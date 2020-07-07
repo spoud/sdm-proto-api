@@ -1,0 +1,83 @@
+syntax = "proto3";
+package io.spoud.sdm.collaboration.v1alpha;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.collaboration.v1alpha";
+option go_package = "collaboration.v1alpha";
+
+import "collaboration/mutation/v1alpha/mutation.proto";
+import "collaboration/domain/v1alpha/domain.proto";
+import "google/protobuf/wrappers.proto";
+import "global/selection/v1/pagination.proto";
+import "global/domain/v1/domain.proto";
+import "global/mutation/v1/mutation.proto";
+
+service UserService {
+  rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);
+  rpc FindUser (FindUserRequest) returns (FindUserResponse);
+  rpc SaveUser (SaveUserRequest) returns (SaveUserResponse);
+
+  rpc ListUserGroupsOfUser (ListUserGroupsOfUserRequest) returns (ListUserGroupsOfUserResponse);
+  rpc SaveUserGroupsOfUser (SaveUserGroupsOfUserRequest) returns (SaveUserGroupsOfUserResponse);
+
+  // Invite a user to an organization
+  rpc InviteToOrganization (InviteToOrganizationRequest) returns (InviteToOrganizationResponse);
+}
+
+message ListUsersRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+  string organization = 2;
+}
+
+message ListUsersResponse {
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 1;
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.User users = 2;
+}
+
+message FindUserRequest {
+  string email = 1;
+}
+
+message FindUserResponse {
+  io.spoud.sdm.collaboration.domain.v1alpha.User user = 1;
+}
+
+message SaveUserRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue email = 2;
+  google.protobuf.StringValue first_name = 3;
+  google.protobuf.StringValue last_name = 4;
+  io.spoud.sdm.collaboration.mutation.v1alpha.OrganizationsList organizations = 5;
+  io.spoud.sdm.global.mutation.v1.PropertyMap properties = 6;
+}
+
+message SaveUserResponse {
+  io.spoud.sdm.collaboration.domain.v1alpha.User user = 1;
+}
+
+message ListUserGroupsOfUserRequest {
+  string user_id = 1;
+}
+
+message ListUserGroupsOfUserResponse {
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.UserGroup userGroups = 1;
+}
+
+message SaveUserGroupsOfUserRequest {
+  string user_id = 1;
+  repeated io.spoud.sdm.global.domain.v1.IdReference user_group_ids = 2;
+  // TODO: replace, add and remove actions
+}
+
+message SaveUserGroupsOfUserResponse {
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.UserGroup user_groups = 1;
+}
+
+message InviteToOrganizationRequest {
+  string organization = 1;
+  string user_email = 2;
+}
+
+message InviteToOrganizationResponse {
+  io.spoud.sdm.global.domain.v1.IdReference user_id = 1;
+}

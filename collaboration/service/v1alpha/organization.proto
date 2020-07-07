@@ -1,0 +1,58 @@
+syntax = "proto3";
+package io.spoud.sdm.collaboration.v1alpha;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.collaboration.v1alpha";
+option go_package = "collaboration.v1alpha";
+
+import "collaboration/domain/v1alpha/domain.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "global/selection/v1/pagination.proto";
+import "global/mutation/v1/mutation.proto";
+
+service OrganizationService {
+  rpc ListOrganizations (ListOrganizationsRequest) returns (ListOrganizationsResponse);
+  rpc GetOrganization (GetOrganizationsRequest) returns (GetOrganizationsResponse);
+  rpc SaveOrganization (SaveOrganizationRequest) returns (SaveOrganizationResponse);
+  rpc DeleteOrganization (DeleteOrganizationRequest) returns (google.protobuf.Empty);
+}
+
+message ListOrganizationsRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+}
+
+message ListOrganizationsResponse {
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 1;
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.Organization organizations = 2;
+}
+
+message GetOrganizationsRequest {
+  oneof identifier {
+    string id = 1;
+    string name = 2;
+  }
+}
+
+message GetOrganizationsResponse {
+  io.spoud.sdm.collaboration.domain.v1alpha.Organization organization = 1;
+}
+
+message DeleteOrganizationRequest {
+  string id = 1;
+}
+
+message SaveOrganizationRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue name = 2;
+  io.spoud.sdm.global.mutation.v1.PropertyMap properties = 4;
+}
+
+message SaveOrganizationResponse {
+  io.spoud.sdm.collaboration.domain.v1alpha.Organization organization = 1;
+}
+
+
+
+
+

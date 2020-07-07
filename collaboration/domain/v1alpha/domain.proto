@@ -1,0 +1,60 @@
+syntax = "proto3";
+package io.spoud.sdm.collaboration.domain.v1alpha;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.collaboration.domain.v1alpha";
+option go_package = "collaboration.domain.v1alpha";
+
+import "google/protobuf/wrappers.proto";
+import "permission/domain/v1/domain.proto";
+
+message User {
+    string id = 1;
+    string email = 2;
+    google.protobuf.StringValue first_name = 3;
+    google.protobuf.StringValue last_name = 4;
+    repeated string organizations = 5;
+    map<string, string> properties = 6;
+}
+
+message TechnicalUser {
+    string id = 1;
+    string label = 2;
+    string username = 3;
+    string organization = 4;
+    io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 5;
+}
+
+message TechnicalUserCredentials {
+    string secret = 1;
+}
+
+message UserGroup {
+    string id = 1;
+    string name = 2;
+    string organization = 3;
+    map<string, string> properties = 4;
+    io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 5;
+}
+
+message Subject {
+    oneof subject {
+        User user = 2;
+        UserGroup userGroup = 3;
+    }
+}
+
+message SubjectType {
+    enum Type {
+        UNKNOWN = 0;
+        USER = 1;
+        USER_GROUP = 2;
+    }
+}
+
+message Organization {
+    string id = 1;
+    string name = 2;
+    map<string, string> properties = 4;
+    io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 5;
+}

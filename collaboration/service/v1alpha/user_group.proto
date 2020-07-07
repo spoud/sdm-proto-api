@@ -1,0 +1,48 @@
+syntax = "proto3";
+package io.spoud.sdm.collaboration.v1alpha;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.collaboration.v1alpha";
+option go_package = "collaboration.v1alpha";
+
+import "collaboration/domain/v1alpha/domain.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "global/selection/v1/pagination.proto";
+import "global/mutation/v1/mutation.proto";
+
+service UserGroupService {
+  rpc ListUserGroups (ListUserGroupsRequest) returns (ListUserGroupsResponse);
+  rpc SaveUserGroup (SaveUserGroupRequest) returns (SaveUserGroupResponse);
+  rpc DeleteUserGroup (DeleteUserGroupRequest) returns (google.protobuf.Empty);
+}
+
+message ListUserGroupsRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+  string organization = 2;
+}
+
+message ListUserGroupsResponse {
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 1;
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.UserGroup user_groups = 2;
+}
+
+message DeleteUserGroupRequest {
+  string id = 1;
+}
+
+message SaveUserGroupRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue name = 2;
+  google.protobuf.StringValue organization = 3;
+  io.spoud.sdm.global.mutation.v1.PropertyMap properties = 4;
+}
+
+message SaveUserGroupResponse {
+  io.spoud.sdm.collaboration.domain.v1alpha.UserGroup user_group = 1;
+}
+
+
+
+
+

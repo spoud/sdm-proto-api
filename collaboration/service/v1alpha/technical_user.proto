@@ -1,0 +1,53 @@
+syntax = "proto3";
+package io.spoud.sdm.collaboration.v1alpha;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.collaboration.v1alpha";
+option go_package = "collaboration.v1alpha";
+
+import "collaboration/mutation/v1alpha/mutation.proto";
+import "collaboration/domain/v1alpha/domain.proto";
+import "global/selection/v1/pagination.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+
+service TechnicalUserService {
+  rpc ListTechnicalUsers (ListTechnicalUsersRequest) returns (ListTechnicalUsersResponse);
+  rpc SaveTechnicalUser (SaveTechnicalUserRequest) returns (SaveTechnicalUserResponse);
+  rpc DeleteTechnicalUser (DeleteTechnicalUserRequest) returns (google.protobuf.Empty);
+  rpc ResetPasswordTechnicalUser (ResetPasswordTechnicalUserRequest) returns (ResetPasswordTechnicalUserResponse);
+}
+
+message ListTechnicalUsersRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+  string organization = 2;
+}
+
+message ListTechnicalUsersResponse {
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 1;
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.TechnicalUser technical_users = 2;
+}
+
+message SaveTechnicalUserRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue organization = 2;
+  google.protobuf.StringValue label = 3;
+}
+
+message SaveTechnicalUserResponse {
+  io.spoud.sdm.collaboration.domain.v1alpha.TechnicalUser technical_user = 1;
+  io.spoud.sdm.collaboration.domain.v1alpha.TechnicalUserCredentials credentials = 2;
+}
+
+message DeleteTechnicalUserRequest {
+  string id = 1;
+}
+
+message ResetPasswordTechnicalUserRequest {
+  string id = 1;
+}
+
+message ResetPasswordTechnicalUserResponse {
+  io.spoud.sdm.collaboration.domain.v1alpha.TechnicalUser technical_user = 1;
+  io.spoud.sdm.collaboration.domain.v1alpha.TechnicalUserCredentials credentials = 2;
+}
