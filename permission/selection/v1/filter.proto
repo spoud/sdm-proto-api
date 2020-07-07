@@ -1,0 +1,26 @@
+syntax = "proto3";
+package io.spoud.sdm.permission.selection.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.permission.selection.v1";
+option go_package = "selection.v1";
+
+import "global/domain/v1/domain.proto";
+import "permission/domain/v1/domain.proto";
+
+message PermissionFilter {
+  // please use subject_ref instead
+  string subject_id = 1 [deprecated=true];
+  string path = 3;
+  io.spoud.sdm.permission.domain.v1.SubjectRef subject_ref = 4;
+  repeated io.spoud.sdm.permission.domain.v1.ResourceFilter resource = 5;
+}
+
+message AuthorizationFilter {
+  string path = 1;
+  io.spoud.sdm.permission.domain.v1.ResourceFilter resource = 2;
+}
+
+message PrivilegePredicate {
+  io.spoud.sdm.permission.domain.v1.Privilege.Type privilege = 1;
+}

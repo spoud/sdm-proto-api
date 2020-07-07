@@ -1,0 +1,25 @@
+syntax = "proto3";
+package io.spoud.sdm.global.mutation.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.global.mutation.v1";
+option go_package = "global.mutation.v1";
+
+// Wrapper for a map of properties.
+// The default merge option is MERGE. Merge options are:
+// <ul>
+//   <li>MERGE will merge the old list of properties with yours. In case of conflict the value of the request will be taken into account</li>
+//   <li>REPLACE_ALL will simply take the properties of the request as properties for the entity (and discard old ones)</li>
+//   <li>REMOVE will remove the properties of the request (value will be ignored, just the key will be used)</li>
+// </ul>
+message PropertyMap {
+  enum MergeOption {
+    MERGE = 0;
+    REPLACE_ALL = 1;
+    REMOVE = 2;
+  }
+  MergeOption merge_option = 1;
+  map<string, string> properties = 2;
+}
+
+

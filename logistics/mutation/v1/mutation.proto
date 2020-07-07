@@ -1,0 +1,55 @@
+syntax = "proto3";
+package io.spoud.sdm.logistics.mutation.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.logistics.mutation.v1";
+option go_package = "logistics.mutation.v1";
+
+import "logistics/domain/v1/domain.proto";
+
+enum AttributeChangeType {
+  UPDATE = 0;
+  DELETE = 1;
+}
+
+enum StateChange {
+  UNKNOWN = 0;
+  AVAILABLE = 1;
+  DELETED = 2;
+}
+
+message AttributeChange {
+  AttributeChangeType type = 1;
+  string value = 3;
+}
+
+message MetaAttributeChange {
+  AttributeChangeType type = 1;
+  string key = 2;
+  string value = 3;
+}
+
+// TODO migrate to global mutation
+// Wrapper for a map of properties.
+// Useful to detect if a value was set explicitly.
+message PropertyMap {
+  enum MergeOption {
+    MERGE = 0;
+    // TODO: implement REPLACE_ALL = 1;
+    // currently, only merge mode is supported (default)
+  }
+  // MergeOption merge_option = 1;
+  map<string, string> properties = 2;
+}
+
+// Wrapper for a list of tags.
+// Useful to detect if a value was set explicitly.
+message TagList {
+  enum MergeOption {
+    REPLACE_ALL = 0;
+    // TODO: APPEND = 1;
+    // currently, only replacing all properties mode is supported (default)
+  }
+  // MergeOption merge_option = 1;
+  repeated io.spoud.sdm.logistics.domain.v1.SimpleTag tags = 2;
+}

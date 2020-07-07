@@ -1,0 +1,51 @@
+syntax = "proto3";
+package io.spoud.sdm.blob.v1alpha;
+
+option java_package = "io.spoud.sdm.blob.v1alpha";
+option java_multiple_files = true;
+
+import "google/protobuf/timestamp.proto";
+import "global/domain/v1/domain.proto";
+
+
+service BlobService {
+  rpc UploadChunk (stream UploadChunkRequest) returns (UploadChunkResponse);
+  rpc GetChunk (GetChunkRequest) returns (stream GetChunkResponse);
+  rpc DeleteBlob (DeleteBlobRequest) returns (DeleteBlobResponse);
+}
+
+message UploadChunkRequest {
+  //Since oneOf, can only be one object of the request at a time per message.
+  //The meta (or deprecated path) can only be set once, and it need to be the first message
+  //The rest of the messages must be the content
+  oneof request {
+    bytes content = 1;
+    //Deprecated since June 16th 2020. Should go in the meta from now on. Since it is off premise, we need to be backwards compatible
+    string path = 2 [deprecated = true];
+    Meta meta = 3;
+  }
+}
+
+message UploadChunkResponse {
+  string id = 1;
+}
+
+message GetChunkRequest {
+  string id = 1;
+}
+
+message GetChunkResponse {
+  bytes content = 1;
+}
+
+message DeleteBlobRequest {
+  string id = 1;
+}
+
+message DeleteBlobResponse {
+}
+
+message Meta {
+  string path = 1;
+  io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity = 2;
+}

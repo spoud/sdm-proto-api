@@ -1,0 +1,12 @@
+syntax = "proto3";
+package io.spoud.sdm.logistics.selection.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.logistics.selection.v1";
+option go_package = "selection.v1";
+import "permission/v1/permission.proto";
+
+message FilterPredicate {
+  string key = 1;
+  string value = 2;
+}

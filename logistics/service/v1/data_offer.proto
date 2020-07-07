@@ -1,0 +1,165 @@
+syntax = "proto3";
+package io.spoud.sdm.logistics.service.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.logistics.service.v1";
+option go_package = "logistics.service.v1";
+
+import "global/selection/v1/pagination.proto";
+import "logistics/selection/v1/filter.proto";
+import "logistics/domain/v1/domain.proto";
+import "logistics/mutation/v1/mutation.proto";
+import "logistics/selection/v1/reference.proto";
+import "permission/selection/v1/filter.proto";
+
+import "google/protobuf/wrappers.proto";
+
+service DataOfferService {
+  rpc GetDataOffer (GetDataOfferRequest) returns (GetDataOfferResponse);
+  rpc DeleteDataOffer (DeleteDataOfferRequest) returns (DeleteDataOfferResponse);
+  rpc ListDataOffers (ListDataOffersRequest) returns (ListDataOffersResponse);
+  rpc CreateDataOffer (CreateDataOfferRequest) returns (CreateDataOfferResponse) {
+    // use Save for mutation instead
+    // deprecated since 2020-02-27
+    option deprecated = true;
+  }
+  rpc UpdateDataOffer (UpdateDataOfferRequest) returns (UpdateDataOfferResponse) {
+    // use Save for mutation instead
+    // deprecated since 2020-02-27
+    option deprecated = true;
+  }
+
+  // Saves a DataOffer.
+  // The entity is identified through the `self` attribute. Different mechanisms for referencing are supported,
+  // like the usual name or id refs. A more advanced approach is to use a DataOfferState as a reference.
+  // If the self entity to update is referenced through a DataOfferState but the DataOffer does not yet exist, it gets created automatically.
+  // The same applies even for a DataOfferState, when the DataOfferSate itself is referenced through matching properties,
+  // the DataOfferState gets created automatically if it does not exist.
+  //
+  // Limitations:
+  //   - properties cannot be removed yet
+  //   - only DataOffer and DataOfferState are created automatically, other refs do not support this
+  rpc Save (SaveDataOfferRequest) returns (SaveDataOfferResponse);
+}
+
+
+message CreateDataOfferRequest {
+  string name = 1;
+  map<string, string> properties = 2;
+
+  // copy from an offer, CURRENTLY DISABLED
+  //string data_offer_id_or_name = 4;
+
+  // variable to replace in offer template, CURRENTLY DISABLED
+  // map<string, string> variable = 6;
+
+  string data_offer_state_id_or_name = 9;
+  string resource_group_id_or_name = 10;
+  string label = 11;
+}
+
+message CreateDataOfferResponse {
+  io.spoud.sdm.logistics.domain.v1.DataOffer data_offer = 1;
+}
+
+message DeleteDataOfferRequest {
+  string id_or_name = 1;
+}
+
+message DeleteDataOfferResponse {
+}
+
+message GetDataOfferRequest {
+  string id_or_name = 1;
+}
+
+message GetDataOfferResponse {
+  io.spoud.sdm.logistics.domain.v1.DataOffer data_offer = 1;
+}
+
+message ListDataOffersRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+
+  // Simple predicate search by key and value.
+  // All predicates are formed as an AND, except predicates with the same key.
+  // For predicates with the same key, the latest entry in the list is taken.
+  // There is no support for an "OR" right now.
+  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 2;
+
+  io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 3;
+}
+
+message ListDataOffersResponse {
+  repeated io.spoud.sdm.logistics.domain.v1.DataOffer data_offers = 1;
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 3;
+}
+
+message UpdateDataOfferRequest {
+  string data_offer_id_or_name = 1;
+  io.spoud.sdm.logistics.mutation.v1.AttributeChange name = 2;
+  repeated io.spoud.sdm.logistics.mutation.v1.MetaAttributeChange properties = 4;
+  io.spoud.sdm.logistics.mutation.v1.AttributeChange resource_group_name_or_id = 6;
+  io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 7;
+}
+
+
+message UpdateDataOfferResponse {
+  io.spoud.sdm.logistics.domain.v1.DataOffer data_offer = 1;
+}
+
+// <b>EXPERIMENTAL</b>
+message SearchDataOffersRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+
+  // Simple predicate filter by key and value.
+  // All predicates are formed as an AND, except predicates with the same key.
+  // For predicates with the same key, the latest entry in the list is taken.
+  // There is no support for an "OR" right now.
+  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 2;
+}
+
+// <b>EXPERIMENTAL</b>
+message SearchDataOffersResponse {
+  repeated io.spoud.sdm.logistics.domain.v1.DataOffer data_offers = 1;
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 3;
+}
+
+// the write model is different from the read model.
+message SaveDataOfferRequest {
+  DataOfferChange input = 1;
+}
+
+message DataOfferChange {
+  // field mask support for updating specific fields only can be added later on
+
+  // Selector for the entity to change.
+  // If the entity does not exist, it gets created under these conditions:
+  //   - properties are copied over to the properties map when using matching properties
+  //   - an error is thrown if the selector is an id and not a name or matching properties
+  io.spoud.sdm.logistics.selection.v1.DataOfferRef self = 1;
+
+  // Entity name (can be used as id).
+  // Globally unique per entity type. Will be auto generated if not set.
+  google.protobuf.StringValue name = 2;
+
+  // Label (title, text).
+  // Will be auto generated if not set.
+  google.protobuf.StringValue label = 4;
+
+  // Resource Group Reference
+  io.spoud.sdm.logistics.selection.v1.BaseRef resource_group = 8;
+
+  // Selector for data offer state entity.
+  // When using matching properties as a selector, the data offer state gets created automatically.
+  io.spoud.sdm.logistics.selection.v1.DataOfferStateRef data_offer_state = 7;
+
+  // List of tags
+  io.spoud.sdm.logistics.mutation.v1.TagList tags = 12;
+
+  // Map of properties
+  io.spoud.sdm.logistics.mutation.v1.PropertyMap properties = 11;
+}
+
+message SaveDataOfferResponse {
+  io.spoud.sdm.logistics.domain.v1.DataOffer data_offer = 1;
+}

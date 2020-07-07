@@ -1,0 +1,47 @@
+syntax = "proto3";
+package io.spoud.sdm.permission.service.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.permission.service.v1";
+option go_package = "permission.service.v1";
+
+import "global/domain/v1/domain.proto";
+import "permission/domain/v1/domain.proto";
+import "permission/selection/v1/filter.proto";
+
+service PermissionAuthorizationService {
+
+  rpc GetPartialReadInformation (GetPartialReadInformationRequest) returns (GetPartialReadInformationResponse);
+
+  rpc GetMyPrivileges (GetMyPrivilegesRequest) returns (GetMyPrivilegesResponse);
+
+  rpc AmIAllowed (AmIAllowedRequest) returns (AmIAllowedResponse);
+}
+
+message GetPartialReadInformationRequest {
+  io.spoud.sdm.permission.domain.v1.Privilege.Type privilege = 1;
+  io.spoud.sdm.permission.domain.v1.ResourceFilter resource = 2;
+}
+
+message GetPartialReadInformationResponse {
+  repeated io.spoud.sdm.permission.domain.v1.PartialReadInformation partialRead = 1;
+}
+
+message GetMyPrivilegesRequest {
+  string path = 1 [deprecated=true];
+  io.spoud.sdm.permission.selection.v1.AuthorizationFilter filter = 2;
+}
+
+message GetMyPrivilegesResponse {
+  repeated io.spoud.sdm.permission.domain.v1.Privilege.Type privilege = 1;
+}
+
+message AmIAllowedRequest {
+  io.spoud.sdm.permission.domain.v1.Privilege.Type privilege = 1;
+  string path = 2 [deprecated=true];
+  io.spoud.sdm.permission.selection.v1.AuthorizationFilter filter = 3;
+}
+
+message AmIAllowedResponse {
+  bool allowed = 1;
+}

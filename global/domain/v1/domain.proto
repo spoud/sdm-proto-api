@@ -1,0 +1,64 @@
+syntax = "proto3";
+package io.spoud.sdm.global.domain.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.global.domain.v1";
+option go_package = "selection.v1";
+
+import "google/protobuf/timestamp.proto";
+
+message IdReference {
+  string id = 1;
+
+  // range reserved due to possible replacement in the future by other types.
+  reserved 11;
+}
+
+message IdNamePathReference {
+  string id = 1;
+  string name = 2;
+
+  string path = 11;
+}
+
+message IdNameReference {
+  string id = 1;
+  string name = 2;
+
+  // range reserved due to possible replacement in the future by other types.
+  reserved 11;
+}
+
+message ActionInfo {
+  string username = 1;
+  google.protobuf.Timestamp timestamp = 2;
+}
+
+message DocInfo {
+  ActionInfo created = 1;
+  ActionInfo last_modified = 2;
+}
+
+message ResourceEntity {
+  enum Type {
+    UNKNOWN = 0;
+    DATA_OFFER = 1;
+    DATA_OFFER_STATE = 2;
+    DATA_SUBSCRIPTION = 3;
+    DATA_SUBSCRIPTION_STATE = 4;
+    TRANSPORT = 5;
+    RESOURCE_GROUP = 6;
+    PERMISSION = 7;
+    USER = 8;
+    USER_GROUP = 9;
+    DATA_PROFILE = 10;
+    SCHEMA = 11;
+    DATA_PROFILING_JOB = 12;
+    ORGANIZATION = 13;
+    DATA_SAMPLE = 14;
+    // user (account) managed completely in collaboration for integration and automation purposes (agents).
+    // same authorization is applied as for regular users.
+    TECHNICAL_USER = 15;
+    AGENT = 16;
+  }
+}

@@ -1,0 +1,132 @@
+syntax = "proto3";
+package io.spoud.sdm.topology.service.v1alpha;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.topology.service.v1alpha";
+option go_package = "topology.service.v1alpha";
+
+import "topology/domain/v1alpha/domain.proto";
+import "global/selection/v1/pagination.proto";
+
+import "google/protobuf/wrappers.proto";
+
+service TopologyService {
+  rpc GetContainerNode (GetContainerNodeRequest) returns (GetContainerNodeResponse);
+  rpc GetDataSourceNode (GetDataSourceNodeRequest) returns (GetDataSourceNodeResponse);
+  rpc GetDataSinkNode (GetDataSinkNodeRequest) returns (GetDataSinkNodeResponse);
+
+  rpc ListDataSinkNodeByDataSourceNode (ListDataSinkNodeByDataSourceNodeRequest) returns (ListDataSinkNodeByDataSourceNodeResponse);
+  rpc ListTopologyNodesByContainerNode (ListTopologyNodesByContainerNodeRequest) returns (ListTopologyNodesByContainerNodeResponse);
+
+  rpc SaveContainerNode (SaveContainerNodeRequest) returns (SaveContainerNodeResponse);
+  rpc SaveDataSourceNode (SaveDataSourceNodeRequest) returns (SaveDataSourceNodeResponse);
+  rpc SaveDataSinkNode (SaveDataSinkNodeRequest) returns (SaveDataSinkNodeResponse);
+
+  rpc DeleteContainerNode (DeleteContainerNodeRequest) returns (DeleteContainerNodeResponse);
+  rpc DeleteDataSourceNode (DeleteDataSourceNodeRequest) returns (DeleteDataSourceNodeResponse);
+  rpc DeleteDataSinkNode (DeleteDataSinkNodeRequest) returns (DeleteDataSinkNodeResponse);
+}
+
+message GetContainerNodeRequest {
+  string container_node_id = 1;
+}
+
+message GetContainerNodeResponse {
+  io.spoud.sdm.topology.domain.v1alpha.ContainerNode container_node = 1;
+}
+
+message GetDataSourceNodeRequest {
+  oneof reference {
+    string data_offer_state_id = 1;
+    string data_source_node_id = 2;
+  }
+}
+
+message GetDataSourceNodeResponse {
+  io.spoud.sdm.topology.domain.v1alpha.DataSourceNode data_source_node = 1;
+}
+
+message GetDataSinkNodeRequest {
+  oneof reference {
+    string data_subscription_state_id = 1;
+    string data_sink_node_id = 2;
+  }
+}
+
+message GetDataSinkNodeResponse {
+  io.spoud.sdm.topology.domain.v1alpha.DataSinkNode data_sink_node = 1;
+}
+
+message ListDataSinkNodeByDataSourceNodeRequest {
+  string data_source_node_id = 1;
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 2;
+}
+
+message ListDataSinkNodeByDataSourceNodeResponse {
+  repeated io.spoud.sdm.topology.domain.v1alpha.DataSinkNode data_sink_nodes = 1;
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
+}
+
+message ListTopologyNodesByContainerNodeRequest {
+  string container_node_id = 1;
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 2;
+}
+
+message ListTopologyNodesByContainerNodeResponse {
+  repeated io.spoud.sdm.topology.domain.v1alpha.TopologyNode topology_nodes = 1;
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
+}
+
+message SaveContainerNodeRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue label = 2;
+  google.protobuf.StringValue container_node_id = 3;
+}
+
+message SaveContainerNodeResponse {
+  io.spoud.sdm.topology.domain.v1alpha.ContainerNode container_node = 1;
+}
+
+message SaveDataSourceNodeRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue label = 2;
+  google.protobuf.StringValue container_node_id = 3;
+  google.protobuf.StringValue data_offer_state_id = 4;
+}
+
+message SaveDataSourceNodeResponse {
+  io.spoud.sdm.topology.domain.v1alpha.DataSourceNode data_source_node = 1;
+}
+
+message SaveDataSinkNodeRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue label = 2;
+  google.protobuf.StringValue container_node_id = 3;
+  google.protobuf.StringValue data_subscription_state_id = 4;
+  google.protobuf.StringValue data_source_node_id = 5;
+}
+
+message SaveDataSinkNodeResponse {
+  io.spoud.sdm.topology.domain.v1alpha.DataSinkNode data_sink_node = 1;
+}
+
+message DeleteContainerNodeRequest {
+  string id = 1;
+}
+
+message DeleteContainerNodeResponse {
+}
+
+message DeleteDataSourceNodeRequest {
+  string id = 1;
+}
+
+message DeleteDataSourceNodeResponse {
+}
+
+message DeleteDataSinkNodeRequest {
+  string id = 1;
+}
+
+message DeleteDataSinkNodeResponse {
+}

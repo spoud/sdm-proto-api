@@ -1,0 +1,32 @@
+syntax = "proto3";
+package io.spoud.sdm.permission.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.permission.v1";
+option go_package = "permission.v1";
+
+import "permission/service/v1/authorization.proto";
+import "permission/service/v1/management.proto";
+
+service PermissionService {
+  //since 2020-05-08 use permission/service/v1 instead
+  option deprecated = true;
+  // Unset the Permissions
+  // Removes any permissions that were set on the path for the subject. It does only remove permissions
+  // set to this specific combination and not anything else. Use the list request to get all
+  // existing permissions to find the according permissions to unset.
+  // Limitations:
+  //   - does not propagate to sub paths
+  //   - does not remove permissions set to subjects related to the one specified
+  rpc UnsetPermissions (io.spoud.sdm.permission.service.v1.UnsetPermissionsRequest) returns (io.spoud.sdm.permission.service.v1.UnsetPermissionsResponse);
+
+  // Saves Permissions
+  // Saves the specified permissions to the specified subject. Subjects can currently be either
+  // user names or group paths from keycloak. If one user has multiple permissions associated
+  // through any combination of user permissions and group permissions, the highest one will be in effect.
+  rpc SavePermissions (io.spoud.sdm.permission.service.v1.SavePermissionsRequest) returns (io.spoud.sdm.permission.service.v1.SavePermissionsResponse);
+  rpc ListPermissions (io.spoud.sdm.permission.service.v1.ListPermissionsRequest) returns (io.spoud.sdm.permission.service.v1.ListPermissionsResponse);
+  rpc GetPartialReadInformation (io.spoud.sdm.permission.service.v1.GetPartialReadInformationRequest) returns (io.spoud.sdm.permission.service.v1.GetPartialReadInformationResponse);
+  rpc GetMyPrivileges (io.spoud.sdm.permission.service.v1.GetMyPrivilegesRequest) returns (io.spoud.sdm.permission.service.v1.GetMyPrivilegesResponse);
+  rpc AmIAllowed (io.spoud.sdm.permission.service.v1.AmIAllowedRequest) returns (io.spoud.sdm.permission.service.v1.AmIAllowedResponse);
+}

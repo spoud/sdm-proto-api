@@ -1,0 +1,64 @@
+syntax = "proto3";
+package io.spoud.sdm.permission.domain.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.permission.domain.v1";
+option go_package = "permission.v1";
+
+import "global/domain/v1/domain.proto";
+
+message Privilege {
+  enum Type {
+    UNKNOWN = 0;
+    // READ -> READ_INFO
+    READ = 1;
+    // WRITE -> READ
+    // WRITE -> LINK
+    WRITE = 2;
+    // ADMIN -> WRITE
+    ADMIN = 3;
+    // LINK -> READ_INFO
+    LINK = 4;
+    // READ_INFO -> NONE
+    READ_INFO = 5;
+    // NONE
+    NONE = 6;
+  }
+}
+
+message PartialReadInformation {
+  bool allowed = 1;
+  string path = 2;
+}
+
+message Permission {
+  io.spoud.sdm.global.domain.v1.IdReference subject = 1;
+  repeated Privilege.Type privilege = 3;
+  io.spoud.sdm.global.domain.v1.DocInfo info = 4;
+  string path = 5;
+  ResourceFilter resource = 6;
+  PrivilegeInformation privilegeInformation = 7;
+}
+
+message SubjectRef{
+  string name = 1;
+}
+
+message PrivilegeInformation {
+  string path = 1;
+  repeated Privilege.Type privilege = 2;
+}
+
+message ResourceGroupings {
+  enum Type{
+    UNKNOWN = 0;
+    ALL = 1;
+  }
+}
+
+message ResourceFilter {
+  oneof type{
+    io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity = 1;
+    ResourceGroupings.Type grouping = 2;
+  }
+}

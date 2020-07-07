@@ -1,0 +1,88 @@
+syntax = "proto3";
+package io.spoud.sdm.logistics.selection.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.logistics.selection.v1";
+option go_package = "selection.v1";
+
+// TransportMatchingProperties are used to define an internal business key, which
+// can be used for referencing a resource across different components.
+message TransportMatchingProperties {
+  BaseRef transport = 5;
+  map<string, string> properties = 1;
+}
+
+// DataOffer reference.
+message DataOfferRef {
+  oneof ref {
+    // ref by id or name
+    IdNameRef id_name = 5;
+
+    // provide matching properties explicitly
+    // MatchingProperties properties = 3
+
+    // ref by state (e.g. DataOfferState, DataSubscriptionState)
+    DataOfferStateRef data_offer_state = 4;
+
+
+    // referencing properties of outer (relative) resource object.
+    // not yet supported
+    // google.protobuf.FieldMask property_mask =  5;
+  }
+
+  // reserved for self matching properties
+  reserved 3;
+}
+
+// DataSubscription reference.
+message DataSubscriptionRef {
+  // ref by id or name
+  IdNameRef id_name = 1;
+}
+
+// DataOfferState reference.
+message DataOfferStateRef {
+  oneof ref {
+
+    // ref by id or name
+    IdNameRef id_name = 4;
+
+    // provide matching properties explicitly
+    TransportMatchingProperties transport_matching_properties = 3;
+
+    // referencing properties of outer (relative) resource object.
+    // not yet supported
+    // google.protobuf.FieldMask property_mask =  4;
+  }
+}
+
+message DataSubscriptionStateRef {
+  oneof ref {
+
+    // ref by id or name
+    IdNameRef id_name = 4;
+
+    // provide matching properties explicitly
+    TransportMatchingProperties transport_matching_properties = 3;
+
+    // referencing properties of outer (relative) resource object.
+    // not yet supported
+    // google.protobuf.FieldMask property_mask =  4;
+  }
+}
+
+message IdNameRef {
+  oneof ref {
+    // ref by id
+    string id = 1;
+    // ref by name;
+    string name = 2;
+  }
+}
+
+// Base ref type.
+// Used for any resource ref without a specific ref message.
+// Support ref evolution by moving from this basic ref type to a dedicated ref messages.
+message BaseRef {
+  IdNameRef id_name = 1;
+}

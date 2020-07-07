@@ -1,0 +1,64 @@
+syntax = "proto3";
+package io.spoud.sdm.permission.service.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.permission.service.v1";
+option go_package = "permission.service.v1";
+
+import "global/domain/v1/domain.proto";
+import "global/selection/v1/pagination.proto";
+import "permission/domain/v1/domain.proto";
+import "permission/selection/v1/filter.proto";
+
+service PermissionManagementService {
+  // Unset the Permissions
+  // Removes any permissions that were set on the path for the subject. It does only remove permissions
+  // set to this specific combination and not anything else. Use the list request to get all
+  // existing permissions to find the according permissions to unset.
+  // Limitations:
+  //   - does not propagate to sub paths
+  //   - does not remove permissions set to subjects related to the one specified
+  rpc UnsetPermissions (UnsetPermissionsRequest) returns (UnsetPermissionsResponse);
+
+  // Saves Permissions
+  // Saves the specified permissions to the specified subject. Subjects can currently be either
+  // user names or group paths from keycloak. If one user has multiple permissions associated
+  // through any combination of user permissions and group permissions, the highest one will be in effect.
+  rpc SavePermissions (SavePermissionsRequest) returns (SavePermissionsResponse);
+  rpc ListPermissions (ListPermissionsRequest) returns (ListPermissionsResponse);
+}
+
+message UnsetPermissionsRequest {
+  string path = 1;
+  // please use subject_ref instead
+  // deprecated since 2020-04-29 use subject_ref (field 3) instead.
+  string subject_id = 2 [deprecated=true];
+  io.spoud.sdm.permission.domain.v1.SubjectRef subject_ref = 3;
+  repeated io.spoud.sdm.permission.domain.v1.ResourceFilter resource = 4;
+}
+
+message UnsetPermissionsResponse {
+}
+
+message SavePermissionsRequest {
+  string path = 1;
+  // please use subject_ref instead
+  string subject_id = 2 [deprecated=true];
+  repeated io.spoud.sdm.permission.domain.v1.Privilege.Type privilege = 3;
+  io.spoud.sdm.permission.domain.v1.SubjectRef subject_ref = 4;
+  io.spoud.sdm.permission.domain.v1.ResourceFilter resource = 5;
+}
+
+message SavePermissionsResponse {
+  io.spoud.sdm.permission.domain.v1.Permission permission = 1;
+}
+
+message ListPermissionsRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+  io.spoud.sdm.permission.selection.v1.PermissionFilter filter = 2;
+}
+
+message ListPermissionsResponse {
+  repeated io.spoud.sdm.permission.domain.v1.Permission permissions = 1;
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 3;
+}

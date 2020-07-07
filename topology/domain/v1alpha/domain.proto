@@ -1,0 +1,39 @@
+syntax = "proto3";
+package io.spoud.sdm.topology.domain.v1alpha;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.topology.domain.v1alpha";
+option go_package = "topology.domain.v1alpha";
+
+import "google/protobuf/timestamp.proto";
+import "global/domain/v1/domain.proto";
+
+message DataSourceNode {
+  string id = 1;
+  string label = 2;
+  io.spoud.sdm.global.domain.v1.IdReference container_node_ref = 3;
+  io.spoud.sdm.global.domain.v1.IdReference data_offer_state_ref = 4;
+}
+
+message DataSinkNode {
+  string id = 1;
+  string label = 2;
+  io.spoud.sdm.global.domain.v1.IdReference container_node_ref = 3;
+  io.spoud.sdm.global.domain.v1.IdReference data_subscription_state_ref = 4;
+  io.spoud.sdm.global.domain.v1.IdReference data_source_node_ref = 5;
+}
+
+message ContainerNode {
+  string id = 1;
+  string label = 2;
+  io.spoud.sdm.global.domain.v1.IdReference container_node_ref = 3;
+}
+
+message TopologyNode {
+  oneof node {
+    ContainerNode container_node = 1;
+    DataSourceNode data_source_node = 2;
+    DataSinkNode data_sink_node = 3;
+  }
+}
+

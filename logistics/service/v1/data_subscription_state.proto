@@ -1,0 +1,156 @@
+syntax = "proto3";
+package io.spoud.sdm.logistics.service.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.logistics.service.v1";
+option go_package = "logistics.service.v1";
+
+import "global/selection/v1/pagination.proto";
+import "logistics/selection/v1/filter.proto";
+import "logistics/domain/v1/domain.proto";
+import "logistics/mutation/v1/mutation.proto";
+import "logistics/selection/v1/reference.proto";
+import "permission/selection/v1/filter.proto";
+
+import "google/protobuf/wrappers.proto";
+
+service DataSubscriptionStateService {
+  rpc GetDataSubscriptionState (GetDataSubscriptionStateRequest) returns (GetDataSubscriptionStateResponse);
+  rpc DeleteDataSubscriptionState (DeleteDataSubscriptionStateRequest) returns (DeleteDataSubscriptionStateResponse);
+  rpc ListDataSubscriptionStates (ListDataSubscriptionStatesRequest) returns (ListDataSubscriptionStatesResponse);
+  rpc SaveDataSubscriptionState (SaveDataSubscriptionStateLegacyRequest) returns (SaveDataSubscriptionStateResponse) {
+    // use Save instead
+    // deprecated since 2020-02-09
+    option deprecated = true;
+  };
+
+  // Saves a DataSubscriptionState.
+  //
+  // The entity is identified through the `self` attribute. Different mechanisms for referencing are supported,
+  // like the usual name or id refs. A more advanced approach is to use matching properties as a reference (basically a tech key).
+  // If the self entity to update does not yet exist and is referenced through matching properties, it gets created automatically.
+  //
+  // Limitations:
+  //   - properties cannot be removed yet
+  //   - no support of specific field updates (without updating everything), aka field masks
+  rpc Save (SaveDataSubscriptionStateRequest) returns (SaveDataSubscriptionStateResponse);
+}
+
+
+message GetDataSubscriptionStateRequest {
+  string id_or_name = 1;
+}
+
+message GetDataSubscriptionStateResponse {
+  io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_state = 1;
+}
+
+message DeleteDataSubscriptionStateResponse {
+
+}
+
+message DeleteDataSubscriptionStateRequest {
+  string id_or_name = 1;
+}
+
+message ListDataSubscriptionStatesRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+  string data_offer_state_id_or_name = 2;
+
+  // Simple predicate filter by key and value.
+  // All predicates are formed as an AND, except predicates with the same key.
+  // For predicates with the same key, the latest entry in the list is taken.
+  // There is no support for an "OR" right now.
+  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 3;
+
+  // add a filter for returning only data subscription states referencing the corresponding transport.
+  string transport_id_or_name = 4;
+
+  // add a filter for returning only data subscription states with a data offer state with a data offer.
+  bool with_data_offer_only = 5;
+
+  io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 6;
+
+}
+
+message ListDataSubscriptionStatesResponse {
+  repeated io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_states = 1;
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
+}
+
+message SaveDataSubscriptionStateLegacyRequest {
+  string data_subscription_state_id_or_name = 1;
+  string name = 2;
+  string data_offer_state_id_or_name = 3;
+  io.spoud.sdm.logistics.mutation.v1.AttributeChange transport_url = 4;
+  io.spoud.sdm.logistics.mutation.v1.StateChange state = 5;
+  repeated io.spoud.sdm.logistics.mutation.v1.MetaAttributeChange properties = 6;
+  io.spoud.sdm.logistics.mutation.v1.AttributeChange resource_group_name_or_id = 8;
+  io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 9;
+}
+
+message SaveDataSubscriptionStateRequest {
+  DataSubscriptionStateChange input = 10;
+}
+
+message DataSubscriptionStateChange {
+  // field mask support for updating specific fields only can be added later on
+
+  // Selector for the entity to change.
+  // If the entity does not exist, it gets created under these conditions:
+  //   - properties are copied over to the properties map when using matching properties
+  //   - an error is thrown if the selector is an id and not a name or matching properties
+  io.spoud.sdm.logistics.selection.v1.DataSubscriptionStateRef self = 1;
+
+  // Entity name (can be used as id).
+  // Globally unique per entity type.
+  google.protobuf.StringValue name = 2;
+
+  // Label
+  google.protobuf.StringValue label = 4;
+
+  // ResourceGroup Reference
+  io.spoud.sdm.logistics.selection.v1.BaseRef resource_group = 8;
+
+  // DataOfferState Reference
+  io.spoud.sdm.logistics.selection.v1.DataOfferStateRef data_offer_state = 9;
+
+  // Lifecycle State
+  io.spoud.sdm.logistics.mutation.v1.StateChange state = 10;
+
+  // Transport URL
+  google.protobuf.StringValue transport_url = 11;
+
+  // List of tags
+  io.spoud.sdm.logistics.mutation.v1.TagList tags = 12;
+
+  // Map of properties
+  io.spoud.sdm.logistics.mutation.v1.PropertyMap properties = 13;
+}
+
+message SaveDataSubscriptionStateResponse {
+  io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_state = 1;
+}
+
+// <b>EXPERIMENTAL</b>
+message SearchDataSubscriptionStatesRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+
+  // Simple predicate search by key and value.
+  // All predicates are formed as an AND, except predicates with the same key.
+  // For predicates with the same key, the latest entry in the list is taken.
+  // There is no support for an "OR" right now.
+  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 2;
+  string data_offer_state_id_or_name = 3;
+  string transport_id_or_name = 4;
+
+  // add a filter for returning only data subscription states with a data offer state with a data offer.
+  bool with_data_offer_only = 5;
+
+}
+
+// <b>EXPERIMENTAL</b>
+message SearchDataSubscriptionStatesResponse {
+  repeated io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_states = 1;
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
+}

@@ -1,0 +1,184 @@
+syntax = "proto3";
+package io.spoud.sdm.logistics.domain.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.logistics.domain.v1";
+option go_package = "logistics.domain.v1";
+
+import "google/protobuf/timestamp.proto";
+import "global/domain/v1/domain.proto";
+import "permission/domain/v1/domain.proto";
+
+// Simplest form of a tag - means just a `name`.
+message SimpleTag {
+  string name = 1;
+}
+
+message ResourceGroup {
+  string id = 1;
+  string name = 2;
+  map<string, string> properties = 5;
+  // additional entity/doc information
+  io.spoud.sdm.global.domain.v1.DocInfo info = 6;
+  io.spoud.sdm.global.domain.v1.IdReference parent = 7;
+  string path = 8;
+  string label = 9;
+  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 10;
+}
+
+// data subscription
+message DataSubscription {
+  string id = 1;
+  string name = 2;
+  map<string, string> properties = 3;
+  io.spoud.sdm.global.domain.v1.IdReference data_offer = 6;
+
+  // additional entity/doc information
+  io.spoud.sdm.global.domain.v1.DocInfo info = 9;
+  io.spoud.sdm.global.domain.v1.IdReference resource_group = 10;
+  io.spoud.sdm.global.domain.v1.IdReference data_subscription_state = 12;
+
+  string label = 13;
+
+  // tag list.
+  repeated SimpleTag tags = 14;
+
+  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 15;
+}
+
+// DataSubscriptionState
+message DataSubscriptionState {
+  string id = 1;
+  string name = 2;
+  map<string, string> properties = 3;
+  string transport_url = 4;
+  io.spoud.sdm.global.domain.v1.IdReference data_offer_state = 5;
+  bool deleted = 6;
+
+  // additional entity/doc information
+  io.spoud.sdm.global.domain.v1.DocInfo info = 7;
+  io.spoud.sdm.global.domain.v1.IdReference resource_group = 8;
+  io.spoud.sdm.global.domain.v1.IdReference data_subscription = 9;
+  io.spoud.sdm.global.domain.v1.IdReference transport = 10;
+
+  string label = 11;
+
+  // tag list.
+  repeated SimpleTag tags = 12;
+
+  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 13;
+}
+
+// Data Offer
+message DataOffer {
+  string id = 1;
+  string name = 2;
+  map<string, string> properties = 3;
+
+  // additional entity/doc information
+  io.spoud.sdm.global.domain.v1.DocInfo info = 9;
+
+  io.spoud.sdm.global.domain.v1.IdReference resource_group = 10;
+  io.spoud.sdm.global.domain.v1.IdReference data_offer_state = 11;
+
+  string label = 12;
+
+  // tag list.
+  repeated SimpleTag tags = 13;
+
+  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 14;
+}
+
+// DataOfferState
+message DataOfferState {
+  string id = 1;
+  string name = 2;
+  map<string, string> properties = 4;
+  string transport_url = 5;
+  io.spoud.sdm.global.domain.v1.IdReference transport = 6;
+  bool deleted = 7;
+  io.spoud.sdm.global.domain.v1.IdReference data_offer = 8;
+
+  // additional entity/doc information
+  io.spoud.sdm.global.domain.v1.DocInfo info = 9;
+  io.spoud.sdm.global.domain.v1.IdReference resource_group = 10;
+
+  string label = 11;
+
+  // tag list.
+  repeated SimpleTag tags = 12;
+
+  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 13;
+}
+
+// Transports
+message Transport {
+  string id = 1;
+  string name = 2;
+  map<string, string> properties = 4;
+
+  // additional entity/doc information
+  io.spoud.sdm.global.domain.v1.DocInfo info = 5;
+
+  io.spoud.sdm.global.domain.v1.IdReference resource_group = 6;
+
+  string label = 7;
+
+  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 8;
+}
+
+// Agents
+message Agent {
+  string id = 1;
+  string label = 2;
+  io.spoud.sdm.global.domain.v1.IdReference resource_group = 3;
+  io.spoud.sdm.global.domain.v1.IdReference technical_user_id = 4;
+  string username = 5;
+  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 6;
+  // additional entity/doc information
+  io.spoud.sdm.global.domain.v1.DocInfo info = 7;
+
+}
+
+// History
+
+
+message HistoryEntity {
+  string id = 1;
+  ResourceEntityType.Type type = 2;
+}
+
+message HistoryEntry {
+  HistoryEntity source = 1;
+  HistoryEventType.Type event_type = 2;
+  google.protobuf.Timestamp timestamp = 3;
+  string username = 4;
+}
+
+message HistoryEventType {
+  enum Type {
+    UNKNOWN = 0;
+    CREATED = 1;
+    MODIFIED = 2;
+    DELETED = 3;
+    LINKED = 4;
+    UNLINKED = 5;
+  }
+}
+
+message ResourceEntityType {
+  enum Type {
+    UNKNOWN = 0;
+    DATA_OFFER = 1;
+    DATA_OFFER_STATE = 2;
+    DATA_SUBSCRIPTION = 3;
+    DATA_SUBSCRIPTION_STATE = 4;
+  }
+}
+
+message StateResourceLifecycle {
+  enum Status {
+    ADOPTED = 0;
+    DELETED = 1;
+  }
+}
