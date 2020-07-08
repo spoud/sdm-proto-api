@@ -5,7 +5,6 @@ option java_multiple_files = true;
 option java_package = "io.spoud.sdm.topology.domain.v1alpha";
 option go_package = "topology.domain.v1alpha";
 
-import "google/protobuf/timestamp.proto";
 import "global/domain/v1/domain.proto";
 
 message DataSourceNode {

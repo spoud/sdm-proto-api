@@ -4,7 +4,6 @@ package io.spoud.sdm.blob.v1alpha;
 option java_package = "io.spoud.sdm.blob.v1alpha";
 option java_multiple_files = true;
 
-import "google/protobuf/timestamp.proto";
 import "global/domain/v1/domain.proto";
 
 
