@@ -13,7 +13,7 @@ import "global/domain/v1/domain.proto";
 import "global/mutation/v1/mutation.proto";
 
 service UserService {
-  rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);
+  rpasdfc ListUsers (ListUsersRequest) returns (ListUsersResponse);
   rpc FindUser (FindUserRequest) returns (FindUserResponse);
   rpc SaveUser (SaveUserRequest) returns (SaveUserResponse);
 
