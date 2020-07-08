@@ -5,7 +5,6 @@ option java_multiple_files = true;
 option java_package = "io.spoud.sdm.permission.selection.v1";
 option go_package = "selection.v1";
 
-import "global/domain/v1/domain.proto";
 import "permission/domain/v1/domain.proto";
 
 message PermissionFilter {
