@@ -1,12 +1,10 @@
 pipeline {
     agent {
         docker {
-            label 'aws-t3-micro'
+            label 'aws-t3-nano'
             image 'spoud/build:linux-generic'
-            alwaysPull true
         }
     }
-    options { buildDiscarder(logRotator(numToKeepStr: '5')) }
 
     stages {
         stage ('Compile proto file ') {
@@ -15,7 +13,6 @@ pipeline {
                 sh 'find . -name "*.proto" | xargs protoc --proto_path=. --doc_out=./out/docs --java_out=./out/java'
             }
         }
-
     }
 }
 
