@@ -15,7 +15,6 @@ service OrganizationService {
   rpc ListOrganizations (ListOrganizationsRequest) returns (ListOrganizationsResponse);
   rpc GetOrganization (GetOrganizationsRequest) returns (GetOrganizationsResponse);
   rpc SaveOrganization (SaveOrganizationRequest) returns (SaveOrganizationResponse);
-  rpc DeleteOrganization (DeleteOrganizationRequest) returns (google.protobuf.Empty);
 }
 
 message ListOrganizationsRequest {
@@ -36,10 +35,6 @@ message GetOrganizationsRequest {
 
 message GetOrganizationsResponse {
   io.spoud.sdm.collaboration.domain.v1alpha.Organization organization = 1;
-}
-
-message DeleteOrganizationRequest {
-  string id = 1;
 }
 
 message SaveOrganizationRequest {
