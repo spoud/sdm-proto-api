@@ -42,6 +42,15 @@ message ResourceMetric {
     // Tag keys:
     // - partition (default: 0)
     DATA_SUBSCRIPTION_STATE_MESSAGES_LAG = 5;
+
+    // how well the data matches the schema
+    DATA_OFFER_STATE_ATTRIBUTE_QUALITY_INDEX = 6;
+
+    // how detailed the schema is defined
+    DATA_OFFER_STATE_ATTRIBUTE_SPECIFICATION_INDEX = 7;
+
+    // a combination of attribute quality and specification index
+    DATA_OFFER_STATE_ATTRIBUTE_INTEGRITY = 8;
   }
 
   double value = 3;
