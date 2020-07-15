@@ -27,6 +27,7 @@ message GetPartialReadInformationResponse {
 }
 
 message GetMyPrivilegesRequest {
+  // deprecated since 2020-06-08 use filter with path (field 2) instead.
   string path = 1 [deprecated=true];
   io.spoud.sdm.permission.selection.v1.AuthorizationFilter filter = 2;
 }
@@ -37,6 +38,7 @@ message GetMyPrivilegesResponse {
 
 message AmIAllowedRequest {
   io.spoud.sdm.permission.domain.v1.Privilege.Type privilege = 1;
+  // deprecated since 2020-06-08 use filter with path (field 3) instead.
   string path = 2 [deprecated=true];
   io.spoud.sdm.permission.selection.v1.AuthorizationFilter filter = 3;
 }
