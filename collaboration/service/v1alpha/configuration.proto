@@ -1,0 +1,26 @@
+syntax = "proto3";
+package io.spoud.sdm.collaboration.v1alpha;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.collaboration.v1alpha";
+option go_package = "collaboration.v1alpha";
+
+import "collaboration/domain/v1alpha/domain.proto";
+
+service ConfigurationService {
+  rpc ListPropertiesConfiguration (ListPropertiesConfigurationRequest) returns (ListPropertiesConfigurationResponse);
+}
+
+message ListPropertiesConfigurationRequest {
+  string organization = 1;
+}
+
+message ListPropertiesConfigurationResponse {
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.PropertyConfiguration properties_configuration = 2;
+}
+
+
+
+
+
+
