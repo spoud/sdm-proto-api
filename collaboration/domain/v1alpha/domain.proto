@@ -60,6 +60,11 @@ message Organization {
     io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 5;
 }
 
+
+message ResourceEntityConfiguration{
+    repeated ResourcePropertyValueDefinition resource_property_value_definition = 1;
+}
+
 message ResourcePropertyValueDefinition{
     io.spoud.sdm.global.domain.v1.ResourceEntity.Type resource_entity = 1;
     string key = 2;

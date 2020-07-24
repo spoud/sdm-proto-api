@@ -8,19 +8,13 @@ option go_package = "collaboration.v1alpha";
 import "collaboration/domain/v1alpha/domain.proto";
 
 service ConfigurationService {
-  rpc ListResourcePropertyValuesDefinitionsConfiguration (ListResourcePropertyValuesDefinitionsConfigurationRequest) returns (ListResourcePropertyValuesDefinitionsConfigurationResponse);
+  rpc getResourceEntityConfiguration (GetResourceEntityConfigurationRequest) returns (GetResourceEntityConfigurationResponse);
 }
 
-message ListResourcePropertyValuesDefinitionsConfigurationRequest {
+message GetResourceEntityConfigurationRequest {
   string organization_id = 1;
 }
 
-message ListResourcePropertyValuesDefinitionsConfigurationResponse {
-  repeated io.spoud.sdm.collaboration.domain.v1alpha.ResourcePropertyValueDefinition resource_property_value_definition = 1;
+message GetResourceEntityConfigurationResponse {
+  io.spoud.sdm.collaboration.domain.v1alpha.ResourceEntityConfiguration  resource_entity_configuration = 1;
 }
-
-
-
-
-
-
