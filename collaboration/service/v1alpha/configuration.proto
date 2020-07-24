@@ -12,7 +12,7 @@ service ConfigurationService {
 }
 
 message ListPropertiesConfigurationRequest {
-  string organization = 1;
+  string organization_id = 1;
 }
 
 message ListPropertiesConfigurationResponse {
