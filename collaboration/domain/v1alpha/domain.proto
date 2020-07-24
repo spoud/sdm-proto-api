@@ -7,6 +7,7 @@ option go_package = "collaboration.domain.v1alpha";
 
 import "google/protobuf/wrappers.proto";
 import "permission/domain/v1/domain.proto";
+import "global/domain/v1/domain.proto";
 
 message User {
     string id = 1;
@@ -57,4 +58,26 @@ message Organization {
     string name = 2;
     map<string, string> properties = 4;
     io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 5;
+}
+
+
+message ResourceEntityConfiguration{
+    repeated ResourcePropertyValueDefinition resource_property_value_definition = 1;
+}
+
+message ResourcePropertyValueDefinition{
+    io.spoud.sdm.global.domain.v1.ResourceEntity.Type resource_entity = 1;
+    string key = 2;
+    Type property_data_type = 3;
+    string label = 4;
+    string description = 5;
+    bool editable = 6;
+    string icon_url = 7;
+
+    enum Type {
+        UNKNOWN = 0;
+        TEXT = 1;
+        LINK = 2;
+        UNIX_TIMESTAMP = 3;
+    }
 }
