@@ -67,7 +67,7 @@ message PropertyConfiguration{
     string label = 4;
     string description = 5;
     bool editable = 6;
-    string avatar_url = 7;
+    string icon_url = 7;
 
     enum Type {
         UNKNOWN = 0;
