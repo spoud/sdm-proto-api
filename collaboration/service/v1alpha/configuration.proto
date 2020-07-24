@@ -16,7 +16,7 @@ message ListPropertiesConfigurationRequest {
 }
 
 message ListPropertiesConfigurationResponse {
-  repeated io.spoud.sdm.collaboration.domain.v1alpha.PropertyConfiguration properties_configuration = 2;
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.PropertyConfiguration properties_configuration = 1;
 }
 
 
