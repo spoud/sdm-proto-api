@@ -16,7 +16,7 @@ service CollaborationService {
 
 message ListSubjectRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
-  string organization = 2;
+  google.protobuf.StringValue organizationName = 2;
   // This global text filter will search in group name and user email/username/firstName/lastName
   google.protobuf.StringValue text_filter = 3;
 }
