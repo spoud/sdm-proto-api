@@ -24,7 +24,7 @@ message HistoryFilter {
 
 message EntityFilter {
   google.protobuf.StringValue id = 1;
-  google.protobuf.StringValue data_owner_id = 2;
+  google.protobuf.StringValue owner_id = 2;
   //string entity_type = 2; // to make it unique, important for external ids like user.
 }
 
