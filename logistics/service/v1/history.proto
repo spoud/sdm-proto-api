@@ -7,6 +7,7 @@ option go_package = "logistics.service.v1";
 
 import "global/selection/v1/pagination.proto";
 import "logistics/domain/v1/domain.proto";
+import "google/protobuf/wrappers.proto";
 
 service HistoryService {
   rpc GetHistory (GetHistoryRequest) returns (GetHistoryResponse);
@@ -22,7 +23,8 @@ message HistoryFilter {
 }
 
 message EntityFilter {
-  string id = 1;
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue owner_id = 2;
   //string entity_type = 2; // to make it unique, important for external ids like user.
 }
 
