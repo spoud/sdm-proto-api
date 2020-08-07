@@ -23,5 +23,8 @@ message AuthorizationFilter {
 
 message PrivilegePredicate {
   io.spoud.sdm.permission.domain.v1.Privilege.Type privilege = 1;
-  io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity = 2;
+}
+
+message ResourceEntityPredicate {
+  io.spoud.sdm.global.domain.v1.ResourceEntity.Type resource_entity = 1;
 }

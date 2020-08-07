@@ -63,6 +63,7 @@ message ListResourceGroupsRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
   repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 2;
   io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 3;
+  io.spoud.sdm.permission.selection.v1.ResourceEntityPredicate resource_entity = 4;
 
 }
 
