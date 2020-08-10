@@ -6,6 +6,7 @@ option java_package = "io.spoud.sdm.permission.selection.v1";
 option go_package = "selection.v1";
 
 import "permission/domain/v1/domain.proto";
+import "global/domain/v1/domain.proto";
 
 message PermissionFilter {
   // please use subject_ref instead
@@ -22,4 +23,8 @@ message AuthorizationFilter {
 
 message PrivilegePredicate {
   io.spoud.sdm.permission.domain.v1.Privilege.Type privilege = 1;
+}
+
+message ResourceEntityPredicate {
+  io.spoud.sdm.global.domain.v1.ResourceEntity.Type resource_entity = 1;
 }
