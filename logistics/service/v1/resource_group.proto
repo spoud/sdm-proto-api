@@ -52,7 +52,7 @@ message UpdateResourceGroupRequest {
   repeated io.spoud.sdm.logistics.mutation.v1.MetaAttributeChange properties = 2;
   io.spoud.sdm.logistics.mutation.v1.AttributeChange name = 3;
 
-  // deprecated since 2020-08-10 use parent reference with parent_ref (field 7) instead.
+  // deprecated since 2020-08-10 use parent reference with parent (field 7) instead.
   io.spoud.sdm.logistics.mutation.v1.AttributeChange parent_name_or_id = 4 [deprecated=true];
   io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 5;
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef self = 6;
@@ -65,7 +65,7 @@ message UpdateResourceGroupResponse {
 }
 
 message DeleteResourceGroupRequest {
-  // deprecated since 2020-08-10 use reference with ref (field 2) instead.
+  // deprecated since 2020-08-10 use reference with self (field 2) instead.
   string id_or_name = 1 [deprecated=true];
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef self = 2;
 
