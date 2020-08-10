@@ -85,8 +85,12 @@ message SaveDataSubscriptionStateLegacyRequest {
   io.spoud.sdm.logistics.mutation.v1.AttributeChange transport_url = 4;
   io.spoud.sdm.logistics.mutation.v1.StateChange state = 5;
   repeated io.spoud.sdm.logistics.mutation.v1.MetaAttributeChange properties = 6;
-  io.spoud.sdm.logistics.mutation.v1.AttributeChange resource_group_name_or_id = 8;
+
+  // deprecated since 2020-08-10 use reference with ref (field 2) instead.
+  io.spoud.sdm.logistics.mutation.v1.AttributeChange resource_group_name_or_id = 8 [deprecated=true];
   io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 9;
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 10;
+
 }
 
 message SaveDataSubscriptionStateRequest {
@@ -110,7 +114,7 @@ message DataSubscriptionStateChange {
   google.protobuf.StringValue label = 4;
 
   // ResourceGroup Reference
-  io.spoud.sdm.logistics.selection.v1.BaseRef resource_group = 8;
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8;
 
   // DataOfferState Reference
   io.spoud.sdm.logistics.selection.v1.DataOfferStateRef data_offer_state = 9;

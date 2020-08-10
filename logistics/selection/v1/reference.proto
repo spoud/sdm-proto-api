@@ -78,6 +78,7 @@ message IdNameRef {
     // ref by name;
     string name = 2;
   }
+  reserved 3;
 }
 
 message IdPathRef {
@@ -97,5 +98,9 @@ message BaseRef {
 }
 
 message ResourceGroupRef {
-  IdPathRef id_path = 1;
+  oneof ref {
+    // deprecated since 2020-08-10 use reference with ref (field 2) instead.
+    IdNameRef id_name = 1 [deprecated=true];
+    IdPathRef id_path = 2;
+  }
 }
