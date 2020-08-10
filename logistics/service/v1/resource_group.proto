@@ -7,6 +7,7 @@ option go_package = "logistics.service.v1";
 
 import "global/selection/v1/pagination.proto";
 import "logistics/selection/v1/filter.proto";
+import "logistics/selection/v1/reference.proto";
 import "logistics/domain/v1/domain.proto";
 import "logistics/mutation/v1/mutation.proto";
 import "permission/selection/v1/filter.proto";
@@ -20,7 +21,9 @@ service ResourceGroupService {
 }
 
 message GetResourceGroupRequest {
-  string id_or_name = 1;
+  // deprecated since 2020-08-10 use reference with ref (field 2) instead.
+  string id_or_name = 1 [deprecated=true];
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef ref = 2;
 }
 
 message GetResourceGroupResponse {
@@ -40,11 +43,14 @@ message CreateResourceGroupResponse {
 }
 
 message UpdateResourceGroupRequest {
-  string resource_group_id_or_name = 1;
+
+  // deprecated since 2020-08-10 use reference with ref (field 6) instead.
+  string resource_group_id_or_name = 1 [deprecated=true];
   repeated io.spoud.sdm.logistics.mutation.v1.MetaAttributeChange properties = 2;
   io.spoud.sdm.logistics.mutation.v1.AttributeChange name = 3;
   io.spoud.sdm.logistics.mutation.v1.AttributeChange parent_name_or_id = 4;
   io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 5;
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef ref = 6;
 
 }
 
@@ -53,7 +59,10 @@ message UpdateResourceGroupResponse {
 }
 
 message DeleteResourceGroupRequest {
-  string id_or_name = 1;
+  // deprecated since 2020-08-10 use reference with ref (field 2) instead.
+  string id_or_name = 1 [deprecated=true];
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef ref = 2;
+
 }
 
 message DeleteResourceGroupResponse {
