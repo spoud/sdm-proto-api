@@ -55,8 +55,7 @@ message CreateDataSubscriptionRequest {
   // variable to replace in offer template and subscription template, CURRENTLY DISABLED
   // map<string, string> variable = 6;
 
-  // deprecated since 2020-08-10 use reference with ref (field 2) instead.
-
+  // deprecated since 2020-08-10 use resource group reference (field 12) instead.
   string resource_group_id_or_name = 9 [deprecated=true];
 
   // Create data subscription through claiming a data subscription state.
@@ -109,7 +108,7 @@ message UpdateDataSubscriptionRequest {
   io.spoud.sdm.logistics.mutation.v1.AttributeChange name = 2;
   repeated io.spoud.sdm.logistics.mutation.v1.MetaAttributeChange properties = 4;
 
-  // deprecated since 2020-08-10 use reference with ref (field 2) instead.
+  // deprecated since 2020-08-10 use resource group reference (field 8) instead.
   io.spoud.sdm.logistics.mutation.v1.AttributeChange resource_group_name_or_id = 6 [deprecated=true];
   io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 7;
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8;

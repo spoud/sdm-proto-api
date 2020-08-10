@@ -86,7 +86,7 @@ message SaveDataSubscriptionStateLegacyRequest {
   io.spoud.sdm.logistics.mutation.v1.StateChange state = 5;
   repeated io.spoud.sdm.logistics.mutation.v1.MetaAttributeChange properties = 6;
 
-  // deprecated since 2020-08-10 use reference with ref (field 2) instead.
+  // deprecated since 2020-08-10 use resource group reference (field 10) instead.
   io.spoud.sdm.logistics.mutation.v1.AttributeChange resource_group_name_or_id = 8 [deprecated=true];
   io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 9;
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 10;

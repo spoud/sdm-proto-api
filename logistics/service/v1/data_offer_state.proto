@@ -53,7 +53,7 @@ message UpdateDataOfferStateRequest {
   string transport_id_or_name = 3;
   string transport_url = 5;
   bool deleted = 7;
-  // deprecated since 2020-08-10 use reference with ref (field 2) instead.
+  // deprecated since 2020-08-10 use resource group reference (field 11) instead.
   io.spoud.sdm.logistics.mutation.v1.AttributeChange resource_group_name_or_id = 9 [deprecated=true];
   io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 10;
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 11;
@@ -102,7 +102,7 @@ message SaveDataOfferStateLegacyRequest {
   io.spoud.sdm.logistics.mutation.v1.AttributeChange transport_url = 4;
   io.spoud.sdm.logistics.mutation.v1.StateChange state = 5;
   repeated io.spoud.sdm.logistics.mutation.v1.MetaAttributeChange properties = 6;
-  // deprecated since 2020-08-10 use reference with ref (field 2) instead.
+  // deprecated since 2020-08-10 use resource group reference (field 10) instead.
   io.spoud.sdm.logistics.mutation.v1.AttributeChange resource_group_name_or_id = 8 [deprecated=true];
   io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 9;
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 10;

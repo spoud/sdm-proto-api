@@ -23,7 +23,7 @@ service ResourceGroupService {
 message GetResourceGroupRequest {
   // deprecated since 2020-08-10 use reference with ref (field 2) instead.
   string id_or_name = 1 [deprecated=true];
-  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef ref = 2;
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef self = 2;
 }
 
 message GetResourceGroupResponse {
@@ -35,9 +35,9 @@ message CreateResourceGroupRequest {
   string name = 2;
   map<string, string> properties = 4;
   // deprecated since 2020-08-10 use parent reference with parent_ref (field 7) instead.
-  string parent_id_or_name = 5;
+  string parent_id_or_name = 5 [deprecated=true];
   string label = 6;
-  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef parent_ref = 7 [deprecated=true];
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef parent = 7;
 
 }
 
@@ -55,8 +55,8 @@ message UpdateResourceGroupRequest {
   // deprecated since 2020-08-10 use parent reference with parent_ref (field 7) instead.
   io.spoud.sdm.logistics.mutation.v1.AttributeChange parent_name_or_id = 4 [deprecated=true];
   io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 5;
-  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef ref = 6;
-  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef parent_ref = 7;
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef self = 6;
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef parent = 7;
 
 }
 
@@ -67,7 +67,7 @@ message UpdateResourceGroupResponse {
 message DeleteResourceGroupRequest {
   // deprecated since 2020-08-10 use reference with ref (field 2) instead.
   string id_or_name = 1 [deprecated=true];
-  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef ref = 2;
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef self = 2;
 
 }
 

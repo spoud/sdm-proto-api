@@ -19,7 +19,7 @@ service AgentService {
 
 message CreateAgentRequest {
   string label = 1;
-  // deprecated since 2020-08-10 use reference with ref (field 2) instead.
+  // deprecated since 2020-08-10 use resource group reference (field 5) instead.
   string resource_group_id_or_name = 2 [deprecated=true];
   string technical_user_uuid = 3;
   string username = 4;
