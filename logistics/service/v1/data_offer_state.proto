@@ -18,11 +18,6 @@ service DataOfferStateService {
   rpc GetDataOfferState (GetDataOfferStateRequest) returns (GetDataOfferStateResponse);
   rpc DeleteDataOfferState (DeleteDataOfferStateRequest) returns (DeleteDataOfferStateResponse);
   rpc ListDataOfferStates (ListDataOfferStatesRequest) returns (ListDataOfferStatesResponse);
-  rpc SaveDataOfferState (SaveDataOfferStateLegacyRequest) returns (SaveDataOfferStateResponse) {
-    // use Save instead
-    // deprecated since 2020-02-07
-    option deprecated = true;
-  };
 
   // Saves a DataOfferState.
   //
@@ -90,17 +85,6 @@ message ListDataOfferStatesResponse {
 
 message SaveDataOfferStateRequest {
   DataOfferStateChange input = 10;
-}
-
-message SaveDataOfferStateLegacyRequest {
-  string data_offer_state_id_or_name = 1;
-  string name = 2;
-  string transport_id_or_name = 3;
-  io.spoud.sdm.logistics.mutation.v1.AttributeChange transport_url = 4;
-  io.spoud.sdm.logistics.mutation.v1.StateChange state = 5;
-  repeated io.spoud.sdm.logistics.mutation.v1.MetaAttributeChange properties = 6;
-  io.spoud.sdm.logistics.mutation.v1.AttributeChange resource_group_name_or_id = 8;
-  io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 9;
 }
 
 message DataOfferStateChange {
