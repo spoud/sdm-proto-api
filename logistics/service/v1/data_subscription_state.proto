@@ -115,26 +115,3 @@ message DataSubscriptionStateChange {
 message SaveDataSubscriptionStateResponse {
   io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_state = 1;
 }
-
-// <b>EXPERIMENTAL</b>
-message SearchDataSubscriptionStatesRequest {
-  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
-
-  // Simple predicate search by key and value.
-  // All predicates are formed as an AND, except predicates with the same key.
-  // For predicates with the same key, the latest entry in the list is taken.
-  // There is no support for an "OR" right now.
-  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 2;
-  string data_offer_state_id_or_name = 3;
-  string transport_id_or_name = 4;
-
-  // add a filter for returning only data subscription states with a data offer state with a data offer.
-  bool with_data_offer_only = 5;
-
-}
-
-// <b>EXPERIMENTAL</b>
-message SearchDataSubscriptionStatesResponse {
-  repeated io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_states = 1;
-  io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
-}

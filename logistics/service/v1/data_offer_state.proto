@@ -124,21 +124,3 @@ message DataOfferStateChange {
 message SaveDataOfferStateResponse {
   io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_state = 1;
 }
-
-// <b>EXPERIMENTAL</b>
-message SearchDataOfferStatesRequest {
-  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
-
-  // Simple predicate search by key and value.
-  // All predicates are formed as an AND, except predicates with the same key.
-  // For predicates with the same key, the latest entry in the list is taken.
-  // There is no support for an "OR" right now.
-  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 2;
-  string transport_id_or_name = 3;
-}
-
-// <b>EXPERIMENTAL</b>
-message SearchDataOfferStatesResponse {
-  repeated io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_states = 1;
-  io.spoud.sdm.global.selection.v1.PageResult page_result = 3;
-}

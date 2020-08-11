@@ -64,23 +64,6 @@ message ListDataOffersResponse {
   io.spoud.sdm.global.selection.v1.PageResult page_result = 3;
 }
 
-// <b>EXPERIMENTAL</b>
-message SearchDataOffersRequest {
-  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
-
-  // Simple predicate filter by key and value.
-  // All predicates are formed as an AND, except predicates with the same key.
-  // For predicates with the same key, the latest entry in the list is taken.
-  // There is no support for an "OR" right now.
-  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 2;
-}
-
-// <b>EXPERIMENTAL</b>
-message SearchDataOffersResponse {
-  repeated io.spoud.sdm.logistics.domain.v1.DataOffer data_offers = 1;
-  io.spoud.sdm.global.selection.v1.PageResult page_result = 3;
-}
-
 // the write model is different from the read model.
 message SaveDataOfferRequest {
   DataOfferChange input = 1;
