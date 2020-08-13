@@ -7,6 +7,7 @@ option go_package = "logistics.service.v1";
 
 import "global/selection/v1/pagination.proto";
 import "logistics/selection/v1/filter.proto";
+import "logistics/selection/v1/reference.proto";
 import "logistics/domain/v1/domain.proto";
 import "logistics/mutation/v1/mutation.proto";
 import "permission/selection/v1/filter.proto";
@@ -20,7 +21,9 @@ service ResourceGroupService {
 }
 
 message GetResourceGroupRequest {
-  string id_or_name = 1;
+  // deprecated since 2020-08-10 use reference with ref (field 2) instead.
+  string id_or_name = 1 [deprecated=true];
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef self = 2;
 }
 
 message GetResourceGroupResponse {
@@ -31,8 +34,11 @@ message CreateResourceGroupRequest {
   string id = 1;
   string name = 2;
   map<string, string> properties = 4;
-  string parent_id_or_name = 5;
+  // deprecated since 2020-08-10 use parent reference with parent_ref (field 7) instead.
+  string parent_id_or_name = 5 [deprecated=true];
   string label = 6;
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef parent = 7;
+
 }
 
 message CreateResourceGroupResponse {
@@ -40,11 +46,17 @@ message CreateResourceGroupResponse {
 }
 
 message UpdateResourceGroupRequest {
-  string resource_group_id_or_name = 1;
+
+  // deprecated since 2020-08-10 use reference with ref (field 6) instead.
+  string resource_group_id_or_name = 1 [deprecated=true];
   repeated io.spoud.sdm.logistics.mutation.v1.MetaAttributeChange properties = 2;
   io.spoud.sdm.logistics.mutation.v1.AttributeChange name = 3;
-  io.spoud.sdm.logistics.mutation.v1.AttributeChange parent_name_or_id = 4;
+
+  // deprecated since 2020-08-10 use parent reference with parent (field 7) instead.
+  io.spoud.sdm.logistics.mutation.v1.AttributeChange parent_name_or_id = 4 [deprecated=true];
   io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 5;
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef self = 6;
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef parent = 7;
 
 }
 
@@ -53,7 +65,10 @@ message UpdateResourceGroupResponse {
 }
 
 message DeleteResourceGroupRequest {
-  string id_or_name = 1;
+  // deprecated since 2020-08-10 use reference with self (field 2) instead.
+  string id_or_name = 1 [deprecated=true];
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef self = 2;
+
 }
 
 message DeleteResourceGroupResponse {

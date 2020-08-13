@@ -40,22 +40,6 @@ message GetDataOfferStateResponse {
   io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_state = 1;
 }
 
-message UpdateDataOfferStateRequest {
-  // the id can be defined upon creation
-  string id = 6;
-  string name = 1;
-  map<string, string> properties = 2;
-  string transport_id_or_name = 3;
-  string transport_url = 5;
-  bool deleted = 7;
-  io.spoud.sdm.logistics.mutation.v1.AttributeChange resource_group_name_or_id = 9;
-  io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 10;
-}
-
-message UpdateDataOfferStateResponse {
-  io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_state = 1;
-}
-
 message DeleteDataOfferStateResponse {
 
 }
@@ -103,7 +87,7 @@ message DataOfferStateChange {
   google.protobuf.StringValue label = 4;
 
   // ResourceGroup Reference
-  io.spoud.sdm.logistics.selection.v1.BaseRef resource_group = 8;
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8;
 
   // Transport Reference
   io.spoud.sdm.logistics.selection.v1.BaseRef transport = 9;

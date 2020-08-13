@@ -94,7 +94,7 @@ message DataSubscriptionStateChange {
   google.protobuf.StringValue label = 4;
 
   // ResourceGroup Reference
-  io.spoud.sdm.logistics.selection.v1.BaseRef resource_group = 8;
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8;
 
   // DataOfferState Reference
   io.spoud.sdm.logistics.selection.v1.DataOfferStateRef data_offer_state = 9;

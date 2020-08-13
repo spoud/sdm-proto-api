@@ -8,6 +8,7 @@ option go_package = "logistics.service.v1";
 import "global/selection/v1/pagination.proto";
 import "logistics/domain/v1/domain.proto";
 import "logistics/selection/v1/filter.proto";
+import "logistics/selection/v1/reference.proto";
 import "permission/selection/v1/filter.proto";
 
 service TransportService {
@@ -30,8 +31,11 @@ message GetTransportResponse {
 message CreateTransportRequest {
   string name = 1;
   map<string, string> properties = 2;
-  string resource_group_id_or_name = 3;
+  // deprecated since 2020-08-10 use resource group reference (field 5) instead.
+  string resource_group_id_or_name = 3 [deprecated=true];
   string label = 4;
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 5;
+
 }
 
 message CreateTransportResponse {

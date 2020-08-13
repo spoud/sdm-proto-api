@@ -83,7 +83,7 @@ message DataSubscriptionChange {
   google.protobuf.StringValue label = 4;
 
   // Resource Group Reference
-  io.spoud.sdm.logistics.selection.v1.BaseRef resource_group = 8;
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8;
 
   // Selector for data subscription state entity.
   // TODO: use DataSubscriptionStateRef (but that means implementing auto creation)
