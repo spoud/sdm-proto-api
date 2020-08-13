@@ -40,25 +40,6 @@ message GetDataOfferStateResponse {
   io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_state = 1;
 }
 
-message UpdateDataOfferStateRequest {
-  // the id can be defined upon creation
-  string id = 6;
-  string name = 1;
-  map<string, string> properties = 2;
-  string transport_id_or_name = 3;
-  string transport_url = 5;
-  bool deleted = 7;
-  // deprecated since 2020-08-10 use resource group reference (field 11) instead.
-  io.spoud.sdm.logistics.mutation.v1.AttributeChange resource_group_name_or_id = 9 [deprecated=true];
-  io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 10;
-  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 11;
-
-}
-
-message UpdateDataOfferStateResponse {
-  io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_state = 1;
-}
-
 message DeleteDataOfferStateResponse {
 
 }
