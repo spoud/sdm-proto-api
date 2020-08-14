@@ -61,7 +61,6 @@ message SchemaEncoding {
         UNKNOWN = 0;
         JSON = 1;
         AVRO = 2;
-        JSON_EXPECTATION = 3;
+        JSON_ASYNCAPI = 3;
     }
 }
-
