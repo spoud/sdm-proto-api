@@ -52,6 +52,7 @@ message SchemaSource {
         UNKNOWN = 0;
         REGISTRY = 1;
         INFERRED = 2;
+        USER_DEFINED = 3;
     }
 }
 
@@ -60,6 +61,7 @@ message SchemaEncoding {
         UNKNOWN = 0;
         JSON = 1;
         AVRO = 2;
+        ASYNC_API = 3;
     }
 }
 
