@@ -77,6 +77,9 @@ message IdNameRef {
     string id = 1;
     // ref by name;
     string name = 2;
+    // deprecated since 2020-08-10 use reference with id or name (field 1 and  2) instead.
+    // ref by either
+    string id_or_name = 4 [deprecated=true];
   }
   reserved 3;
 }
