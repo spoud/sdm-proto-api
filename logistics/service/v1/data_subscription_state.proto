@@ -33,7 +33,9 @@ service DataSubscriptionStateService {
 
 
 message GetDataSubscriptionStateRequest {
-  string id_or_name = 1;
+  // deprecated since 2020-08-31 use self reference (field 2) instead.
+  string id_or_name = 1 [deprecated=true];
+  io.spoud.sdm.logistics.selection.v1.DataSubscriptionStateRef self = 2;
 }
 
 message GetDataSubscriptionStateResponse {
@@ -45,7 +47,9 @@ message DeleteDataSubscriptionStateResponse {
 }
 
 message DeleteDataSubscriptionStateRequest {
-  string id_or_name = 1;
+  // deprecated since 2020-08-31 use self reference (field 2) instead.
+  string id_or_name = 1 [deprecated=true];
+  io.spoud.sdm.logistics.selection.v1.DataSubscriptionStateRef self = 2;
 }
 
 message ListDataSubscriptionStatesRequest {

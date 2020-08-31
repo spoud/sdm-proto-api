@@ -32,8 +32,9 @@ service DataOfferStateService {
 }
 
 message GetDataOfferStateRequest {
-  string id_or_name = 1;
-  reserved 2;
+  // deprecated since 2020-08-31 use self reference (field 3) instead.
+  string id_or_name = 1 [deprecated=true];
+  io.spoud.sdm.logistics.selection.v1.DataOfferStateRef self = 3;
 }
 
 message GetDataOfferStateResponse {
@@ -45,7 +46,9 @@ message DeleteDataOfferStateResponse {
 }
 
 message DeleteDataOfferStateRequest {
-  string id_or_name = 1;
+  // deprecated since 2020-08-31 use self reference (field 2) instead.
+  string id_or_name = 1 [deprecated=true];
+  io.spoud.sdm.logistics.selection.v1.DataOfferStateRef self = 2;
 }
 
 message ListDataOfferStatesRequest {
