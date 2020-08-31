@@ -32,7 +32,9 @@ message CreateAgentResponse {
 }
 
 message DeleteAgentRequest {
-  string id = 1;
+  // deprecated since 2020-08-31 use self reference (field 2) instead.
+  string id = 1 [deprecated=true];
+  io.spoud.sdm.logistics.selection.v1.BaseRef self = 2;
 }
 
 
