@@ -1,0 +1,49 @@
+syntax = "proto3";
+package io.spoud.sdm.hooks.domain.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.global.hooks.v1";
+option go_package = "logger.v1";
+
+import "google/protobuf/timestamp.proto";
+import "logistics/domain/v1/domain.proto";
+
+
+message LogRecord {
+    string entity_uuid = 1;
+    google.protobuf.Timestamp timestamp = 2;
+    StateChangeAction.Type action = 3;
+
+    EntityType.Type entity_type = 4;
+
+    // in a DELETED case, the entity might be null
+    oneof entity {
+        io.spoud.sdm.logistics.domain.v1.DataOffer data_offer = 10;
+        io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_state = 12;
+        io.spoud.sdm.logistics.domain.v1.DataSubscription data_subscription = 13;
+        io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_state = 14;
+        io.spoud.sdm.logistics.domain.v1.ResourceGroup resource_group = 15;
+        io.spoud.sdm.logistics.domain.v1.Transport transport = 16;
+    }
+}
+
+// WARNING ! DIFFERENT FROM  logitics/v1alpha/hook.proto
+message StateChangeAction {
+    enum Type {
+        UNKNOWN = 0;
+        UPDATED = 1;
+        DELETED = 2;
+    }
+}
+
+message EntityType {
+    enum Type {
+        UNKNOWN = 0;
+        DATA_OFFER = 1;
+        DATA_OFFER_STATE = 2;
+        DATA_SUBSCRIPTION = 3;
+        DATA_SUBSCRIPTION_STATE = 4;
+        TRANSPORT = 5;
+        RESOURCE_GROUP = 6;
+    }
+}

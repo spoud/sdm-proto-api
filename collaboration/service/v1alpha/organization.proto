@@ -7,7 +7,6 @@ option go_package = "collaboration.v1alpha";
 
 import "collaboration/domain/v1alpha/domain.proto";
 import "google/protobuf/wrappers.proto";
-import "google/protobuf/empty.proto";
 import "global/selection/v1/pagination.proto";
 import "global/mutation/v1/mutation.proto";
 
