@@ -2,7 +2,7 @@ syntax = "proto3";
 package io.spoud.sdm.hooks.domain.v1;
 
 option java_multiple_files = true;
-option java_package = "io.spoud.sdm.global.hooks.v1";
+option java_package = "io.spoud.sdm.hooks.domain.v1";
 option go_package = "logger.v1";
 
 import "google/protobuf/timestamp.proto";
