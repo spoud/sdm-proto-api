@@ -1,0 +1,50 @@
+syntax = "proto3";
+package io.spoud.sdm.hooks.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.hooks.v1";
+option go_package = "hooks.v1";
+
+//import "google/protobuf/timestamp.proto";
+//import "logistics/domain/v1/domain.proto";
+import "hooks/domain/v1/filter.proto";
+import "hooks/domain/v1/domain.proto";
+//import "global/domain/v1/domain.proto";
+
+
+service StateChanger {
+    // subscribe to any changes
+    rpc SubscribeChange (SubscribeChangeRequest) returns (stream SubscribeChangeResponse);
+}
+
+// ---------------------
+// Subscribe Request
+// Each subscribe request will result in a stateful server stream, whereas the server tries
+// to forward state changes only, if:
+// 1) the filter is true (in the case of initial loading or new state) OR
+// 2) an entity previously matching the filter no longer matches the filter (in the case of the new state is no longer interesting)
+//
+// in case 2) you'll just get the new state once to be able to cleanup or adapt...
+//
+// The state will be bound to the stream. If there's a communication problem like connection loss,
+// the server should close the connection and do a cleanup. There's no support for resuming a stream.
+// Later on, there will be some mechanisms to clearly express a position to start from (as a param in the request),
+// to avoid always streaming from the beginning.
+// ---------------------
+message SubscribeChangeRequest {
+    io.spoud.sdm.hooks.domain.v1.StateChangeStartPosition start_position = 1;
+    repeated io.spoud.sdm.hooks.domain.v1.StateChangeFilter filters = 2;
+}
+
+// ---------------------
+// Subscribe Response
+// The response guarantees that all entities in the response are ordered in a consistent way.
+// By consistent it means:
+// 1) by creation timestamp (for initial state loading), by modified timestamp/when things happening (after initial loading, stream) - whereas a "timestamp"
+//    should be strictly ordered (sequence, ...) OR
+// 2) by acyclic dependencies (for initial state loading), same as 1) after initial loading.
+// ---------------------
+message SubscribeChangeResponse {
+    io.spoud.sdm.hooks.domain.v1.LogRecord log_record = 1;
+}
+
