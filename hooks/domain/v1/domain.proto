@@ -7,6 +7,7 @@ option go_package = "logger.v1";
 
 import "google/protobuf/timestamp.proto";
 import "logistics/domain/v1/domain.proto";
+import "global/domain/v1/domain.proto";
 
 
 message LogRecord {
@@ -14,7 +15,7 @@ message LogRecord {
     google.protobuf.Timestamp timestamp = 2;
     StateChangeAction.Type action = 3;
 
-    EntityType.Type entity_type = 4;
+    io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 4;
 
     // in a DELETED case, the entity might be null
     oneof entity {
@@ -36,14 +37,4 @@ message StateChangeAction {
     }
 }
 
-message EntityType {
-    enum Type {
-        UNKNOWN = 0;
-        DATA_OFFER = 1;
-        DATA_OFFER_STATE = 2;
-        DATA_SUBSCRIPTION = 3;
-        DATA_SUBSCRIPTION_STATE = 4;
-        TRANSPORT = 5;
-        RESOURCE_GROUP = 6;
-    }
-}
+

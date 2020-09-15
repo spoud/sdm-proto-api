@@ -8,10 +8,11 @@ option go_package = "logistics.hooks.v1alpha";
 import "google/protobuf/timestamp.proto";
 import "logistics/domain/v1/domain.proto";
 
-
-service StateChanger {
+// deprecated since 15.09.2020 moved to /hooks/service/v1
+service StateChanger  {
+  option deprecated = true;
   // subscribe to any changes
-  rpc SubscribeChange (SubscribeChangeRequest) returns (stream SubscribeChangeResponse);
+  rpc SubscribeChange (SubscribeChangeRequest) returns (stream SubscribeChangeResponse) ;
 }
 
 // ---------------------
@@ -29,6 +30,7 @@ service StateChanger {
 // to avoid always streaming from the beginning.
 // ---------------------
 message SubscribeChangeRequest {
+  option deprecated = true;
   StateChangeStartPosition start_position = 1;
   repeated StateChangeFilter filters = 2;
 }
@@ -42,6 +44,7 @@ message SubscribeChangeRequest {
 // 2) by acyclic dependencies (for initial state loading), same as 1) after initial loading.
 // ---------------------
 message SubscribeChangeResponse {
+  option deprecated = true;
   string entity_id = 1;
   google.protobuf.Timestamp timestamp = 2;
 
@@ -68,30 +71,35 @@ message SubscribeChangeResponse {
 
 // Entity ResourceGroup
 message ResourceGroupFilter {
+  option deprecated = true;
   string id = 1;
   repeated PropertiesFilter properties_filters = 2;
 }
 
 // Entity Transport
 message TransportFilter {
+  option deprecated = true;
   string id = 1;
   repeated PropertiesFilter properties_filters = 3;
 }
 
 // Entity DataOffer
 message DataOfferFilter {
+  option deprecated = true;
   string id = 1;
   repeated PropertiesFilter properties_filters = 2;
 }
 
 // Entity DataOfferState
 message DataOfferStateFilter {
+  option deprecated = true;
   string id = 1;
   repeated PropertiesFilter properties_filters = 3;
 }
 
 // Entity DataSubscription
 message DataSubscriptionFilter {
+  option deprecated = true;
   string id = 1;
   repeated PropertiesFilter properties_filters = 2;
   string data_offer_id = 3;
@@ -99,18 +107,21 @@ message DataSubscriptionFilter {
 
 // Entity DataSubscriptionState
 message DataSubscriptionStateFilter {
+  option deprecated = true;
   string id = 1;
   repeated PropertiesFilter properties_filters = 2;
 }
 
 // General predicate for one meta attribute (exact match)
 message PropertiesFilter {
+  option deprecated = true;
   string key = 1; // e.g. sdm.transport.kafka.topic
   string value = 2; // agg_topic_2383
 }
 
 // Possible filters
 message StateChangeFilter {
+  option deprecated = true;
   oneof filter {
     DataOfferFilter data_offer_filter = 1;
     DataOfferStateFilter data_offer_state_filter = 2;
@@ -122,6 +133,7 @@ message StateChangeFilter {
 }
 
 message StateChangeStartPosition {
+  option deprecated = true;
   oneof position {
     PositionPreset preset = 1;
     // in future: int64 offset = 2;
@@ -130,16 +142,19 @@ message StateChangeStartPosition {
 }
 
 enum PositionPreset {
+  option deprecated = true;
   EARLIEST = 0;
   LATEST = 1;
 }
 
 enum StateChangeAction {
+  option deprecated = true;
   UPDATED = 0;
   DELETED = 1;
 }
 
 enum EntityType {
+  option deprecated = true;
   UNKNOWN = 0;
   DATA_OFFER = 1;
   DATA_OFFER_STATE = 2;
