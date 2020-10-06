@@ -28,6 +28,12 @@ message LogRecord {
     }
 }
 
+// Context specific information about the current stream.
+// Also used for keep alives and other gossip.
+message StreamInfo {
+    google.protobuf.Timestamp timestamp = 2;
+}
+
 // WARNING ! DIFFERENT FROM  logitics/v1alpha/hook.proto
 message StateChangeAction {
     enum Type {
