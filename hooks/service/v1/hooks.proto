@@ -38,13 +38,16 @@ message SubscribeChangeRequest {
 
 // ---------------------
 // Subscribe Response
-// The response guarantees that all entities in the response are ordered in a consistent way.
+// The log record response guarantees that all entities in the response are ordered in a consistent way.
 // By consistent it means:
 // 1) by creation timestamp (for initial state loading), by modified timestamp/when things happening (after initial loading, stream) - whereas a "timestamp"
 //    should be strictly ordered (sequence, ...) OR
 // 2) by acyclic dependencies (for initial state loading), same as 1) after initial loading.
 // ---------------------
 message SubscribeChangeResponse {
-    io.spoud.sdm.hooks.domain.v1.LogRecord log_record = 1;
+    oneof response {
+      io.spoud.sdm.hooks.domain.v1.LogRecord log_record = 1;
+      io.spoud.sdm.hooks.domain.v1.StreamInfo stream_info = 2;
+    }
 }
 
