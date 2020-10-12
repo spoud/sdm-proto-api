@@ -14,6 +14,11 @@ message IdReference {
   reserved 11;
 }
 
+message IdPathReference {
+  string id = 1;
+  string path = 11;
+}
+
 message IdNamePathReference {
   string id = 1;
   string name = 2;
