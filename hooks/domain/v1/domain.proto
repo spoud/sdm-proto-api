@@ -17,6 +17,8 @@ message LogRecord {
 
     io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 4;
 
+    string path = 5;
+
     // in a DELETED case, the entity might be null
     oneof entity {
         io.spoud.sdm.logistics.domain.v1.DataOffer data_offer = 10;
