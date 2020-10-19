@@ -5,12 +5,8 @@ option java_multiple_files = true;
 option java_package = "io.spoud.sdm.hooks.v1";
 option go_package = "hooks.v1";
 
-//import "google/protobuf/timestamp.proto";
-//import "logistics/domain/v1/domain.proto";
 import "hooks/domain/v1/filter.proto";
 import "hooks/domain/v1/domain.proto";
-//import "global/domain/v1/domain.proto";
-
 
 service StateChanger {
     // subscribe to any changes
