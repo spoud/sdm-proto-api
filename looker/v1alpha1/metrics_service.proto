@@ -53,13 +53,13 @@ message ResourceMetric {
     DATA_OFFER_STATE_ATTRIBUTE_INTEGRITY = 8;
 
     // How many item is there in this dataset
-    DATA_OFFER_DATASET_COUNT = 9;
+    DATA_OFFER_STATE_DATASET_COUNT = 9;
 
     // The size in bytes of the dataset
-    DATA_OFFER_DATASET_SIZE_BYTES = 10;
+    DATA_OFFER_STATE_DATASET_SIZE_BYTES = 10;
 
     // Number of mutations that occur on the dataset
-    DATA_OFFER_MUTATIONS = 11;
+    DATA_OFFER_STATE_MUTATIONS = 11;
   }
 
   double value = 3;
