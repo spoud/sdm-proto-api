@@ -65,5 +65,8 @@ message ResourceEntity {
     // same authorization is applied as for regular users.
     TECHNICAL_USER = 15;
     AGENT = 16;
+
+    // Used only for hooks
+    CHECKPOINT = 999;
   }
 }
