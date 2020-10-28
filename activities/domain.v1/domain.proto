@@ -1,0 +1,59 @@
+syntax = "proto3";
+package io.spoud.sdm.activities.domain.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.activities.domain.v1";
+option go_package = "activities.v1";
+
+import "google/protobuf/timestamp.proto";
+import "logistics/domain/v1/domain.proto";
+import "global/domain/v1/domain.proto";
+
+
+message Activity {
+    // reference the correlating activities
+    string correlation_id = 1;
+    string entity_uuid = 2;
+    google.protobuf.Timestamp timestamp = 3;
+    ActivityType.Type type = 4;
+    // subject who causes the activity
+    SubjectReference subject_causing = 5;
+
+    // reference the target the activity applies to
+    Reference target = 6;
+
+    // additional named references to subjects or resources
+    map<string, Reference> references = 7;
+
+}
+
+message Reference {
+    oneof reference {
+        ResourceReference resource_ref = 1;
+        SubjectReference subject_ref = 2;
+    }
+}
+
+message ResourceReference {
+    string id = 1;
+    io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 2;
+}
+
+message SubjectReference {
+    string id = 1;
+}
+
+message ActivityType {
+    enum Type {
+        UNKNOWN = 0;
+        // 100..199 related to ownership change
+        OWNER_CHANGE = 100;
+        OWNERSHIP_SELF_ASSIGNED = 110;
+        OWNERSHIP_ASSIGNED = 120;
+        OWNERSHIP_UNASSIGNED = 130;
+        // 200..299 related to ...
+
+    }
+}
+
+
