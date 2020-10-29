@@ -27,7 +27,7 @@ message DataOfferRef {
 
     // referencing properties of outer (relative) resource object.
     // not yet supported
-    // google.protobuf.FieldMask property_mask =  7;
+    // google.protobuf.FieldMask property_mask =  5;
   }
 
   // reserved for self matching properties

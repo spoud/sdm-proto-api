@@ -9,20 +9,21 @@ import "global/selection/v1/pagination.proto";
 import "logistics/selection/v1/filter.proto";
 import "logistics/domain/v1/domain.proto";
 import "logistics/mutation/v1/mutation.proto";
+import "logistics/service/v1/data_port.proto";
 import "logistics/selection/v1/reference.proto";
 import "permission/selection/v1/filter.proto";
 
 import "google/protobuf/wrappers.proto";
 
-// This service is deprecated, please use DataPortService instead
+// This service is deprecated since 29.10.2020, please use DataPortService instead
 service DataOfferStateService {
-  rpc GetDataOfferState (GetDataOfferStateRequest) returns (GetDataOfferStateResponse) {
+  rpc GetDataOfferState (io.spoud.sdm.logistics.service.v1.GetDataPortRequest) returns (io.spoud.sdm.logistics.service.v1.GetDataPortResponse) {
     option deprecated = true;
   };
-  rpc DeleteDataOfferState (DeleteDataOfferStateRequest) returns (DeleteDataOfferStateResponse) {
+  rpc DeleteDataOfferState (io.spoud.sdm.logistics.service.v1.DeleteDataPortRequest) returns (io.spoud.sdm.logistics.service.v1.DeleteDataPortResponse) {
     option deprecated = true;
   };
-  rpc ListDataOfferStates (ListDataOfferStatesRequest) returns (ListDataOfferStatesResponse) {
+  rpc ListDataOfferStates (io.spoud.sdm.logistics.service.v1.ListDataPortsRequest) returns (io.spoud.sdm.logistics.service.v1.ListDataPortsResponse) {
     option deprecated = true;
   };
 
@@ -35,97 +36,7 @@ service DataOfferStateService {
   // Limitations:
   //   - properties cannot be removed yet
   //   - no support of specific field updates (without updating everything), aka field masks
-  rpc Save (SaveDataOfferStateRequest) returns (SaveDataOfferStateResponse) {
+  rpc Save (SaveDataPortRequest) returns (SaveDataPortResponse) {
     option deprecated = true;
   };
-}
-
-message GetDataOfferStateRequest {
-  option deprecated = true;
-  // deprecated since 2020-08-31 use self reference (field 3) instead.
-  string id_or_name = 1 [deprecated=true];
-  io.spoud.sdm.logistics.selection.v1.DataOfferStateRef self = 3;
-}
-
-message GetDataOfferStateResponse {
-  option deprecated = true;
-  io.spoud.sdm.logistics.domain.v1.DataPort data_offer_state = 1;
-}
-
-message DeleteDataOfferStateResponse {
-  option deprecated = true;
-
-}
-
-message DeleteDataOfferStateRequest {
-  option deprecated = true;
-  // deprecated since 2020-08-31 use self reference (field 2) instead.
-  string id_or_name = 1 [deprecated=true];
-  io.spoud.sdm.logistics.selection.v1.DataOfferStateRef self = 2;
-}
-
-message ListDataOfferStatesRequest {
-  option deprecated = true;
-  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
-  string transport_id_or_name = 2;
-
-  // Simple predicate filter by key and value.
-  // All predicates are formed as an AND, except predicates with the same key.
-  // For predicates with the same key, the latest entry in the list is taken.
-  // There is no support for an "OR" right now.
-  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 3;
-
-  io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 4;
-
-}
-
-message ListDataOfferStatesResponse {
-  option deprecated = true;
-  repeated io.spoud.sdm.logistics.domain.v1.DataPort data_offer_states = 1;
-  io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
-}
-
-message SaveDataOfferStateRequest {
-  option deprecated = true;
-  DataOfferStateChange input = 10;
-}
-
-message DataOfferStateChange {
-  option deprecated = true;
-  // field mask support for updating specific fields only can be added later on
-
-  // Selector for the entity to change.
-  // If the entity does not exist, it gets created under these conditions:
-  //   - properties are copied over to the properties map when using matching properties
-  //   - an error is thrown if the selector is an id and not a name or matching properties
-  io.spoud.sdm.logistics.selection.v1.DataOfferStateRef self = 1;
-
-  // Entity name (can be used as id).
-  // Globally unique per entity type.
-  google.protobuf.StringValue name = 2;
-
-  google.protobuf.StringValue label = 4;
-
-  // ResourceGroup Reference
-  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8;
-
-  // Transport Reference
-  io.spoud.sdm.logistics.selection.v1.BaseRef transport = 9;
-
-  // Lifecycle State
-  io.spoud.sdm.logistics.mutation.v1.StateChange state = 10;
-
-  // Transport URL
-  google.protobuf.StringValue transport_url = 11;
-
-  // List of tags
-  io.spoud.sdm.logistics.mutation.v1.TagList tags = 12;
-
-  // Map of properties
-  io.spoud.sdm.logistics.mutation.v1.PropertyMap properties = 13;
-}
-
-message SaveDataOfferStateResponse {
-  option deprecated = true;
-  io.spoud.sdm.logistics.domain.v1.DataPort data_offer_state = 1;
 }
