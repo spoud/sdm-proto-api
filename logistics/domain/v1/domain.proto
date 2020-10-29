@@ -52,7 +52,7 @@ message DataSubscriptionState {
   string name = 2;
   map<string, string> properties = 3;
   string transport_url = 4;
-  io.spoud.sdm.global.domain.v1.IdReference data_offer_state = 5;
+  io.spoud.sdm.global.domain.v1.IdReference data_port = 5;
   bool deleted = 6;
 
   // additional entity/doc information
@@ -79,7 +79,7 @@ message DataOffer {
   io.spoud.sdm.global.domain.v1.DocInfo info = 9;
 
   io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 10;
-  io.spoud.sdm.global.domain.v1.IdReference data_offer_state = 11;
+  io.spoud.sdm.global.domain.v1.IdReference data_port = 11;
 
   string label = 12;
 

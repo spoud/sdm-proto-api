@@ -54,7 +54,7 @@ message DeleteDataSubscriptionStateRequest {
 
 message ListDataSubscriptionStatesRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
-  string data_offer_state_id_or_name = 2;
+  string data_port_id_or_name = 2;
 
   // Simple predicate filter by key and value.
   // All predicates are formed as an AND, except predicates with the same key.
@@ -101,7 +101,7 @@ message DataSubscriptionStateChange {
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8;
 
   // DataOfferState Reference
-  io.spoud.sdm.logistics.selection.v1.DataPortRef data_offer_state = 9;
+  io.spoud.sdm.logistics.selection.v1.DataPortRef data_port = 9;
 
   // Lifecycle State
   io.spoud.sdm.logistics.mutation.v1.StateChange state = 10;

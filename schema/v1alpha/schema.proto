@@ -18,7 +18,7 @@ service SchemaService {
 }
 
 message SaveSchemaRequest {
-    string data_offer_state_id = 2;
+    string data_port_id = 2;
     SchemaSource.Type source = 3;
     SchemaEncoding.Type encoding = 4;
     string content = 6;

@@ -38,7 +38,7 @@ message GetDataPortRequest {
 }
 
 message GetDataPortResponse {
-  io.spoud.sdm.logistics.domain.v1.DataPort data_offer_state = 1;
+  io.spoud.sdm.logistics.domain.v1.DataPort data_port = 1;
 }
 
 message DeleteDataPortResponse {
@@ -66,7 +66,7 @@ message ListDataPortsRequest {
 }
 
 message ListDataPortsResponse {
-  repeated io.spoud.sdm.logistics.domain.v1.DataPort data_offer_states = 1;
+  repeated io.spoud.sdm.logistics.domain.v1.DataPort data_port = 1;
   io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
 }
 
@@ -109,5 +109,5 @@ message DataPortChange {
 }
 
 message SaveDataPortResponse {
-  io.spoud.sdm.logistics.domain.v1.DataPort data_offer_state = 1;
+  io.spoud.sdm.logistics.domain.v1.DataPort data_port = 1;
 }

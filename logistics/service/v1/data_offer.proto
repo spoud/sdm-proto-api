@@ -95,7 +95,7 @@ message DataOfferChange {
 
   // Selector for data offer state entity.
   // When using matching properties as a selector, the data offer state gets created automatically.
-  io.spoud.sdm.logistics.selection.v1.DataOfferStateRef data_offer_state = 7;
+  io.spoud.sdm.logistics.selection.v1.DataPortRef data_port = 7;
 
   // List of tags
   io.spoud.sdm.logistics.mutation.v1.TagList tags = 12;

@@ -55,7 +55,7 @@ message SubscribeChangeResponse {
   // in a DELETED case, the entity might be null
   oneof entity {
     io.spoud.sdm.logistics.domain.v1.DataOffer data_offer = 10;
-    io.spoud.sdm.logistics.domain.v1.DataPort data_offer_state = 12;
+    io.spoud.sdm.logistics.domain.v1.DataPort data_port = 12;
     io.spoud.sdm.logistics.domain.v1.DataSubscription data_subscription = 13;
     io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_state = 14;
     io.spoud.sdm.logistics.domain.v1.ResourceGroup resource_group = 15;
@@ -91,7 +91,7 @@ message DataOfferFilter {
 }
 
 // Entity DataOfferState
-message DataOfferStateFilter {
+message DataPortFilter {
   option deprecated = true;
   string id = 1;
   repeated PropertiesFilter properties_filters = 3;
@@ -124,7 +124,7 @@ message StateChangeFilter {
   option deprecated = true;
   oneof filter {
     DataOfferFilter data_offer_filter = 1;
-    DataOfferStateFilter data_offer_state_filter = 2;
+    DataPortFilter data_port_filter = 2;
     DataSubscriptionFilter data_subscription_filter = 3;
     DataSubscriptionStateFilter data_subscription_state_filter = 4;
     ResourceGroupFilter resource_group_filter = 5;
