@@ -5,15 +5,7 @@ option java_multiple_files = true;
 option java_package = "io.spoud.sdm.logistics.service.v1";
 option go_package = "logistics.service.v1";
 
-import "global/selection/v1/pagination.proto";
-import "logistics/selection/v1/filter.proto";
-import "logistics/domain/v1/domain.proto";
-import "logistics/mutation/v1/mutation.proto";
 import "logistics/service/v1/data_port.proto";
-import "logistics/selection/v1/reference.proto";
-import "permission/selection/v1/filter.proto";
-
-import "google/protobuf/wrappers.proto";
 
 // This service is deprecated since 29.10.2020, please use DataPortService instead
 service DataOfferStateService {
