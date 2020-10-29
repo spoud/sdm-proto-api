@@ -55,11 +55,12 @@ message SubscribeChangeResponse {
   // in a DELETED case, the entity might be null
   oneof entity {
     io.spoud.sdm.logistics.domain.v1.DataOffer data_offer = 10;
-    io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_state = 12;
+    io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_state = 12 [deprecated=true];
     io.spoud.sdm.logistics.domain.v1.DataSubscription data_subscription = 13;
     io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_state = 14;
     io.spoud.sdm.logistics.domain.v1.ResourceGroup resource_group = 15;
     io.spoud.sdm.logistics.domain.v1.Transport transport = 16;
+    io.spoud.sdm.logistics.domain.v1.DataPort data_port = 17;
   }
 }
 
@@ -157,7 +158,7 @@ enum EntityType {
   option deprecated = true;
   UNKNOWN = 0;
   DATA_OFFER = 1;
-  DATA_OFFER_STATE = 2;
+  DATA_PORT = 2;
   DATA_SUBSCRIPTION = 3;
   DATA_SUBSCRIPTION_STATE = 4;
   TRANSPORT = 5;

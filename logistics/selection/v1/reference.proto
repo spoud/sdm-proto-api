@@ -21,13 +21,17 @@ message DataOfferRef {
     // provide matching properties explicitly
     // MatchingProperties properties = 3
 
+    // Deprecated, please use data_port
     // ref by state (e.g. DataOfferState, DataSubscriptionState)
-    DataOfferStateRef data_offer_state = 4;
+    DataOfferStateRef data_offer_state = 4 [deprecated=true];
+
+    // ref by data port
+    DataPortRef data_port = 6;
 
 
     // referencing properties of outer (relative) resource object.
     // not yet supported
-    // google.protobuf.FieldMask property_mask =  5;
+    // google.protobuf.FieldMask property_mask =  7;
   }
 
   // reserved for self matching properties

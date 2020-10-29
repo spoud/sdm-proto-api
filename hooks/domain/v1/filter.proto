@@ -30,6 +30,14 @@ message DataOfferFilter {
 
 // Entity DataOfferState
 message DataOfferStateFilter {
+    option deprecated = true;
+    string id = 1;
+    repeated PropertiesFilter properties_filters = 3;
+}
+
+// Entity DataPort
+message DataPortFilter {
+    option deprecated = true;
     string id = 1;
     repeated PropertiesFilter properties_filters = 3;
 }
@@ -57,11 +65,12 @@ message PropertiesFilter {
 message StateChangeFilter {
     oneof filter {
         DataOfferFilter data_offer_filter = 1;
-        DataOfferStateFilter data_offer_state_filter = 2;
+        DataOfferStateFilter data_offer_state_filter = 2 [deprecated = true];
         DataSubscriptionFilter data_subscription_filter = 3;
         DataSubscriptionStateFilter data_subscription_state_filter = 4;
         ResourceGroupFilter resource_group_filter = 5;
         TransportFilter transport_filter = 6;
+        DataPortFilter data_port_filter = 7;
     }
 }
 
