@@ -49,7 +49,7 @@ message GetDataOfferStateRequest {
 
 message GetDataOfferStateResponse {
   option deprecated = true;
-  io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_state = 1;
+  io.spoud.sdm.logistics.domain.v1.DataPort data_offer_state = 1;
 }
 
 message DeleteDataOfferStateResponse {
@@ -81,7 +81,7 @@ message ListDataOfferStatesRequest {
 
 message ListDataOfferStatesResponse {
   option deprecated = true;
-  repeated io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_states = 1;
+  repeated io.spoud.sdm.logistics.domain.v1.DataPort data_offer_states = 1;
   io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
 }
 
@@ -127,5 +127,5 @@ message DataOfferStateChange {
 
 message SaveDataOfferStateResponse {
   option deprecated = true;
-  io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_state = 1;
+  io.spoud.sdm.logistics.domain.v1.DataPort data_offer_state = 1;
 }
