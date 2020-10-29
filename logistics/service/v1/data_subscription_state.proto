@@ -101,7 +101,7 @@ message DataSubscriptionStateChange {
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8;
 
   // DataOfferState Reference
-  io.spoud.sdm.logistics.selection.v1.DataOfferStateRef data_offer_state = 9 [deprecated = true];
+  io.spoud.sdm.logistics.selection.v1.DataPortRef data_offer_state = 9;
 
   // Lifecycle State
   io.spoud.sdm.logistics.mutation.v1.StateChange state = 10;
@@ -114,9 +114,6 @@ message DataSubscriptionStateChange {
 
   // Map of properties
   io.spoud.sdm.logistics.mutation.v1.PropertyMap properties = 13;
-
-  // DataPort Reference
-  io.spoud.sdm.logistics.selection.v1.DataPortRef data_port = 14 [deprecated = true];
 }
 
 message SaveDataSubscriptionStateResponse {

@@ -30,7 +30,6 @@ message DataOfferFilter {
 
 // Entity DataPort
 message DataPortFilter {
-    option deprecated = true;
     string id = 1;
     repeated PropertiesFilter properties_filters = 3;
 }
