@@ -14,58 +14,44 @@ import "permission/selection/v1/filter.proto";
 
 import "google/protobuf/wrappers.proto";
 
-// This service is deprecated, please use DataPortService instead
-service DataOfferStateService {
-  rpc GetDataOfferState (GetDataOfferStateRequest) returns (GetDataOfferStateResponse) {
-    option deprecated = true;
-  };
-  rpc DeleteDataOfferState (DeleteDataOfferStateRequest) returns (DeleteDataOfferStateResponse) {
-    option deprecated = true;
-  };
-  rpc ListDataOfferStates (ListDataOfferStatesRequest) returns (ListDataOfferStatesResponse) {
-    option deprecated = true;
-  };
+service DataPortService {
+  rpc GetDataPort (GetDataPortRequest) returns (GetDataPortResponse);
+  rpc DeleteDataPort (DeleteDataPortRequest) returns (DeleteDataPortResponse);
+  rpc ListDataPorts (ListDataPortsRequest) returns (ListDataPortsResponse);
 
-  // Saves a DataOfferState.
+  // Saves a DataPort.
   //
   // The entity is identified through the `self` attribute. Different mechanisms for referencing are supported,
-  // like the usual name or id refs. A more advanced approach is to use matching properties as a reference (basically a tech key).
+  // like id refs. A more advanced approach is to use matching properties as a reference (basically a tech key).
   // If the self entity to update does not yet exist and is referenced through matching properties, it gets created automatically.
   //
   // Limitations:
   //   - properties cannot be removed yet
   //   - no support of specific field updates (without updating everything), aka field masks
-  rpc Save (SaveDataOfferStateRequest) returns (SaveDataOfferStateResponse) {
-    option deprecated = true;
-  };
+  rpc Save (SaveDataPortRequest) returns (SaveDataPortResponse);
 }
 
-message GetDataOfferStateRequest {
-  option deprecated = true;
+message GetDataPortRequest {
   // deprecated since 2020-08-31 use self reference (field 3) instead.
   string id_or_name = 1 [deprecated=true];
-  io.spoud.sdm.logistics.selection.v1.DataOfferStateRef self = 3;
+  io.spoud.sdm.logistics.selection.v1.DataPortRef self = 3;
 }
 
-message GetDataOfferStateResponse {
-  option deprecated = true;
-  io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_state = 1;
+message GetDataPortResponse {
+  io.spoud.sdm.logistics.domain.v1.DataPort data_offer_state = 1;
 }
 
-message DeleteDataOfferStateResponse {
-  option deprecated = true;
+message DeleteDataPortResponse {
 
 }
 
-message DeleteDataOfferStateRequest {
-  option deprecated = true;
+message DeleteDataPortRequest {
   // deprecated since 2020-08-31 use self reference (field 2) instead.
   string id_or_name = 1 [deprecated=true];
-  io.spoud.sdm.logistics.selection.v1.DataOfferStateRef self = 2;
+  io.spoud.sdm.logistics.selection.v1.DataPortRef self = 2;
 }
 
-message ListDataOfferStatesRequest {
-  option deprecated = true;
+message ListDataPortsRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
   string transport_id_or_name = 2;
 
@@ -79,26 +65,23 @@ message ListDataOfferStatesRequest {
 
 }
 
-message ListDataOfferStatesResponse {
-  option deprecated = true;
-  repeated io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_states = 1;
+message ListDataPortsResponse {
+  repeated io.spoud.sdm.logistics.domain.v1.DataPort data_offer_states = 1;
   io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
 }
 
-message SaveDataOfferStateRequest {
-  option deprecated = true;
-  DataOfferStateChange input = 10;
+message SaveDataPortRequest {
+  DataPortChange input = 10;
 }
 
-message DataOfferStateChange {
-  option deprecated = true;
+message DataPortChange {
   // field mask support for updating specific fields only can be added later on
 
   // Selector for the entity to change.
   // If the entity does not exist, it gets created under these conditions:
   //   - properties are copied over to the properties map when using matching properties
   //   - an error is thrown if the selector is an id and not a name or matching properties
-  io.spoud.sdm.logistics.selection.v1.DataOfferStateRef self = 1;
+  io.spoud.sdm.logistics.selection.v1.DataPortRef self = 1;
 
   // Entity name (can be used as id).
   // Globally unique per entity type.
@@ -125,7 +108,6 @@ message DataOfferStateChange {
   io.spoud.sdm.logistics.mutation.v1.PropertyMap properties = 13;
 }
 
-message SaveDataOfferStateResponse {
-  option deprecated = true;
-  io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_state = 1;
+message SaveDataPortResponse {
+  io.spoud.sdm.logistics.domain.v1.DataPort data_offer_state = 1;
 }

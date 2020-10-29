@@ -40,8 +40,27 @@ message DataSubscriptionRef {
   IdNameRef id_name = 1;
 }
 
+// Deprecated since 29.10.2020, please use @DataPortRef
 // DataOfferState reference.
 message DataOfferStateRef {
+  option deprecated = true;
+  oneof ref {
+
+    // ref by id or name
+    IdNameRef id_name = 4;
+
+    // provide matching properties explicitly
+    TransportMatchingProperties transport_matching_properties = 3;
+
+    // referencing properties of outer (relative) resource object.
+    // not yet supported
+    // google.protobuf.FieldMask property_mask =  4;
+  }
+}
+
+// DataPort reference.
+message DataPortRef {
+  option deprecated = true;
   oneof ref {
 
     // ref by id or name

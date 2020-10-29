@@ -89,8 +89,32 @@ message DataOffer {
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 14;
 }
 
+// Deprecated since 29.10.2020, please use DataPort
 // DataOfferState
 message DataOfferState {
+  option deprecated = true;
+  string id = 1;
+  string name = 2;
+  map<string, string> properties = 4;
+  string transport_url = 5;
+  io.spoud.sdm.global.domain.v1.IdReference transport = 6;
+  bool deleted = 7;
+  io.spoud.sdm.global.domain.v1.IdReference data_offer = 8;
+
+  // additional entity/doc information
+  io.spoud.sdm.global.domain.v1.DocInfo info = 9;
+  io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 10;
+
+  string label = 11;
+
+  // tag list.
+  repeated SimpleTag tags = 12;
+
+  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 13;
+}
+
+// DataPort
+message DataPort {
   string id = 1;
   string name = 2;
   map<string, string> properties = 4;
