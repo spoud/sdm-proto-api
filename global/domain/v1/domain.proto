@@ -48,7 +48,7 @@ message ResourceEntity {
   enum Type {
     UNKNOWN = 0;
     DATA_OFFER = 1;
-    DATA_OFFER_STATE = 2;
+    DATA_PORT = 2;
     DATA_SUBSCRIPTION = 3;
     DATA_SUBSCRIPTION_STATE = 4;
     TRANSPORT = 5;

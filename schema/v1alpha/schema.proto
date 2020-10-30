@@ -11,11 +11,14 @@ import "permission/domain/v1/domain.proto";
 
 service SchemaService {
     rpc saveSchema (SaveSchemaRequest) returns (SaveSchemaResponse);
-    rpc getLatestSchemasForDataOfferState (GetLatestSchemasForDataOfferStateRequest) returns (GetLatestSchemasForDataOfferStateResponse);
+    rpc getLatestSchemasForDataOfferState (GetLatestSchemasForDataPortRequest) returns (GetLatestSchemasForDataPortResponse){
+        option deprecated = true;
+    };
+    rpc getLatestSchemasForDataPort (GetLatestSchemasForDataPortRequest) returns (GetLatestSchemasForDataPortResponse);
 }
 
 message SaveSchemaRequest {
-    string data_offer_state_id = 2;
+    string data_port_id = 2;
     SchemaSource.Type source = 3;
     SchemaEncoding.Type encoding = 4;
     string content = 6;
@@ -26,11 +29,11 @@ message SaveSchemaResponse {
     Schema schema = 1;
 }
 
-message GetLatestSchemasForDataOfferStateRequest {
-    string data_offer_state_id = 1;
+message GetLatestSchemasForDataPortRequest {
+    string data_port_id = 1;
 }
 
-message GetLatestSchemasForDataOfferStateResponse {
+message GetLatestSchemasForDataPortResponse {
     // repeated because we can have multiple "last" schema. For example we could have one from the registry and
     // one from the profiler (so 2 schemas). But then maybe we have schemas for keys and values (so 2x2=4 schemas).
     repeated Schema schemas = 1;
@@ -38,7 +41,7 @@ message GetLatestSchemasForDataOfferStateResponse {
 
 message Schema {
     string id = 1;
-    string data_offer_state_id = 2;
+    string data_port_id = 2;
     SchemaSource.Type source = 3;
     SchemaEncoding.Type encoding = 4;
     string content = 6;

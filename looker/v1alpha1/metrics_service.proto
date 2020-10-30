@@ -21,12 +21,12 @@ message ResourceMetric {
     // Message COUNTER on the producing side.
     // Tag keys:
     // - partition (default: 0)
-    DATA_OFFER_STATE_MESSAGES = 1;
+    DATA_PORT_MESSAGES = 1;
 
     // Bytes COUNTER on the producing side.
     // Tag keys:
     // - partition (default: 0)
-    DATA_OFFER_STATE_BYTES = 2;
+    DATA_PORT_BYTES = 2;
 
     // Message COUNTER on the consuming side.
     // Tag keys:
@@ -44,22 +44,22 @@ message ResourceMetric {
     DATA_SUBSCRIPTION_STATE_MESSAGES_LAG = 5;
 
     // how well the data matches the schema
-    DATA_OFFER_STATE_ATTRIBUTE_QUALITY_INDEX = 6;
+    DATA_PORT_ATTRIBUTE_QUALITY_INDEX = 6;
 
     // how detailed the schema is defined
-    DATA_OFFER_STATE_ATTRIBUTE_SPECIFICATION_INDEX = 7;
+    DATA_PORT_ATTRIBUTE_SPECIFICATION_INDEX = 7;
 
     // a combination of attribute quality and specification index
-    DATA_OFFER_STATE_ATTRIBUTE_INTEGRITY = 8;
+    DATA_PORT_ATTRIBUTE_INTEGRITY = 8;
 
     // How many item is there in this dataset
-    DATA_OFFER_STATE_DATASET_COUNT = 9;
+    DATA_PORT_DATASET_COUNT = 9;
 
     // The size in bytes of the dataset
-    DATA_OFFER_STATE_DATASET_SIZE_BYTES = 10;
+    DATA_PORT_DATASET_SIZE_BYTES = 10;
 
     // Number of mutations that occur on the dataset
-    DATA_OFFER_STATE_MUTATIONS = 11;
+    DATA_PORT_MUTATIONS = 11;
   }
 
   double value = 3;

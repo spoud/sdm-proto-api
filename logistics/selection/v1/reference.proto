@@ -21,8 +21,8 @@ message DataOfferRef {
     // provide matching properties explicitly
     // MatchingProperties properties = 3
 
-    // ref by state (e.g. DataOfferState, DataSubscriptionState)
-    DataOfferStateRef data_offer_state = 4;
+    // ref by DataPort
+    DataPortRef data_port = 4;
 
 
     // referencing properties of outer (relative) resource object.
@@ -40,8 +40,8 @@ message DataSubscriptionRef {
   IdNameRef id_name = 1;
 }
 
-// DataOfferState reference.
-message DataOfferStateRef {
+// DataPort reference.
+message DataPortRef {
   oneof ref {
 
     // ref by id or name
