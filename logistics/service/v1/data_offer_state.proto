@@ -28,7 +28,7 @@ service DataOfferStateService {
   // Limitations:
   //   - properties cannot be removed yet
   //   - no support of specific field updates (without updating everything), aka field masks
-  rpc Save (SaveDataPortRequest) returns (SaveDataPortResponse) {
+  rpc Save (io.spoud.sdm.logistics.service.v1.SaveDataPortRequest) returns (io.spoud.sdm.logistics.service.v1.SaveDataPortResponse) {
     option deprecated = true;
   };
 }
