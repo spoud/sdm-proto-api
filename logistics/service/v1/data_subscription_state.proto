@@ -100,7 +100,7 @@ message DataSubscriptionStateChange {
   // ResourceGroup Reference
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8;
 
-  // DataOfferState Reference
+  // DataPort Reference
   io.spoud.sdm.logistics.selection.v1.DataPortRef data_port = 9;
 
   // Lifecycle State

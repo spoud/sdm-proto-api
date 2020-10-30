@@ -21,14 +21,14 @@ service DataOfferService {
 
   // Saves a DataOffer.
   // The entity is identified through the `self` attribute. Different mechanisms for referencing are supported,
-  // like the usual name or id refs. A more advanced approach is to use a DataOfferState as a reference.
-  // If the self entity to update is referenced through a DataOfferState but the DataOffer does not yet exist, it gets created automatically.
-  // The same applies even for a DataOfferState, when the DataOfferSate itself is referenced through matching properties,
-  // the DataOfferState gets created automatically if it does not exist.
+  // like the usual name or id refs. A more advanced approach is to use a DataPort as a reference.
+  // If the self entity to update is referenced through a DataPort but the DataOffer does not yet exist, it gets created automatically.
+  // The same applies even for a DataPort, when the DataOfferSate itself is referenced through matching properties,
+  // the DataPort gets created automatically if it does not exist.
   //
   // Limitations:
   //   - properties cannot be removed yet
-  //   - only DataOffer and DataOfferState are created automatically, other refs do not support this
+  //   - only DataOffer and DataPort are created automatically, other refs do not support this
   rpc Save (SaveDataOfferRequest) returns (SaveDataOfferResponse);
 }
 
@@ -93,8 +93,8 @@ message DataOfferChange {
   // Resource Group Reference
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8;
 
-  // Selector for data offer state entity.
-  // When using matching properties as a selector, the data offer state gets created automatically.
+  // Selector for data port entity.
+  // When using matching properties as a selector, the data port gets created automatically.
   io.spoud.sdm.logistics.selection.v1.DataPortRef data_port = 7;
 
   // List of tags

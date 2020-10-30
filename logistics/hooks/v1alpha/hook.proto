@@ -90,7 +90,7 @@ message DataOfferFilter {
   repeated PropertiesFilter properties_filters = 2;
 }
 
-// Entity DataOfferState
+// Entity DataPort
 message DataPortFilter {
   option deprecated = true;
   string id = 1;
