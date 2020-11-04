@@ -34,12 +34,6 @@ message DataOfferRef {
   reserved 3;
 }
 
-// DataSubscription reference.
-message DataSubscriptionRef {
-  // ref by id or name
-  IdNameRef id_name = 1;
-}
-
 // DataPort reference.
 message DataPortRef {
   oneof ref {

@@ -26,26 +26,6 @@ message ResourceGroup {
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 10;
 }
 
-// data subscription
-message DataSubscription {
-  string id = 1;
-  string name = 2;
-  map<string, string> properties = 3;
-  io.spoud.sdm.global.domain.v1.IdReference data_offer = 6;
-
-  // additional entity/doc information
-  io.spoud.sdm.global.domain.v1.DocInfo info = 9;
-  io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 10;
-  io.spoud.sdm.global.domain.v1.IdReference data_subscription_state = 12;
-
-  string label = 13;
-
-  // tag list.
-  repeated SimpleTag tags = 14;
-
-  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 15;
-}
-
 // DataSubscriptionState
 message DataSubscriptionState {
   string id = 1;
@@ -58,7 +38,6 @@ message DataSubscriptionState {
   // additional entity/doc information
   io.spoud.sdm.global.domain.v1.DocInfo info = 7;
   io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 8;
-  io.spoud.sdm.global.domain.v1.IdReference data_subscription = 9;
   io.spoud.sdm.global.domain.v1.IdReference transport = 10;
 
   string label = 11;
@@ -171,7 +150,6 @@ message ResourceEntityType {
     UNKNOWN = 0;
     DATA_OFFER = 1;
     DATA_PORT = 2;
-    DATA_SUBSCRIPTION = 3;
     DATA_SUBSCRIPTION_STATE = 4;
   }
 }
