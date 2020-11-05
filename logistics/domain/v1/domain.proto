@@ -90,12 +90,21 @@ message DataPort {
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 13;
 }
 
+message TransportDataType {
+  enum Type{
+    UNKNOWN = 0;
+    DATA_SET = 1;
+    STREAM = 2;
+  }
+}
+
 message TransportType {
   string id = 1;
   string name = 2;
   map<string, string> initial_properties = 4;
   io.spoud.sdm.global.domain.v1.DocInfo info = 5;
-  string label = 7;
+  string label = 6;
+  TransportDataType.Type data_type = 7;
 }
 
 // Transports
