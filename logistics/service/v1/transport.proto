@@ -16,6 +16,8 @@ service TransportService {
   rpc CreateTransport (CreateTransportRequest) returns (CreateTransportResponse);
   rpc DeleteTransport (DeleteTransportRequest) returns (DeleteTransportResponse);
   rpc ListTransports (ListTransportsRequest) returns (ListTransportsResponse);
+
+  rpc ListTransportTypes (ListTransportTypesRequest) returns (ListTransportTypesResponse);
 }
 
 message GetTransportRequest {
@@ -63,5 +65,14 @@ message ListTransportsRequest {
 
 message ListTransportsResponse {
   repeated io.spoud.sdm.logistics.domain.v1.Transport transports = 1;
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
+}
+
+message ListTransportTypesRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+}
+
+message ListTransportTypesResponse {
+  repeated io.spoud.sdm.logistics.domain.v1.TransportType transportTypes = 1;
   io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
 }
