@@ -37,7 +37,7 @@ message CreateTransportRequest {
   string resource_group_id_or_name = 3 [deprecated=true];
   string label = 4;
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 5;
-  string transport_type_uuid = 6;
+  string transport_type_id = 6;
 }
 
 message CreateTransportResponse {
