@@ -85,9 +85,6 @@ message DataItemChange {
 
   google.protobuf.StringValue label = 4;
 
-  // ResourceGroup Reference
-  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group_ref = 8;
-
   // Transport Reference
   io.spoud.sdm.logistics.selection.v1.DataPortRef data_port_ref = 9;
 

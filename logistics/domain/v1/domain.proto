@@ -98,18 +98,13 @@ message DataItem {
   string label = 3;
   map<string, string> properties = 4;
   string transport_url = 5;
-  io.spoud.sdm.global.domain.v1.IdReference transport = 6;
-  bool deleted = 7;
   io.spoud.sdm.global.domain.v1.IdReference data_port = 8;
 
   // additional entity/doc information
   io.spoud.sdm.global.domain.v1.DocInfo info = 9;
-  io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 10;
 
   // tag list.
   repeated SimpleTag tags = 11;
-
-  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 12;
 }
 
 message TransportDataType {
