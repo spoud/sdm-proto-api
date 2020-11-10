@@ -73,8 +73,7 @@ message DataPort {
   string id = 1;
   string name = 2;
   map<string, string> properties = 4;
-  // Deprecated since 10.11.2020, use transport url in DataItem
-  string transport_url = 5 [deprecated=true];
+  string endpoint_url = 5;
   io.spoud.sdm.global.domain.v1.IdReference transport = 6;
   bool deleted = 7;
   io.spoud.sdm.global.domain.v1.IdReference data_offer = 8;

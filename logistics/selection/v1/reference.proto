@@ -50,7 +50,7 @@ message DataPortRef {
   }
 }
 
-// DataPort reference.
+// DataItem reference.
 message DataItemRef {
   oneof ref {
 
