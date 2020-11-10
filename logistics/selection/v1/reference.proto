@@ -50,6 +50,22 @@ message DataPortRef {
   }
 }
 
+// DataPort reference.
+message DataItemRef {
+  oneof ref {
+
+    // ref by id or name
+    IdNameRef id_name = 4;
+
+    // provide matching properties explicitly
+    TransportMatchingProperties transport_matching_properties = 3;
+
+    // referencing properties of outer (relative) resource object.
+    // not yet supported
+    // google.protobuf.FieldMask property_mask =  4;
+  }
+}
+
 message DataSubscriptionStateRef {
   oneof ref {
 

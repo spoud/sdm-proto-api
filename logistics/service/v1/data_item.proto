@@ -1,0 +1,109 @@
+syntax = "proto3";
+package io.spoud.sdm.logistics.service.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.logistics.service.v1";
+option go_package = "logistics.service.v1";
+
+import "global/selection/v1/pagination.proto";
+import "logistics/selection/v1/filter.proto";
+import "logistics/domain/v1/domain.proto";
+import "logistics/mutation/v1/mutation.proto";
+import "logistics/selection/v1/reference.proto";
+import "permission/selection/v1/filter.proto";
+
+import "google/protobuf/wrappers.proto";
+
+service DataItemService {
+  rpc GetDataItem (GetDataItemRequest) returns (GetDataItemResponse);
+  rpc DeleteDataItem (DeleteDataItemRequest) returns (DeleteDataItemResponse);
+  rpc ListDataItems (ListDataItemsRequest) returns (ListDataItemsResponse);
+
+  // Saves a DataItem.
+  //
+  // The entity is identified through the `self` attribute. Different mechanisms for referencing are supported,
+  // like id refs. A more advanced approach is to use matching properties as a reference (basically a tech key).
+  // If the self entity to update does not yet exist and is referenced through matching properties, it gets created automatically.
+  //
+  // Limitations:
+  //   - properties cannot be removed yet
+  //   - no support of specific field updates (without updating everything), aka field masks
+  rpc Save (SaveDataItemRequest) returns (SaveDataItemResponse);
+}
+
+message GetDataItemRequest {
+  io.spoud.sdm.logistics.selection.v1.DataItemRef self = 3;
+}
+
+message GetDataItemResponse {
+  io.spoud.sdm.logistics.domain.v1.DataItem data_item = 1;
+}
+
+message DeleteDataItemResponse {
+
+}
+
+message DeleteDataItemRequest {
+  io.spoud.sdm.logistics.selection.v1.DataItemRef self = 2;
+}
+
+message ListDataItemsRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+  io.spoud.sdm.logistics.selection.v1.DataPortRef dataPortRef = 2;
+
+  // Simple predicate filter by key and value.
+  // All predicates are formed as an AND, except predicates with the same key.
+  // For predicates with the same key, the latest entry in the list is taken.
+  // There is no support for an "OR" right now.
+  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 3;
+
+  io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 4;
+
+}
+
+message ListDataItemsResponse {
+  repeated io.spoud.sdm.logistics.domain.v1.DataItem data_item = 1;
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
+}
+
+message SaveDataItemRequest {
+  DataItemChange input = 10;
+}
+
+message DataItemChange {
+  // field mask support for updating specific fields only can be added later on
+
+  // Selector for the entity to change.
+  // If the entity does not exist, it gets created under these conditions:
+  //   - properties are copied over to the properties map when using matching properties
+  //   - an error is thrown if the selector is an id and not a name or matching properties
+  io.spoud.sdm.logistics.selection.v1.DataItemRef self = 1;
+
+  // Entity name (can be used as id).
+  // Globally unique per entity type.
+  google.protobuf.StringValue name = 2;
+
+  google.protobuf.StringValue label = 4;
+
+  // ResourceGroup Reference
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group_ref = 8;
+
+  // Transport Reference
+  io.spoud.sdm.logistics.selection.v1.DataPortRef data_port_ref = 9;
+
+  // Lifecycle State
+  io.spoud.sdm.logistics.mutation.v1.StateChange state = 10;
+
+  // Transport URL
+  google.protobuf.StringValue transport_url = 11;
+
+  // List of tags
+  io.spoud.sdm.logistics.mutation.v1.TagList tags = 12;
+
+  // Map of properties
+  io.spoud.sdm.logistics.mutation.v1.PropertyMap properties = 13;
+}
+
+message SaveDataItemResponse {
+  io.spoud.sdm.logistics.domain.v1.DataItem data_item = 1;
+}
