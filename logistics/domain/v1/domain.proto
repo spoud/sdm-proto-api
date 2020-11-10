@@ -190,6 +190,7 @@ message ResourceEntityType {
     DATA_OFFER = 1;
     DATA_PORT = 2;
     DATA_SUBSCRIPTION_STATE = 4;
+    DATA_ITEM = 5;
   }
 }
 
