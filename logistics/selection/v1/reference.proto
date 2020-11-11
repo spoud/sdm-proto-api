@@ -81,6 +81,13 @@ message DataSubscriptionStateRef {
   }
 }
 
+// Transport reference.
+message TransportRef {
+  oneof ref {
+    IdNameRef id_name = 4;
+  }
+}
+
 message TransportTypeRef {
   oneof ref {
     // ref by id or name

@@ -49,15 +49,16 @@ message DeleteDataItemRequest {
 
 message ListDataItemsRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
-  io.spoud.sdm.logistics.selection.v1.DataPortRef dataPortRef = 2;
+  io.spoud.sdm.logistics.selection.v1.DataPortRef data_port_ref = 2;
+  io.spoud.sdm.logistics.selection.v1.TransportRef transport_ref = 3;
 
   // Simple predicate filter by key and value.
   // All predicates are formed as an AND, except predicates with the same key.
   // For predicates with the same key, the latest entry in the list is taken.
   // There is no support for an "OR" right now.
-  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 3;
+  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 4;
 
-  io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 4;
+  io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 5;
 
 }
 
