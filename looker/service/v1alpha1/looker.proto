@@ -1,0 +1,150 @@
+syntax = "proto3";
+package io.spoud.sdm.looker.v1alpha1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.looker.v1alpha1";
+option go_package = "looker.v1alpha1";
+
+import "google/protobuf/timestamp.proto";
+import "global/selection/v1/pagination.proto";
+import "logistics/selection/v1/reference.proto";
+import "permission/domain/v1/domain.proto";
+import "looker/domain/v1alpha1/domain.proto";
+
+service LookerService {
+  // used by the profiler
+  // Deprecated since 12.11.2020, use addDataProfile instead
+  rpc updateDataProfile (UpdateDataProfileRequest) returns (UpdateDataProfileResponse) {
+    option deprecated = true;
+  };
+
+  // used by the UI
+  rpc getDataProfile (GetDataProfileRequest) returns (GetDataProfileResponse);
+
+  rpc listDataProfilingJobs (ListDataProfilingJobsRequest) returns (ListDataProfilingJobsResponse);
+
+  rpc addDataProfile (AddDataProfileRequest) returns (AddDataProfileResponse) {
+    option deprecated = true;
+  };
+}
+
+// XXX(lza): why don't we just pass a DataProfile Message (above) in the Request?
+message UpdateDataProfileRequest {
+  option deprecated = true;
+
+  // references the job which triggered this profiling
+  string data_profiling_job_id = 1;
+
+  // amount of messages taken into account for the profiling
+  int32 data_samples_count = 3;
+
+  // Report creation timestamp, does not have to
+  // be related to the timestamp of the profiled messages.
+  google.protobuf.Timestamp report_timestamp = 4;
+
+  // if there's an error set, the profiling returned without a report.
+  io.spoud.sdm.looker.domain.v1alpha1.DataProfilingError error = 5;
+
+  google.protobuf.Timestamp data_samples_from = 6;
+  google.protobuf.Timestamp data_samples_to = 7;
+
+  int32 total_records_read = 9;
+  int32 total_records_processed = 10;
+
+  // stats about size of profile
+  int32 profile_size_bytes = 11;
+
+  // versions used
+  string profiler_service_version = 13;
+  string profiler_version = 14;
+
+  // the SkipStrategyType seed (usually the one used last time)
+  io.spoud.sdm.looker.domain.v1alpha1.SkipStrategyType.Type skipStrategyType = 15;
+
+  // this contains a set of DataSample. In the error case we can expect a sample of the sampling
+  // data in order to understand what went wrong.
+  repeated io.spoud.sdm.looker.domain.v1alpha1.DataSample samples = 16;
+
+  // this contains a UUID for the profile which is stored in the blob service
+  string html_blob_id = 17;
+}
+
+message UpdateDataProfileResponse {
+  option deprecated = true;
+  io.spoud.sdm.looker.domain.v1alpha1.DataProfile data_profile = 1;
+}
+
+// Get data profile by id or transport_offer_id
+message GetDataProfileRequest {
+
+  // get data profile by id
+  string id = 1;
+
+  // get data profile by transport offer id
+  string transport_offer_id = 2;
+
+  // define error handling if data profile cannot be found.
+  io.spoud.sdm.looker.domain.v1alpha1.NotExistsResolution not_exists_resolution = 3;
+}
+
+message GetDataProfileResponse {
+  io.spoud.sdm.looker.domain.v1alpha1.DataProfile data_profile = 1;
+}
+
+// data profiling jobs can be filtered by transport_id
+message ListDataProfilingJobsRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 2;
+
+  // returns data profiling jobs with this transport id (uuid) only.
+  // each profiler is responsible for a different transport id.
+  string transport_id = 1;
+}
+
+// right now we expect to get an updateDataProfile for each
+// job for each listing.
+message ListDataProfilingJobsResponse {
+  repeated io.spoud.sdm.looker.domain.v1alpha1.DataProfilingJob jobs = 1;
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
+}
+
+message AddDataProfileRequest {
+  // references the job which triggered this profiling
+  io.spoud.sdm.logistics.selection.v1.DataPortRef data_porf_ref = 1;
+
+  // amount of messages taken into account for the profiling
+  int32 data_samples_count = 3;
+
+  // Report creation timestamp, does not have to
+  // be related to the timestamp of the profiled messages.
+  google.protobuf.Timestamp report_timestamp = 4;
+
+  // if there's an error set, the profiling returned without a report.
+  io.spoud.sdm.looker.domain.v1alpha1.DataProfilingError error = 5;
+
+  google.protobuf.Timestamp data_samples_from = 6;
+  google.protobuf.Timestamp data_samples_to = 7;
+
+  int32 total_records_read = 9;
+  int32 total_records_processed = 10;
+
+  // stats about size of profile
+  int32 profile_size_bytes = 11;
+
+  // versions used
+  string profiler_service_version = 13;
+  string profiler_version = 14;
+
+  // the SkipStrategyType seed (usually the one used last time)
+  io.spoud.sdm.looker.domain.v1alpha1.SkipStrategyType.Type skipStrategyType = 15;
+
+  // this contains a set of DataSample. In the error case we can expect a sample of the sampling
+  // data in order to understand what went wrong.
+  repeated io.spoud.sdm.looker.domain.v1alpha1.DataSample samples = 16;
+
+  // this contains a UUID for the profile which is stored in the blob service
+  string profile_html_blob_id = 17;
+}
+
+message AddDataProfileResponse {
+  io.spoud.sdm.looker.domain.v1alpha1.DataProfile data_profile = 1;
+}
