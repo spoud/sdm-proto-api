@@ -36,8 +36,8 @@ message DataProfile {
   // be related to the timestamp of the profiled messages.
   google.protobuf.Timestamp report_timestamp = 5;
 
-  // reference to the transport offer id
-  string transport_offer_id = 8;
+  // reference to the data port
+  string data_port_id = 8;
 
   google.protobuf.Timestamp data_samples_from = 9;
   google.protobuf.Timestamp data_samples_to = 10;
