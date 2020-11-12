@@ -71,6 +71,7 @@ enum NotExistsResolution {
 
 // A DataProfileJob gets created for each TransportOffer (if it's synchronized)
 message DataProfilingJob {
+  option deprecated = true;
 
   // unique identifier of the job
   string id = 1;

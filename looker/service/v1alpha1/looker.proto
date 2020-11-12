@@ -21,7 +21,10 @@ service LookerService {
   // used by the UI
   rpc getDataProfile (GetDataProfileRequest) returns (GetDataProfileResponse);
 
-  rpc listDataProfilingJobs (ListDataProfilingJobsRequest) returns (ListDataProfilingJobsResponse);
+  // Deprecated since 12.11.2020, jobs are obsolete and not needed anymore (use addDataProfile instead of uploadDataProfile)
+  rpc listDataProfilingJobs (ListDataProfilingJobsRequest) returns (ListDataProfilingJobsResponse) {
+    option deprecated = true;
+  }
 
   rpc addDataProfile (AddDataProfileRequest) returns (AddDataProfileResponse);
 }
@@ -91,6 +94,7 @@ message GetDataProfileResponse {
 
 // data profiling jobs can be filtered by transport_id
 message ListDataProfilingJobsRequest {
+  option deprecated = true;
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 2;
 
   // returns data profiling jobs with this transport id (uuid) only.
@@ -101,6 +105,7 @@ message ListDataProfilingJobsRequest {
 // right now we expect to get an updateDataProfile for each
 // job for each listing.
 message ListDataProfilingJobsResponse {
+  option deprecated = true;
   repeated io.spoud.sdm.looker.domain.v1alpha1.DataProfilingJob jobs = 1;
   io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
 }
