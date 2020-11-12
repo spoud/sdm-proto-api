@@ -115,24 +115,24 @@ message AddDataProfileRequest {
   io.spoud.sdm.logistics.selection.v1.DataPortRef data_porf_ref = 1;
 
   // amount of messages taken into account for the profiling
-  int32 data_samples_count = 3;
+  int32 data_samples_count = 2;
 
   // Report creation timestamp, does not have to
   // be related to the timestamp of the profiled messages.
-  google.protobuf.Timestamp report_timestamp = 4;
+  google.protobuf.Timestamp report_timestamp = 3;
 
   // if there's an error set, the profiling returned without a report.
-  io.spoud.sdm.looker.domain.v1alpha1.DataProfilingError error = 5;
+  io.spoud.sdm.looker.domain.v1alpha1.DataProfilingError error = 4;
 
-  google.protobuf.Timestamp data_samples_from = 6;
-  google.protobuf.Timestamp data_samples_to = 7;
+  google.protobuf.Timestamp data_samples_from = 5;
+  google.protobuf.Timestamp data_samples_to = 6;
 
   // versions used
-  string profiler_service_version = 13;
-  string profiler_version = 14;
+  string profiler_service_version = 7;
+  string profiler_version = 8;
 
   // this contains a UUID for the profile which is stored in the blob service
-  string profile_html_blob_id = 17;
+  string profile_html_blob_id = 9;
 }
 
 message AddDataProfileResponse {
