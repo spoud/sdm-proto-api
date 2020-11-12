@@ -127,22 +127,9 @@ message AddDataProfileRequest {
   google.protobuf.Timestamp data_samples_from = 6;
   google.protobuf.Timestamp data_samples_to = 7;
 
-  int32 total_records_read = 9;
-  int32 total_records_processed = 10;
-
-  // stats about size of profile
-  int32 profile_size_bytes = 11;
-
   // versions used
   string profiler_service_version = 13;
   string profiler_version = 14;
-
-  // the SkipStrategyType seed (usually the one used last time)
-  io.spoud.sdm.looker.domain.v1alpha1.SkipStrategyType.Type skipStrategyType = 15;
-
-  // this contains a set of DataSample. In the error case we can expect a sample of the sampling
-  // data in order to understand what went wrong.
-  repeated io.spoud.sdm.looker.domain.v1alpha1.DataSample samples = 16;
 
   // this contains a UUID for the profile which is stored in the blob service
   string profile_html_blob_id = 17;
