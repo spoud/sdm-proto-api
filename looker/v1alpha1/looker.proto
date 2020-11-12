@@ -61,11 +61,21 @@ message DataProfile {
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 14;
 }
 
+message DataProfileIdentifier{
+  oneof id{
+    string data_profiling_job_id = 1;
+    string data_port_id = 2;
+  }
+}
+
 // XXX(lza): why don't we just pass a DataProfile Message (above) in the Request?
 message UpdateDataProfileRequest {
 
   // references the job which triggered this profiling
-  string data_profiling_job_id = 1;
+  // @Deprecated, use data_profile_ref instead
+  string data_profiling_job_id = 1 [deprecated=true];
+
+  DataProfileIdentifier data_profile_ref = 2;
 
   // amount of messages taken into account for the profiling
   int32 data_samples_count = 3;
