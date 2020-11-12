@@ -63,7 +63,10 @@ message DataProfile {
 
 message DataProfileIdentifier{
   oneof id{
+    // use this id if the profile was created from a job
     string data_profiling_job_id = 1;
+
+    // use this id if the profile was created without job
     string data_port_id = 2;
   }
 }
@@ -75,6 +78,7 @@ message UpdateDataProfileRequest {
   // @Deprecated, use data_profile_ref instead
   string data_profiling_job_id = 1 [deprecated=true];
 
+  // Reference to the dataProfilingJob/dataPort
   DataProfileIdentifier data_profile_ref = 2;
 
   // amount of messages taken into account for the profiling
