@@ -23,9 +23,7 @@ service LookerService {
 
   rpc listDataProfilingJobs (ListDataProfilingJobsRequest) returns (ListDataProfilingJobsResponse);
 
-  rpc addDataProfile (AddDataProfileRequest) returns (AddDataProfileResponse) {
-    option deprecated = true;
-  };
+  rpc addDataProfile (AddDataProfileRequest) returns (AddDataProfileResponse);
 }
 
 // XXX(lza): why don't we just pass a DataProfile Message (above) in the Request?
