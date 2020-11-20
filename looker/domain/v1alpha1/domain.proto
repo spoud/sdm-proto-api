@@ -1,0 +1,110 @@
+syntax = "proto3";
+package io.spoud.sdm.looker.domain.v1alpha1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.looker.domain.v1alpha1";
+option go_package = "looker.v1alpha1";
+
+import "google/protobuf/timestamp.proto";
+import "global/selection/v1/pagination.proto";
+import "permission/domain/v1/domain.proto";
+
+message DataProfilingError {
+  string message = 1;
+
+  enum Type {
+    UNKNOWN = 0;
+    PROFILER_UNREACHABLE = 1;
+    UNKNOWN_ENCODING = 2;
+    ACCESS_DENIED = 3;
+    NO_DATA = 4;
+    TRANSPORT_UNAVAILABLE = 5;
+    NO_PARTITION = 6;
+  }
+
+  Type type = 2;
+}
+
+// DataProfile
+message DataProfile {
+  string id = 1;
+  // references the job which triggered this profiling
+  string data_profiling_job_id = 2;
+
+  int32 data_samples_count = 4;
+  // Report creation timestamp, does not have to
+  // be related to the timestamp of the profiled messages.
+  google.protobuf.Timestamp report_timestamp = 5;
+
+  // reference to the data port
+  string data_port_id = 8;
+
+  google.protobuf.Timestamp data_samples_from = 9;
+  google.protobuf.Timestamp data_samples_to = 10;
+
+  // if there's an error set, the profiling returns without a report.
+  DataProfilingError error = 12;
+
+  // this contains a UUID for the profile which is stored in the blob service
+  string html_blob_id = 13;
+
+  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 14;
+}
+
+message DataSample {
+  enum Encoding {
+    UNKNOWN = 0;
+    JSON = 1;
+    AVRO = 2;
+  }
+
+  Encoding encoding = 1;
+  bytes data_sample = 2;
+}
+
+enum NotExistsResolution {
+  THROW_ERROR = 0;
+  RETURN_EMPTY = 1;
+}
+
+// DataProfileJob
+
+// A DataProfileJob gets created for each TransportOffer (if it's synchronized)
+message DataProfilingJob {
+  option deprecated = true;
+
+  // unique identifier of the job
+  string id = 1;
+
+  // transport offer reference
+  // needed to link it with external services / logistics
+  // especially useful for a data profile search.
+  string transport_offer_id = 2;
+
+  // transport id reference, needed to group/list by transport
+  string transport_id = 3;
+
+  // transport url contains all endpoint information to access the content.
+  // e.g. for kafka it's the following template: `kafka://<bootstrap-servers>?topic=<topic-name>`
+  // example: `kafka://kafka-1.spoud.io:9092,kafka-2.spoud.io:9092?topic=sdm-topic-xy`
+  string transport_url = 4;
+
+  // the SkipStrategyType seed (usually the one used last time)
+  SkipStrategyType.Type skipStrategyType = 5;
+
+  // The path for the resource, used for permissions
+  string path = 6;
+
+  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 7;
+
+}
+
+//this enum indicates the skip strategy which was last used by the profiler
+message SkipStrategyType {
+  enum Type {
+    UNKNOWN = 0;
+    SKIP_UP_TO_LATEST = 1;
+    SKIP_HALF_TO_LATEST = 2;
+    READ_BACKWARDS = 3;
+  }
+}
