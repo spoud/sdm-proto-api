@@ -73,7 +73,7 @@ message DataPort {
   string id = 1;
   string name = 2;
   map<string, string> properties = 4;
-  string transport_url = 5;
+  string endpoint_url = 5;
   io.spoud.sdm.global.domain.v1.IdReference transport = 6;
   bool deleted = 7;
   io.spoud.sdm.global.domain.v1.IdReference data_offer = 8;
@@ -88,6 +88,23 @@ message DataPort {
   repeated SimpleTag tags = 12;
 
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 13;
+}
+
+// DataItem
+message DataItem {
+  string id = 1;
+  string name = 2;
+  string label = 3;
+  map<string, string> properties = 4;
+  string transport_url = 5;
+  bool deleted = 7;
+  io.spoud.sdm.global.domain.v1.IdReference data_port = 8;
+
+  // additional entity/doc information
+  io.spoud.sdm.global.domain.v1.DocInfo info = 9;
+
+  // tag list.
+  repeated SimpleTag tags = 11;
 }
 
 message TransportDataType {
@@ -168,6 +185,7 @@ message ResourceEntityType {
     DATA_OFFER = 1;
     DATA_PORT = 2;
     DATA_SUBSCRIPTION_STATE = 4;
+    DATA_ITEM = 5;
   }
 }
 
