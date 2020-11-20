@@ -8,10 +8,8 @@ option go_package = "selection.v1";
 // TransportMatchingProperties are used to define an internal business key, which
 // can be used for referencing a resource across different components.
 message TransportMatchingProperties {
-  // deprecated since 2020-08-10 use reference with id_path instead.
-  BaseRef transport = 5 [deprecated=true];
+  BaseRef transport = 5;
   map<string, string> properties = 1;
-  IdPathRef id_path = 6;
 }
 
 // DataOffer reference.
@@ -116,6 +114,6 @@ message BaseRef {
 
 message ResourceGroupRef {
   oneof ref {
-    IdPathRef id_path = 1;
+    IdPathRef id_path = 2;
   }
 }
