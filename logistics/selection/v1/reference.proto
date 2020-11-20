@@ -18,7 +18,7 @@ message TransportMatchingProperties {
 message DataOfferRef {
   oneof ref {
     // ref by id or name
-    // deprecated since 2020-08-10 use reference with id_path (field 2) instead.
+    // deprecated since 2020-08-10 use reference with id_path instead.
     IdNameRef id_name = 5 [deprecated=true];
     IdPathRef id_path = 2;
 
@@ -43,7 +43,7 @@ message DataPortRef {
   oneof ref {
 
     // ref by id or name
-    // deprecated since 2020-08-10 use reference with id_path (field 2) instead.
+    // deprecated since 2020-08-10 use reference with id_path instead.
     IdNameRef id_name = 4 [deprecated=true];
     IdPathRef id_path = 2;
 
@@ -75,7 +75,7 @@ message DataSubscriptionStateRef {
   oneof ref {
 
     // ref by id or name
-    // deprecated since 2020-08-10 use reference with id_path (field 2) instead.
+    // deprecated since 2020-08-10 use reference with id_path instead.
     IdNameRef id_name = 4 [deprecated=true];
     IdPathRef id_path = 2;
 
@@ -98,7 +98,7 @@ message TransportRef {
 message TransportTypeRef {
   oneof ref {
     // ref by id or name
-    // deprecated since 2020-08-10 use reference with id_path (field 2) instead.
+    // deprecated since 2020-08-10 use reference with id_path instead.
     IdNameRef id_name = 4 [deprecated=true];
     IdPathRef id_path = 2;
   }
@@ -132,15 +132,15 @@ message IdPathRef {
 // Base ref type.
 // Used for any resource ref without a specific ref message.
 // Support ref evolution by moving from this basic ref type to a dedicated ref messages.
-// deprecated since 2020-11-20 name is not unique anymore, please use IdPathRef
 message BaseRef {
-  option deprecated = true;
-  IdNameRef id_name = 1;
+  // deprecated since 2020-08-10 use reference with id_path instead.
+  IdNameRef id_name = 1 [deprecated=true];
+  IdPathRef id_path = 2;
 }
 
 message ResourceGroupRef {
   oneof ref {
-    // deprecated since 2020-08-10 use reference with id_path (field 2) instead.
+    // deprecated since 2020-08-10 use reference with id_path instead.
     IdNameRef id_name = 1 [deprecated=true];
     IdPathRef id_path = 2;
   }
