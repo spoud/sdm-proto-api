@@ -59,12 +59,11 @@ message DataPortRef {
 // DataItem reference.
 message DataItemRef {
   oneof ref {
-
-    // ref by id or name
-    IdNameRef id_name = 4;
+    // ref by id or path
+    IdPathRef id_path = 1;
 
     // provide matching properties explicitly
-    TransportMatchingProperties transport_matching_properties = 3;
+    TransportMatchingProperties transport_matching_properties = 2;
 
     // referencing properties of outer (relative) resource object.
     // not yet supported
