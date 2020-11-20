@@ -45,14 +45,11 @@ message DeleteDataSubscriptionStateResponse {
 }
 
 message DeleteDataSubscriptionStateRequest {
-  // deprecated since 2020-08-31 use self reference (field 2) instead.
-  string id_or_name = 1 [deprecated=true];
   io.spoud.sdm.logistics.selection.v1.DataSubscriptionStateRef self = 2;
 }
 
 message ListDataSubscriptionStatesRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
-  string data_port_id_or_name = 2;
 
   // Simple predicate filter by key and value.
   // All predicates are formed as an AND, except predicates with the same key.
@@ -60,14 +57,14 @@ message ListDataSubscriptionStatesRequest {
   // There is no support for an "OR" right now.
   repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 3;
 
-  // add a filter for returning only data subscription states referencing the corresponding transport.
-  string transport_id_or_name = 4;
-
   // add a filter for returning only data subscription states with a data offer state with a data offer.
   bool with_data_offer_only = 5;
 
   io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 6;
 
+  io.spoud.sdm.logistics.selection.v1.DataPortRef data_port_ref = 7;
+
+  io.spoud.sdm.logistics.selection.v1.BaseRef transport_ref = 8;
 }
 
 message ListDataSubscriptionStatesResponse {
