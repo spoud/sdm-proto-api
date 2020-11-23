@@ -24,7 +24,6 @@ message DataOfferRef {
     // ref by DataPort
     DataPortRef data_port = 4;
 
-
     // referencing properties of outer (relative) resource object.
     // not yet supported
     // google.protobuf.FieldMask property_mask =  5;
@@ -99,7 +98,7 @@ message IdPathRef {
     // ref by id
     string id = 1;
     // ref by name
-    string name = 2 [deprecated=true];
+    string name = 2 [deprecated = true];
     // ref by path;
     string path = 3;
   }
@@ -113,7 +112,5 @@ message BaseRef {
 }
 
 message ResourceGroupRef {
-  oneof ref {
-    IdPathRef id_path = 2;
-  }
+  IdPathRef id_path = 2;
 }
