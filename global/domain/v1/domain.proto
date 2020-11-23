@@ -19,21 +19,6 @@ message IdPathReference {
   string path = 11;
 }
 
-message IdNamePathReference {
-  string id = 1;
-  string name = 2;
-
-  string path = 11;
-}
-
-message IdNameReference {
-  string id = 1;
-  string name = 2;
-
-  // range reserved due to possible replacement in the future by other types.
-  reserved 11;
-}
-
 message ActionInfo {
   string username = 1;
   google.protobuf.Timestamp timestamp = 2;

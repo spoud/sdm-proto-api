@@ -32,8 +32,6 @@ service DataPortService {
 }
 
 message GetDataPortRequest {
-  // deprecated since 2020-08-31 use self reference (field 3) instead.
-  string id_or_name = 1 [deprecated=true];
   io.spoud.sdm.logistics.selection.v1.DataPortRef self = 3;
 }
 
@@ -46,14 +44,11 @@ message DeleteDataPortResponse {
 }
 
 message DeleteDataPortRequest {
-  // deprecated since 2020-08-31 use self reference (field 2) instead.
-  string id_or_name = 1 [deprecated=true];
   io.spoud.sdm.logistics.selection.v1.DataPortRef self = 2;
 }
 
 message ListDataPortsRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
-  string transport_id_or_name = 2;
 
   // Simple predicate filter by key and value.
   // All predicates are formed as an AND, except predicates with the same key.
@@ -63,6 +58,7 @@ message ListDataPortsRequest {
 
   io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 4;
 
+  io.spoud.sdm.logistics.selection.v1.BaseRef transport_ref = 5;
 }
 
 message ListDataPortsResponse {

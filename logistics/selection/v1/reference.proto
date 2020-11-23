@@ -15,15 +15,14 @@ message TransportMatchingProperties {
 // DataOffer reference.
 message DataOfferRef {
   oneof ref {
-    // ref by id or name
-    IdNameRef id_name = 5;
+    // ref by id or path
+    IdPathRef id_path = 5;
 
     // provide matching properties explicitly
     // MatchingProperties properties = 3
 
     // ref by DataPort
     DataPortRef data_port = 4;
-
 
     // referencing properties of outer (relative) resource object.
     // not yet supported
@@ -38,8 +37,8 @@ message DataOfferRef {
 message DataPortRef {
   oneof ref {
 
-    // ref by id or name
-    IdNameRef id_name = 4;
+    // ref by id or path
+    IdPathRef id_path = 4;
 
     // provide matching properties explicitly
     TransportMatchingProperties transport_matching_properties = 3;
@@ -53,12 +52,11 @@ message DataPortRef {
 // DataItem reference.
 message DataItemRef {
   oneof ref {
-
-    // ref by id or name
-    IdNameRef id_name = 4;
+    // ref by id or path
+    IdPathRef id_path = 1;
 
     // provide matching properties explicitly
-    TransportMatchingProperties transport_matching_properties = 3;
+    TransportMatchingProperties transport_matching_properties = 2;
 
     // referencing properties of outer (relative) resource object.
     // not yet supported
@@ -69,8 +67,8 @@ message DataItemRef {
 message DataSubscriptionStateRef {
   oneof ref {
 
-    // ref by id or name
-    IdNameRef id_name = 4;
+    // ref by id or path
+    IdPathRef id_path = 4;
 
     // provide matching properties explicitly
     TransportMatchingProperties transport_matching_properties = 3;
@@ -84,34 +82,23 @@ message DataSubscriptionStateRef {
 // Transport reference.
 message TransportRef {
   oneof ref {
-    IdNameRef id_name = 4;
+    IdPathRef id_path = 4;
   }
 }
 
 message TransportTypeRef {
   oneof ref {
-    // ref by id or name
-    IdNameRef id_name = 4;
+    // ref by id or path
+    IdPathRef id_path = 4;
   }
-}
-
-message IdNameRef {
-  oneof ref {
-    // ref by id
-    string id = 1;
-    // ref by name;
-    string name = 2;
-    // deprecated since 2020-08-10 use reference with id or name (field 1 and  2) instead.
-    // ref by either
-    string id_or_name = 4 [deprecated=true];
-  }
-  reserved 3;
 }
 
 message IdPathRef {
   oneof ref {
     // ref by id
     string id = 1;
+    // ref by name
+    string name = 2 [deprecated = true];
     // ref by path;
     string path = 3;
   }
@@ -121,13 +108,9 @@ message IdPathRef {
 // Used for any resource ref without a specific ref message.
 // Support ref evolution by moving from this basic ref type to a dedicated ref messages.
 message BaseRef {
-  IdNameRef id_name = 1;
+  IdPathRef id_path = 1;
 }
 
 message ResourceGroupRef {
-  oneof ref {
-    // deprecated since 2020-08-10 use reference with id_path (field 2) instead.
-    IdNameRef id_name = 1 [deprecated=true];
-    IdPathRef id_path = 2;
-  }
+  IdPathRef id_path = 2;
 }

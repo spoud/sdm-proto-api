@@ -19,8 +19,6 @@ service AgentService {
 
 message CreateAgentRequest {
   string label = 1;
-  // deprecated since 2020-08-10 use resource group reference (field 5) instead.
-  string resource_group_id_or_name = 2 [deprecated=true];
   string technical_user_uuid = 3;
   string username = 4;
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 5;
@@ -32,8 +30,6 @@ message CreateAgentResponse {
 }
 
 message DeleteAgentRequest {
-  // deprecated since 2020-08-31 use self reference (field 2) instead.
-  string id = 1 [deprecated=true];
   io.spoud.sdm.logistics.selection.v1.BaseRef self = 2;
 }
 
