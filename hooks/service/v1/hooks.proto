@@ -47,9 +47,5 @@ message SubscribeChangeResponse {
     io.spoud.sdm.hooks.domain.v1.LogRecord log_record = 1;
     io.spoud.sdm.hooks.domain.v1.StreamInfo stream_info = 2;
   }
-
-  // Optional cursor. If the current message has a cursor it will be returned. You can then use this cursor to go back
-  // to this exact position when you reconnect
-  google.protobuf.StringValue name = 10;
 }
 
