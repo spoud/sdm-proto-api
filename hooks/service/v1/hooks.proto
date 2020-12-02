@@ -8,8 +8,6 @@ option go_package = "hooks.v1";
 import "hooks/domain/v1/filter.proto";
 import "hooks/domain/v1/domain.proto";
 
-import "google/protobuf/wrappers.proto";
-
 service StateChanger {
   // subscribe to any changes
   rpc SubscribeChange (SubscribeChangeRequest) returns (stream SubscribeChangeResponse);
