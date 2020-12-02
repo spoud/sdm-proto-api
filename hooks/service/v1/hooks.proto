@@ -8,9 +8,11 @@ option go_package = "hooks.v1";
 import "hooks/domain/v1/filter.proto";
 import "hooks/domain/v1/domain.proto";
 
+import "google/protobuf/wrappers.proto";
+
 service StateChanger {
-    // subscribe to any changes
-    rpc SubscribeChange (SubscribeChangeRequest) returns (stream SubscribeChangeResponse);
+  // subscribe to any changes
+  rpc SubscribeChange (SubscribeChangeRequest) returns (stream SubscribeChangeResponse);
 }
 
 // ---------------------
@@ -28,8 +30,8 @@ service StateChanger {
 // to avoid always streaming from the beginning.
 // ---------------------
 message SubscribeChangeRequest {
-    io.spoud.sdm.hooks.domain.v1.StateChangeStartPosition start_position = 1;
-    repeated io.spoud.sdm.hooks.domain.v1.StateChangeFilter filters = 2;
+  io.spoud.sdm.hooks.domain.v1.StateChangeStartPosition start_position = 1;
+  repeated io.spoud.sdm.hooks.domain.v1.StateChangeFilter filters = 2;
 }
 
 // ---------------------
@@ -41,9 +43,13 @@ message SubscribeChangeRequest {
 // 2) by acyclic dependencies (for initial state loading), same as 1) after initial loading.
 // ---------------------
 message SubscribeChangeResponse {
-    oneof response {
-      io.spoud.sdm.hooks.domain.v1.LogRecord log_record = 1;
-      io.spoud.sdm.hooks.domain.v1.StreamInfo stream_info = 2;
-    }
+  oneof response {
+    io.spoud.sdm.hooks.domain.v1.LogRecord log_record = 1;
+    io.spoud.sdm.hooks.domain.v1.StreamInfo stream_info = 2;
+  }
+
+  // Optional cursor. If the current message has a cursor it will be returned. You can then use this cursor to go back
+  // to this exact position when you reconnect
+  google.protobuf.StringValue name = 10;
 }
 

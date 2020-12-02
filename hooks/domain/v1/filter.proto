@@ -12,62 +12,61 @@ option go_package = "logger.v1";
 
 // Entity ResourceGroup
 message ResourceGroupFilter {
-    string id = 1;
-    repeated PropertiesFilter properties_filters = 2;
+  string id = 1;
+  repeated PropertiesFilter properties_filters = 2;
 }
 
 // Entity Transport
 message TransportFilter {
-    string id = 1;
-    repeated PropertiesFilter properties_filters = 3;
+  string id = 1;
+  repeated PropertiesFilter properties_filters = 3;
 }
 
 // Entity DataOffer
 message DataOfferFilter {
-    string id = 1;
-    repeated PropertiesFilter properties_filters = 2;
+  string id = 1;
+  repeated PropertiesFilter properties_filters = 2;
 }
 
 // Entity DataPort
 message DataPortFilter {
-    string id = 1;
-    repeated PropertiesFilter properties_filters = 3;
+  string id = 1;
+  repeated PropertiesFilter properties_filters = 3;
 }
 
 // Entity DataSubscriptionState
 message DataSubscriptionStateFilter {
-    string id = 1;
-    repeated PropertiesFilter properties_filters = 2;
+  string id = 1;
+  repeated PropertiesFilter properties_filters = 2;
 }
 
 // General predicate for one meta attribute (exact match)
 message PropertiesFilter {
-    string key = 1; // e.g. sdm.transport.kafka.topic
-    string value = 2; // agg_topic_2383
+  string key = 1; // e.g. sdm.transport.kafka.topic
+  string value = 2; // agg_topic_2383
 }
 
 // Possible filters
 message StateChangeFilter {
-    oneof filter {
-        DataOfferFilter data_offer_filter = 1;
-        DataPortFilter data_port_filter = 2;
-        DataSubscriptionStateFilter data_subscription_state_filter = 4;
-        ResourceGroupFilter resource_group_filter = 5;
-        TransportFilter transport_filter = 6;
-    }
+  oneof filter {
+    DataOfferFilter data_offer_filter = 1;
+    DataPortFilter data_port_filter = 2;
+    DataSubscriptionStateFilter data_subscription_state_filter = 4;
+    ResourceGroupFilter resource_group_filter = 5;
+    TransportFilter transport_filter = 6;
+  }
 }
 
 message StateChangeStartPosition {
-    oneof position {
-        PositionPreset preset = 1;
-        // in future: int64 offset = 2;
-        // in future google.protobuf.Timestamp timestamp = 3;
-    }
+  oneof position {
+    PositionPreset preset = 1;
+    string cursor = 2;
+  }
 }
 
 enum PositionPreset {
-    EARLIEST = 0;
-    LATEST = 1;
+  EARLIEST = 0;
+  LATEST = 1;
 }
 
 
