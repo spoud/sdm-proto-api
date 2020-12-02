@@ -6,13 +6,13 @@ option java_package = "io.spoud.sdm.global.selection.v1";
 option go_package = "selection.v1";
 
 message PageRequest {
-    // same as "first" in graphql
-    int32 page_size = 1;
+  // same as "first" in graphql
+  int32 page_size = 1;
 
-    // same as "after" in graphql pagination
-    string page_token = 2;
+  // same as "after" in graphql pagination
+  string page_token = 2;
 }
 
 message PageResult {
-    string next_page_token = 2;
+  string next_page_token = 2;
 }

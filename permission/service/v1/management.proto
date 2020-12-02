@@ -31,7 +31,7 @@ message UnsetPermissionsRequest {
   string path = 1;
   // please use subject_ref instead
   // deprecated since 2020-04-29 use subject_ref (field 3) instead.
-  string subject_id = 2 [deprecated=true];
+  string subject_id = 2 [deprecated = true];
   io.spoud.sdm.permission.domain.v1.SubjectRef subject_ref = 3;
   repeated io.spoud.sdm.permission.domain.v1.ResourceFilter resource = 4;
 }
@@ -42,7 +42,7 @@ message UnsetPermissionsResponse {
 message SavePermissionsRequest {
   string path = 1;
   // please use subject_ref instead
-  string subject_id = 2 [deprecated=true];
+  string subject_id = 2 [deprecated = true];
   repeated io.spoud.sdm.permission.domain.v1.Privilege.Type privilege = 3;
   io.spoud.sdm.permission.domain.v1.SubjectRef subject_ref = 4;
   io.spoud.sdm.permission.domain.v1.ResourceFilter resource = 5;

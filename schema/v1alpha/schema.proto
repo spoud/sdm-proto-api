@@ -10,60 +10,60 @@ import "global/domain/v1/domain.proto";
 import "permission/domain/v1/domain.proto";
 
 service SchemaService {
-    rpc saveSchema (SaveSchemaRequest) returns (SaveSchemaResponse);
-    rpc getLatestSchemasForDataOfferState (GetLatestSchemasForDataPortRequest) returns (GetLatestSchemasForDataPortResponse){
-        option deprecated = true;
-    };
-    rpc getLatestSchemasForDataPort (GetLatestSchemasForDataPortRequest) returns (GetLatestSchemasForDataPortResponse);
+  rpc saveSchema (SaveSchemaRequest) returns (SaveSchemaResponse);
+  rpc getLatestSchemasForDataOfferState (GetLatestSchemasForDataPortRequest) returns (GetLatestSchemasForDataPortResponse) {
+    option deprecated = true;
+  };
+  rpc getLatestSchemasForDataPort (GetLatestSchemasForDataPortRequest) returns (GetLatestSchemasForDataPortResponse);
 }
 
 message SaveSchemaRequest {
-    string data_port_id = 2;
-    SchemaSource.Type source = 3;
-    SchemaEncoding.Type encoding = 4;
-    string content = 6;
-    string path = 7;
+  string data_port_id = 2;
+  SchemaSource.Type source = 3;
+  SchemaEncoding.Type encoding = 4;
+  string content = 6;
+  string path = 7;
 }
 
 message SaveSchemaResponse {
-    Schema schema = 1;
+  Schema schema = 1;
 }
 
 message GetLatestSchemasForDataPortRequest {
-    string data_port_id = 1;
+  string data_port_id = 1;
 }
 
 message GetLatestSchemasForDataPortResponse {
-    // repeated because we can have multiple "last" schema. For example we could have one from the registry and
-    // one from the profiler (so 2 schemas). But then maybe we have schemas for keys and values (so 2x2=4 schemas).
-    repeated Schema schemas = 1;
+  // repeated because we can have multiple "last" schema. For example we could have one from the registry and
+  // one from the profiler (so 2 schemas). But then maybe we have schemas for keys and values (so 2x2=4 schemas).
+  repeated Schema schemas = 1;
 }
 
 message Schema {
-    string id = 1;
-    string data_port_id = 2;
-    SchemaSource.Type source = 3;
-    SchemaEncoding.Type encoding = 4;
-    string content = 6;
-    io.spoud.sdm.global.domain.v1.ActionInfo created = 7;
-    google.protobuf.Timestamp last_seen = 8;
-    io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 9;
+  string id = 1;
+  string data_port_id = 2;
+  SchemaSource.Type source = 3;
+  SchemaEncoding.Type encoding = 4;
+  string content = 6;
+  io.spoud.sdm.global.domain.v1.ActionInfo created = 7;
+  google.protobuf.Timestamp last_seen = 8;
+  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 9;
 }
 
 message SchemaSource {
-    enum Type {
-        UNKNOWN = 0;
-        REGISTRY = 1;
-        INFERRED = 2;
-        USER_DEFINED = 3;
-    }
+  enum Type {
+    UNKNOWN = 0;
+    REGISTRY = 1;
+    INFERRED = 2;
+    USER_DEFINED = 3;
+  }
 }
 
 message SchemaEncoding {
-    enum Type {
-        UNKNOWN = 0;
-        JSON = 1;
-        AVRO = 2;
-        JSON_ASYNCAPI = 3;
-    }
+  enum Type {
+    UNKNOWN = 0;
+    JSON = 1;
+    AVRO = 2;
+    JSON_ASYNCAPI = 3;
+  }
 }
