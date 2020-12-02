@@ -9,10 +9,10 @@ import "google/protobuf/timestamp.proto";
 import "logistics/domain/v1/domain.proto";
 
 // deprecated since 15.09.2020 moved to /hooks/service/v1
-service StateChanger  {
+service StateChanger {
   option deprecated = true;
   // subscribe to any changes
-  rpc SubscribeChange (SubscribeChangeRequest) returns (stream SubscribeChangeResponse) ;
+  rpc SubscribeChange (SubscribeChangeRequest) returns (stream SubscribeChangeResponse);
 }
 
 // ---------------------
@@ -61,7 +61,6 @@ message SubscribeChangeResponse {
     io.spoud.sdm.logistics.domain.v1.Transport transport = 16;
   }
 }
-
 
 // ---------------------
 // specific entity based filters.

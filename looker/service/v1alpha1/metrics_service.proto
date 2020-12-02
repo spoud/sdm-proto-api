@@ -78,8 +78,8 @@ message UpdateMetricResponse {
 }
 
 // operational metric
-message HealthState{
-  enum State{
+message HealthState {
+  enum State {
     UNDEFINED = 0;
     UP = 1;
     DOWN = 2;
@@ -142,9 +142,8 @@ message OperationalMetric {
   // this sdm.auth.client-id
   string agent_id = 2;
 
-
   // metric value
-  oneof value{
+  oneof value {
     double double_value = 3;
     HealthState.State health = 4;
   }

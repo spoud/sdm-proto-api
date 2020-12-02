@@ -10,7 +10,7 @@ import "global/domain/v1/domain.proto";
 
 message PermissionFilter {
   // please use subject_ref instead
-  string subject_id = 1 [deprecated=true];
+  string subject_id = 1 [deprecated = true];
   string path = 3;
   io.spoud.sdm.permission.domain.v1.SubjectRef subject_ref = 4;
   repeated io.spoud.sdm.permission.domain.v1.ResourceFilter resource = 5;

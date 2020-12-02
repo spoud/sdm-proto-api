@@ -108,7 +108,7 @@ message DataItem {
 }
 
 message TransportDataType {
-  enum Type{
+  enum Type {
     UNKNOWN = 0;
     DATA_SET = 1;
     STREAM = 2;

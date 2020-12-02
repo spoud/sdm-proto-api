@@ -16,5 +16,5 @@ message GetResourceEntityConfigurationRequest {
 }
 
 message GetResourceEntityConfigurationResponse {
-  io.spoud.sdm.collaboration.domain.v1alpha.ResourceEntityConfiguration  resource_entity_configuration = 1;
+  io.spoud.sdm.collaboration.domain.v1alpha.ResourceEntityConfiguration resource_entity_configuration = 1;
 }
