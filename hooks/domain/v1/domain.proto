@@ -19,6 +19,9 @@ message LogRecord {
 
   string path = 5;
 
+  // Cursor of the current message, you can then use this cursor to go back to this exact position when you reconnect
+  string cursor = 6;
+
   // in a DELETED case, the entity might be null
   oneof entity {
     io.spoud.sdm.logistics.domain.v1.DataOffer data_offer = 10;

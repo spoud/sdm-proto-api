@@ -60,8 +60,7 @@ message StateChangeFilter {
 message StateChangeStartPosition {
   oneof position {
     PositionPreset preset = 1;
-    // in future: int64 offset = 2;
-    // in future google.protobuf.Timestamp timestamp = 3;
+    string cursor = 2;
   }
 }
 
