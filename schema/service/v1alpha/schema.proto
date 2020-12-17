@@ -20,13 +20,13 @@ service SchemaService {
 }
 
 message SaveSchemaRequest {
-  // Deprecated since 17.12.2020, please use subject_ref instead
+  // Deprecated since 17.12.2020, please use entity_ref instead
   string data_port_id = 2 [deprecated = true];
   io.spoud.sdm.schema.domain.v1alpha1.SchemaSource.Type source = 3;
   io.spoud.sdm.schema.domain.v1alpha1.SchemaEncoding.Type encoding = 4;
   string content = 6;
   string path = 7;
-  io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 8;
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 10;
 }
 
 message SaveSchemaResponse {
@@ -34,9 +34,9 @@ message SaveSchemaResponse {
 }
 
 message GetLatestSchemasForDataPortRequest {
-  // Deprecated since 17.12.2020, please use subject_ref instead
+  // Deprecated since 17.12.2020, please use entity_ref instead
   string data_port_id = 1 [deprecated = true];
-  io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 2;
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 10;
 }
 
 message GetLatestSchemasForDataPortResponse {
