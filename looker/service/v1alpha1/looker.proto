@@ -75,17 +75,20 @@ message UpdateDataProfileResponse {
   io.spoud.sdm.looker.domain.v1alpha1.DataProfile data_profile = 1;
 }
 
-// Get data profile by id or transport_offer_id
+// Get data profile by id or entity ref
 message GetDataProfileRequest {
 
   // get data profile by id
   string id = 1;
 
   // get data profile by transport offer id
-  string transport_offer_id = 2;
+  // deprecated since 17.12.2020, please use entity_ref
+  string data_port_id = 2 [deprecated=true];
 
   // define error handling if data profile cannot be found.
   io.spoud.sdm.looker.domain.v1alpha1.NotExistsResolution not_exists_resolution = 3;
+
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 4;
 }
 
 message GetDataProfileResponse {
