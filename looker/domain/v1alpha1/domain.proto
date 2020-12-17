@@ -7,6 +7,7 @@ option go_package = "looker.v1alpha1";
 
 import "google/protobuf/timestamp.proto";
 import "permission/domain/v1/domain.proto";
+import "global/selection/v1/reference.proto";
 
 message DataProfilingError {
   string message = 1;
@@ -36,7 +37,8 @@ message DataProfile {
   google.protobuf.Timestamp report_timestamp = 5;
 
   // reference to the data port
-  string data_port_id = 8;
+  // deprecated since 17.12.2010, please use entity_ref
+  string data_port_id = 8 [deprecated=true];
 
   google.protobuf.Timestamp data_samples_from = 9;
   google.protobuf.Timestamp data_samples_to = 10;
@@ -48,6 +50,8 @@ message DataProfile {
   string html_blob_id = 13;
 
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 14;
+
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 15;
 }
 
 message DataSample {
