@@ -8,8 +8,8 @@ option go_package = "looker.v1alpha1";
 import "google/protobuf/timestamp.proto";
 import "global/selection/v1/pagination.proto";
 import "logistics/selection/v1/reference.proto";
-import "permission/domain/v1/domain.proto";
 import "looker/domain/v1alpha1/domain.proto";
+import "global/selection/v1/reference.proto";
 
 service LookerService {
   // used by the profiler
@@ -111,8 +111,8 @@ message ListDataProfilingJobsResponse {
 }
 
 message AddDataProfileRequest {
-  // references the job which triggered this profiling
-  io.spoud.sdm.logistics.selection.v1.DataPortRef data_porf_ref = 1;
+  // deprecated since 17.12.2020, please use entity_ref
+  io.spoud.sdm.logistics.selection.v1.DataPortRef data_port_ref = 1 [deprecated=true];
 
   // amount of messages taken into account for the profiling
   int32 data_samples_count = 2;
@@ -133,6 +133,8 @@ message AddDataProfileRequest {
 
   // this contains a UUID for the profile which is stored in the blob service
   string profile_html_blob_id = 9;
+
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 10;
 }
 
 message AddDataProfileResponse {
