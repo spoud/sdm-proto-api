@@ -8,7 +8,6 @@ option go_package = "looker.v1alpha1";
 import "google/protobuf/timestamp.proto";
 import "global/selection/v1/pagination.proto";
 import "logistics/selection/v1/reference.proto";
-import "permission/domain/v1/domain.proto";
 import "looker/domain/v1alpha1/domain.proto";
 import "global/selection/v1/reference.proto";
 

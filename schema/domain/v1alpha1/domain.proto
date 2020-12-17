@@ -6,9 +6,9 @@ option java_package = "io.spoud.sdm.schema.domain.v1alpha1";
 option go_package = "schema.v1alpha1";
 
 import "google/protobuf/timestamp.proto";
-import "global/selection/v1/pagination.proto";
-import "permission/domain/v1/domain.proto";
+import "global/domain/v1/domain.proto";
 import "global/selection/v1/reference.proto";
+import "permission/domain/v1/domain.proto";
 
 
 message Schema {
