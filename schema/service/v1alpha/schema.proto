@@ -10,10 +10,14 @@ import "global/selection/v1/reference.proto";
 
 service SchemaService {
   rpc saveSchema (SaveSchemaRequest) returns (SaveSchemaResponse);
-  rpc getLatestSchemasForDataOfferState (GetLatestSchemasForDataPortRequest) returns (GetLatestSchemasForDataPortResponse) {
+  rpc getLatestSchemasForDataOfferState (GetLatestSchemasForDataPortRequest) returns (GetLatestSchemasForEntityResponse) {
     option deprecated = true;
   };
-  rpc getLatestSchemasForDataPort (GetLatestSchemasForDataPortRequest) returns (GetLatestSchemasForDataPortResponse);
+  // Deprecated since 17.12.2020, please use getLatestSchemasForEntity instead
+  rpc getLatestSchemasForDataPort (GetLatestSchemasForDataPortRequest) returns (GetLatestSchemasForEntityResponse){
+    option deprecated = true;
+  };
+  rpc getLatestSchemasForEntity (GetLatestSchemasForEntityRequest) returns (GetLatestSchemasForEntityResponse);
 }
 
 message SaveSchemaRequest {
@@ -31,12 +35,15 @@ message SaveSchemaResponse {
 }
 
 message GetLatestSchemasForDataPortRequest {
-  // Deprecated since 17.12.2020, please use entity_ref instead
-  string data_port_id = 1 [deprecated = true];
-  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 10;
+  option deprecated = true;
+  string data_port_id = 1;
 }
 
-message GetLatestSchemasForDataPortResponse {
+message GetLatestSchemasForEntityRequest {
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 1;
+}
+
+message GetLatestSchemasForEntityResponse {
   // repeated because we can have multiple "last" schema. For example we could have one from the registry and
   // one from the profiler (so 2 schemas). But then maybe we have schemas for keys and values (so 2x2=4 schemas).
   repeated io.spoud.sdm.schema.domain.v1alpha1.Schema schemas = 1;
