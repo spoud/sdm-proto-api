@@ -1,0 +1,13 @@
+syntax = "proto3";
+package io.spoud.sdm.global.selection.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.global.selection.v1";
+option go_package = "selection.v1";
+
+import "global/domain/v1/domain.proto";
+
+message EntityRef {
+  string id = 1;
+  io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 2;
+}

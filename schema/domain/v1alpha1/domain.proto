@@ -8,11 +8,12 @@ option go_package = "schema.v1alpha1";
 import "google/protobuf/timestamp.proto";
 import "global/selection/v1/pagination.proto";
 import "permission/domain/v1/domain.proto";
+import "global/selection/v1/reference.proto";
 
 
 message Schema {
   string id = 1;
-  // Deprecated since 17.12.2020, please use subject_ref instead
+  // Deprecated since 17.12.2020, please use entity_ref instead
   string data_port_id = 2 [deprecated = true];
   SchemaSource.Type source = 3;
   SchemaEncoding.Type encoding = 4;
@@ -20,7 +21,7 @@ message Schema {
   io.spoud.sdm.global.domain.v1.ActionInfo created = 7;
   google.protobuf.Timestamp last_seen = 8;
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 9;
-  SubjectRef subject_ref = 10;
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 10;
 }
 
 message SchemaSource {
@@ -42,9 +43,4 @@ message SchemaEncoding {
   }
 }
 
-message SubjectRef {
-  oneof id {
-    string data_port_id = 1;
-    string data_item_id = 2;
-  }
-}
+
