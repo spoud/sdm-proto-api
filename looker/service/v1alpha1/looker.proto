@@ -83,7 +83,7 @@ message GetDataProfileRequest {
 
   // get data profile by transport offer id
   // deprecated since 17.12.2020, please use entity_ref
-  string data_port_id = 2 [deprecated=true];
+  string data_port_id = 2 [deprecated = true];
 
   // define error handling if data profile cannot be found.
   io.spoud.sdm.looker.domain.v1alpha1.NotExistsResolution not_exists_resolution = 3;
@@ -102,7 +102,9 @@ message ListDataProfilingJobsRequest {
 
   // returns data profiling jobs with this transport id (uuid) only.
   // each profiler is responsible for a different transport id.
-  string transport_id = 1;
+  string transport_id = 1 [deprecated = true];
+
+  io.spoud.sdm.logistics.selection.v1.BaseRef transport_ref = 3;
 }
 
 // right now we expect to get an updateDataProfile for each
@@ -115,7 +117,7 @@ message ListDataProfilingJobsResponse {
 
 message AddDataProfileRequest {
   // deprecated since 17.12.2020, please use entity_ref
-  io.spoud.sdm.logistics.selection.v1.DataPortRef data_port_ref = 1 [deprecated=true];
+  io.spoud.sdm.logistics.selection.v1.DataPortRef data_port_ref = 1 [deprecated = true];
 
   // amount of messages taken into account for the profiling
   int32 data_samples_count = 2;
