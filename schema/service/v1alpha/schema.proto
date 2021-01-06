@@ -5,7 +5,7 @@ option java_multiple_files = true;
 option java_package = "io.spoud.sdm.schema.v1alpha";
 option go_package = "schema.v1alpha";
 
-import "schema/domain/v1alpha1/domain.proto";
+import "schema/domain/v1alpha/domain.proto";
 import "global/selection/v1/reference.proto";
 
 service SchemaService {
@@ -23,15 +23,15 @@ service SchemaService {
 message SaveSchemaRequest {
   // Deprecated since 17.12.2020, please use entity_ref instead
   string data_port_id = 2 [deprecated = true];
-  io.spoud.sdm.schema.domain.v1alpha1.SchemaSource.Type source = 3;
-  io.spoud.sdm.schema.domain.v1alpha1.SchemaEncoding.Type encoding = 4;
+  io.spoud.sdm.schema.domain.v1alpha.SchemaSource.Type source = 3;
+  io.spoud.sdm.schema.domain.v1alpha.SchemaEncoding.Type encoding = 4;
   string content = 6;
   string path = 7;
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 10;
 }
 
 message SaveSchemaResponse {
-  io.spoud.sdm.schema.domain.v1alpha1.Schema schema = 1;
+  io.spoud.sdm.schema.domain.v1alpha.Schema schema = 1;
 }
 
 message GetLatestSchemasForDataPortRequest {
@@ -46,5 +46,5 @@ message GetLatestSchemasForEntityRequest {
 message GetLatestSchemasForEntityResponse {
   // repeated because we can have multiple "last" schema. For example we could have one from the registry and
   // one from the profiler (so 2 schemas). But then maybe we have schemas for keys and values (so 2x2=4 schemas).
-  repeated io.spoud.sdm.schema.domain.v1alpha1.Schema schemas = 1;
+  repeated io.spoud.sdm.schema.domain.v1alpha.Schema schemas = 1;
 }
