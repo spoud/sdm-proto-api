@@ -150,4 +150,5 @@ enum EntityType {
   DATA_SUBSCRIPTION_STATE = 4;
   TRANSPORT = 5;
   RESOURCE_GROUP = 6;
+  DATA_ITEM = 7;
 }
