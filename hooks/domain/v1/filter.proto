@@ -3,6 +3,7 @@ package io.spoud.sdm.hooks.domain.v1;
 
 option java_multiple_files = true;
 option java_package = "io.spoud.sdm.hooks.domain.v1";
+import "logistics/selection/v1/reference.proto";
 option go_package = "logger.v1";
 
 // ---------------------
@@ -32,18 +33,21 @@ message DataOfferFilter {
 message DataPortFilter {
   string id = 1;
   repeated PropertiesFilter properties_filters = 3;
+  io.spoud.sdm.logistics.selection.v1.BaseRef transport_ref = 4;
 }
 
 // Entity DataPort
 message DataItemFilter {
   string id = 1;
   repeated PropertiesFilter properties_filters = 3;
+  io.spoud.sdm.logistics.selection.v1.BaseRef transport_ref = 4;
 }
 
 // Entity DataSubscriptionState
 message DataSubscriptionStateFilter {
   string id = 1;
   repeated PropertiesFilter properties_filters = 2;
+  io.spoud.sdm.logistics.selection.v1.BaseRef transport_ref = 4;
 }
 
 // General predicate for one meta attribute (exact match)
