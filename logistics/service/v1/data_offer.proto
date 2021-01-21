@@ -98,6 +98,10 @@ message DataOfferChange {
 
   // Map of properties
   io.spoud.sdm.logistics.mutation.v1.PropertyMap properties = 11;
+
+  // Follow DataOffer
+  // Is the user following this data DataOffer 
+  google.protobuf.BoolValue is_following = 13;
 }
 
 message SaveDataOfferResponse {
