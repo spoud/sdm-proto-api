@@ -1,0 +1,32 @@
+syntax = "proto3";
+package io.spoud.sdm.collaboration.v1alpha;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.collaboration.v1alpha";
+option go_package = "collaboration.v1alpha";
+
+import "collaboration/domain/v1alpha/domain.proto";
+import "global/selection/v1/reference.proto";
+
+service FollowEntityService {
+  rpc saveFollowEntity (SaveFollowEntityRequest) returns (SaveFollowEntityResponse);
+  rpc getFollowedEntitiesByUser (GetFollowedEntitiesByUserRequest) returns (GetFollowedEntitiesByUserResponse);
+}
+
+message SaveFollowEntityRequest {
+  string user_id = 1;
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
+}
+
+message SaveFollowEntityResponse {
+  bool is_following = 1;
+}
+
+message GetFollowedEntitiesByUserRequest {
+  string user_id = 1;
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
+}
+
+message GetFollowedEntitiesByUserResponse {
+  bool is_following = 1;
+}
