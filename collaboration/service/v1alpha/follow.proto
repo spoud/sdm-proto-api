@@ -7,10 +7,14 @@ option go_package = "collaboration.v1alpha";
 
 import "collaboration/domain/v1alpha/domain.proto";
 import "global/selection/v1/reference.proto";
+import "global/selection/v1/pagination.proto";
+import "google/protobuf/empty.proto";
+
+
 
 service FollowService {
-  rpc Follow (FollowRequest) returns (FollowResponse);
-  rpc UnFollow (UnFollowRequest) returns (UnFollowResponse);
+  rpc Follow (FollowRequest) returns (google.protobuf.Empty);
+  rpc UnFollow (UnFollowRequest) returns (google.protobuf.Empty);
   rpc ListFollowedEntities (ListFollowedEntitiesRequest) returns (ListFollowedEntitiesResponse);
   rpc IsUserFollowingEntity (IsUserFollowingEntityRequest) returns (IsUserFollowingEntityResponse);
 }
@@ -20,15 +24,9 @@ message FollowRequest {
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
 }
 
-message FollowResponse {
-}
-
 message UnFollowRequest {
   string user_id = 1;
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
-}
-
-message UnFollowResponse {
 }
 
 message ListFollowedEntitiesRequest {
