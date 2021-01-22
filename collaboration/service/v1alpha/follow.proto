@@ -10,7 +10,7 @@ import "global/selection/v1/reference.proto";
 
 service FollowService {
   rpc SaveFollow (SaveFollowRequest) returns (SaveFollowResponse);
-  rpc ListFollowedEntitiesByUser (GetFollowedEntitiesByUserRequest) returns (GetFollowedEntitiesByUserResponse);
+  rpc ListFollowedEntitiesByUser (ListFollowedEntitiesByUserRequest) returns (ListFollowedEntitiesByUserResponse);
 }
 
 message SaveFollowRequest {
@@ -22,11 +22,11 @@ message SaveFollowResponse {
   bool is_following = 1;
 }
 
-message GetFollowedEntitiesByUserRequest {
+message ListFollowedEntitiesByUserRequest {
   string user_id = 1;
   io.spoud.sdm.global.selection.v1.Ref entity_ref = 2;
 }
 
-message GetFollowedEntitiesByUserResponse {
+message ListFollowedEntitiesByUserResponse {
   bool is_following = 1;
 }
