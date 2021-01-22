@@ -81,3 +81,9 @@ message ResourcePropertyValueDefinition {
     UNIX_TIMESTAMP = 3;
   }
 }
+
+message FollowEntity {
+  string id = 1;
+  string user_id = 2;
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 3;
+}
