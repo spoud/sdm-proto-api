@@ -10,27 +10,36 @@ import "global/selection/v1/reference.proto";
 
 service FollowService {
   rpc SaveFollow (SaveFollowRequest) returns (SaveFollowResponse);
-  rpc ListFollowedEntitiesByUser (ListFollowedEntitiesByUserRequest) returns (ListFollowedEntitiesByUserResponse);
+  rpc ListFollowedEntities (ListFollowedEntitiesRequest) returns (ListFollowedEntitiesResponse);
+  rpc IsUserFollowingEntity (IsUserFollowingEntityRequest) returns (IsUserFollowingEntityResponse);
 }
 
 message SaveFollowRequest {
   string user_id = 1;
-  io.spoud.sdm.global.selection.v1.Ref entity_ref = 2;
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
 }
 
 message SaveFollowResponse {
-  bool is_following = 1;
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 1;
+  repeated repeated io.spoud.sdm.collaboration.domain.v1alpha.Follow follow = 2;
 }
 
-message ListFollowedEntitiesByUserRequest {
-   FollowFilter filter = 1;
+message ListFollowedEntitiesRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+  string user_id = 2;
+  repeated io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 3;
 }
 
-message FollowFilter {
+message ListFollowedEntitiesResponse {
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 1;
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.FollowEntity follows = 2;
+}
+
+message IsUserFollowingEntityRequest {
   string user_id = 1;
-  io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 2;
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
 }
 
-message ListFollowedEntitiesByUserResponse {
+message IsUserFollowingEntityResponse {
   bool is_following = 1;
 }
