@@ -9,27 +9,26 @@ import "collaboration/domain/v1alpha/domain.proto";
 import "global/selection/v1/reference.proto";
 
 service FollowService {
-  rpc SaveFollow (SaveFollowRequest) returns (SaveFollowResponse);
+  rpc Follow (FollowRequest) returns (FollowResponse);
+  rpc UnFollow (UnFollowRequest) returns (UnFollowResponse);
   rpc ListFollowedEntities (ListFollowedEntitiesRequest) returns (ListFollowedEntitiesResponse);
   rpc IsUserFollowingEntity (IsUserFollowingEntityRequest) returns (IsUserFollowingEntityResponse);
 }
 
-message SaveFollowRequest {
+message FollowRequest {
   string user_id = 1;
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
-  FollowAction.Action action = 3;
 }
 
-message FollowAction{
-  enum Action{
-    UNKNOWN = 0;
-    START_FOLLOW = 1;
-    STOP_FOLLOW = 2;
-  }
+message FollowResponse {
 }
 
-message SaveFollowResponse {
-  io.spoud.sdm.collaboration.domain.v1alpha.Follow follow = 1;
+message UnFollowRequest {
+  string user_id = 1;
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
+}
+
+message UnFollowResponse {
 }
 
 message ListFollowedEntitiesRequest {
@@ -40,7 +39,7 @@ message ListFollowedEntitiesRequest {
 
 message ListFollowedEntitiesResponse {
   io.spoud.sdm.global.selection.v1.PageResult page_result = 1;
-  repeated io.spoud.sdm.collaboration.domain.v1alpha.FollowEntity follows = 2;
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.Follow follows = 2;
 }
 
 message IsUserFollowingEntityRequest {
