@@ -17,6 +17,15 @@ service FollowService {
 message SaveFollowRequest {
   string user_id = 1;
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
+  FollowAction.Action action = 3;
+}
+
+message FollowAction{
+  enum Action{
+    UNKNOWN = 0;
+    START_FOLLOW = 1;
+    STOP_FOLLOW = 2;
+  }
 }
 
 message SaveFollowResponse {
