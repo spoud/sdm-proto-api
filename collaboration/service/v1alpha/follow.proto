@@ -20,8 +20,7 @@ message SaveFollowRequest {
 }
 
 message SaveFollowResponse {
-  io.spoud.sdm.global.selection.v1.PageResult page_result = 1;
-  repeated repeated io.spoud.sdm.collaboration.domain.v1alpha.Follow follow = 2;
+  io.spoud.sdm.collaboration.domain.v1alpha.Follow follow = 1;
 }
 
 message ListFollowedEntitiesRequest {
