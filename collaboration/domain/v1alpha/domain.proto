@@ -8,6 +8,8 @@ option go_package = "collaboration.domain.v1alpha";
 import "google/protobuf/wrappers.proto";
 import "permission/domain/v1/domain.proto";
 import "global/domain/v1/domain.proto";
+import "global/selection/v1/reference.proto";
+
 
 message User {
   string id = 1;
@@ -80,4 +82,10 @@ message ResourcePropertyValueDefinition {
     LINK = 2;
     UNIX_TIMESTAMP = 3;
   }
+}
+
+message Follow {
+  string id = 1;
+  string user_id = 2;
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 3;
 }
