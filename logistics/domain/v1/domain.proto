@@ -123,6 +123,9 @@ message TransportType {
   io.spoud.sdm.global.domain.v1.DocInfo info = 5;
   string label = 6;
   TransportDataType.Type data_type = 7;
+
+  // Config template for agent startup
+  string config_template_docker_compose = 8;
 }
 
 // Transports
