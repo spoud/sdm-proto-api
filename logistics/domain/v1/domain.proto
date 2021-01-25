@@ -126,7 +126,6 @@ message TransportType {
 
   // Config template for agent startup
   string config_template_docker_compose = 8;
-  string config_template_kubernetes = 9;
 }
 
 // Transports
