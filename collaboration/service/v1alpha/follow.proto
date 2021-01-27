@@ -21,18 +21,15 @@ service FollowService {
 }
 
 message FollowRequest {
-  string user_id = 1;
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
 }
 
 message UnFollowRequest {
-  string user_id = 1;
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
 }
 
 message ListFollowedEntitiesRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
-  string user_id = 2;
   repeated io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 3;
 }
 
@@ -42,7 +39,6 @@ message ListFollowedEntitiesResponse {
 }
 
 message IsUserFollowingEntityRequest {
-  string user_id = 1;
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
 }
 
