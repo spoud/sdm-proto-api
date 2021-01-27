@@ -16,7 +16,7 @@ import "google/protobuf/empty.proto";
 service FollowService {
   rpc Follow (FollowRequest) returns (google.protobuf.Empty);
   rpc UnFollow (UnFollowRequest) returns (google.protobuf.Empty);
-  rpc ListFollowedEntities (ListFollowedEntitiesRequest) returns (ListFollowedEntitiesResponse);
+  rpc ListFollowByUser (ListFollowByUserRequest) returns (ListFollowByUserResponse);
   rpc IsUserFollowingEntity (IsUserFollowingEntityRequest) returns (IsUserFollowingEntityResponse);
 }
 
@@ -28,12 +28,12 @@ message UnFollowRequest {
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
 }
 
-message ListFollowedEntitiesRequest {
+message ListFollowByUserRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
   repeated io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 3;
 }
 
-message ListFollowedEntitiesResponse {
+message ListFollowByUserResponse {
   io.spoud.sdm.global.selection.v1.PageResult page_result = 1;
   repeated io.spoud.sdm.collaboration.domain.v1alpha.Follow follows = 2;
 }
