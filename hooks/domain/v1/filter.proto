@@ -50,6 +50,12 @@ message DataSubscriptionStateFilter {
   io.spoud.sdm.logistics.selection.v1.BaseRef transport_ref = 4;
 }
 
+// Entity Schema
+message SchemaFilter {
+  string id = 1;
+  repeated PropertiesFilter properties_filters = 2;
+}
+
 // General predicate for one meta attribute (exact match)
 message PropertiesFilter {
   string key = 1; // e.g. sdm.transport.kafka.topic
@@ -65,6 +71,7 @@ message StateChangeFilter {
     ResourceGroupFilter resource_group_filter = 5;
     TransportFilter transport_filter = 6;
     DataItemFilter data_item_filter = 7;
+    SchemaFilter schema_filter = 8;
   }
 }
 

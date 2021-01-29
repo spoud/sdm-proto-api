@@ -7,6 +7,7 @@ option go_package = "logger.v1";
 
 import "google/protobuf/timestamp.proto";
 import "logistics/domain/v1/domain.proto";
+import "schema/domain/v1alpha/domain.proto";
 import "global/domain/v1/domain.proto";
 
 
@@ -30,6 +31,7 @@ message LogRecord {
     io.spoud.sdm.logistics.domain.v1.ResourceGroup resource_group = 15;
     io.spoud.sdm.logistics.domain.v1.Transport transport = 16;
     io.spoud.sdm.logistics.domain.v1.DataItem data_item = 17;
+    io.spoud.sdm.schema.domain.v1alpha.Schema schema = 18;
   }
 }
 
