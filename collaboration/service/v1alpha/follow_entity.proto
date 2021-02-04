@@ -13,18 +13,18 @@ import "google/protobuf/empty.proto";
 
 
 
-service FollowService {
-  rpc Follow (FollowRequest) returns (google.protobuf.Empty);
-  rpc UnFollow (UnFollowRequest) returns (google.protobuf.Empty);
-  rpc ListFollowedEntities (ListFollowedEntitiesRequest) returns (ListFollowedEntitiesResponse);
+service FollowEntityService {
+  rpc FollowEntity (FollowEntityRequest) returns (google.protobuf.Empty);
+  rpc UnFollowEntity (UnFollowEntityRequest) returns (google.protobuf.Empty);
+  rpc ListFollowedEntitiesByUser (ListFollowedEntitiesRequest) returns (ListFollowedEntitiesResponse);
   rpc IsUserFollowingEntity (IsUserFollowingEntityRequest) returns (IsUserFollowingEntityResponse);
 }
 
-message FollowRequest {
+message FollowEntityRequest {
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 1;
 }
 
-message UnFollowRequest {
+message UnFollowEntityRequest {
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
 }
 
