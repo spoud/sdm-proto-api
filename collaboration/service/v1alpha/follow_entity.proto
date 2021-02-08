@@ -26,7 +26,7 @@ message FollowEntityRequest {
 }
 
 message UnFollowEntityRequest {
-  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 1;
 }
 
 message ListFollowedEntitiesRequest {
@@ -48,7 +48,7 @@ message IsUserFollowingEntityResponse {
 }
 
 message CountUsersByEntityIdRequest {
-  string entity_id = 1;
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 1;
 }
 
 message CountUsersByEntityIdResponse {
