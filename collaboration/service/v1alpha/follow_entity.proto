@@ -18,6 +18,7 @@ service FollowEntityService {
   rpc UnFollowEntity (UnFollowEntityRequest) returns (google.protobuf.Empty);
   rpc ListFollowedEntitiesByUser (ListFollowedEntitiesRequest) returns (ListFollowedEntitiesResponse);
   rpc IsUserFollowingEntity (IsUserFollowingEntityRequest) returns (IsUserFollowingEntityResponse);
+  rpc CountUsersByEntityRef (CountUsersByEntityRefRequest) returns (CountUsersByEntityRefResponse);
 }
 
 message FollowEntityRequest {
@@ -25,7 +26,7 @@ message FollowEntityRequest {
 }
 
 message UnFollowEntityRequest {
-  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 1;
 }
 
 message ListFollowedEntitiesRequest {
@@ -44,4 +45,12 @@ message IsUserFollowingEntityRequest {
 
 message IsUserFollowingEntityResponse {
   bool is_following = 1;
+}
+
+message CountUsersByEntityRefRequest {
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 1;
+}
+
+message CountUsersByEntityRefResponse {
+  int32 user_count= 1;
 }
