@@ -1,0 +1,25 @@
+syntax = "proto3";
+package io.spoud.sdm.search.domain.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.search.domain.v1";
+option go_package = "search.v1";
+
+import "logistics/domain/v1/domain.proto";
+import "schema/domain/v1alpha/domain.proto";
+
+
+message SearchResultItem {
+
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 1;
+
+  oneof entity {
+    io.spoud.sdm.logistics.domain.v1.DataOffer data_offer = 10;
+    io.spoud.sdm.logistics.domain.v1.DataPort data_port = 11;
+    io.spoud.sdm.logistics.domain.v1.DataItem data_item = 12;
+    io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_state = 13;
+    io.spoud.sdm.schema.domain.v1alpha.Schema schema = 14;
+    io.spoud.sdm.logistics.domain.v1.ResourceGroup resource_group = 15;
+    io.spoud.sdm.logistics.domain.v1.Transport transport = 16;
+  }
+}
