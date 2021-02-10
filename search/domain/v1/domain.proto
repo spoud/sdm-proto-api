@@ -7,10 +7,9 @@ option go_package = "search.v1";
 
 import "logistics/domain/v1/domain.proto";
 import "schema/domain/v1alpha/domain.proto";
-
+import "global/selection/v1/reference.proto";
 
 message SearchResultItem {
-
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 1;
 
   oneof entity {
