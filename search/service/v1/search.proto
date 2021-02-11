@@ -11,7 +11,7 @@ import "google/protobuf/wrappers.proto";
 import "global/domain/v1/domain.proto";
 
 service SearchService {
-  rpc SubscribeChange (SearchRequest) returns (stream SearchResponse);
+  rpc search (SearchRequest) returns (stream SearchResponse);
 }
 
 message SearchRequest {
