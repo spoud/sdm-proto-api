@@ -18,7 +18,7 @@ message SearchRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
   google.protobuf.StringValue searchText = 2;
   google.protobuf.StringValue path = 3;
-  repeated io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 4;
+  io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 4;
 }
 
 message SearchResponse {
