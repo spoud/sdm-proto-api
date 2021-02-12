@@ -18,6 +18,7 @@ service SchemaService {
     option deprecated = true;
   };
   rpc getLatestSchemasForEntity (GetLatestSchemasForEntityRequest) returns (GetLatestSchemasForEntityResponse);
+  rpc GetSchema (GetSchemaRequest) returns (GetSchemaResponse);
 }
 
 message SaveSchemaRequest {
@@ -47,4 +48,12 @@ message GetLatestSchemasForEntityResponse {
   // repeated because we can have multiple "last" schema. For example we could have one from the registry and
   // one from the profiler (so 2 schemas). But then maybe we have schemas for keys and values (so 2x2=4 schemas).
   repeated io.spoud.sdm.schema.domain.v1alpha.Schema schemas = 1;
+}
+
+message GetSchemaRequest {
+  io.spoud.sdm.global.selection.v1.BaseRef self = 2;
+}
+
+message GetSchemaResponse {
+  io.spoud.sdm.schema.domain.v1alpha.Schema schema = 1;
 }
