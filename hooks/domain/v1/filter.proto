@@ -5,7 +5,7 @@ option java_multiple_files = true;
 option java_package = "io.spoud.sdm.hooks.domain.v1";
 import "logistics/selection/v1/reference.proto";
 import "global/domain/v1/domain.proto";
-option go_package = "logger.v1";
+option go_package = "hooks.v1";
 
 // ---------------------
 // specific entity based filters.
