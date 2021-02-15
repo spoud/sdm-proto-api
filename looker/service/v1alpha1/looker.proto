@@ -7,9 +7,9 @@ option go_package = "looker.v1alpha1";
 
 import "google/protobuf/timestamp.proto";
 import "global/selection/v1/pagination.proto";
+import "global/selection/v1/reference.proto";
 import "logistics/selection/v1/reference.proto";
 import "looker/domain/v1alpha1/domain.proto";
-import "global/selection/v1/reference.proto";
 
 service LookerService {
   // used by the profiler
@@ -104,7 +104,7 @@ message ListDataProfilingJobsRequest {
   // each profiler is responsible for a different transport id.
   string transport_id = 1 [deprecated = true];
 
-  io.spoud.sdm.logistics.selection.v1.BaseRef transport_ref = 3;
+  io.spoud.sdm.global.selection.v1.BaseRef transport_ref = 3;
 }
 
 // right now we expect to get an updateDataProfile for each

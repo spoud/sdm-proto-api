@@ -4,11 +4,12 @@ package io.spoud.sdm.logistics.selection.v1;
 option java_multiple_files = true;
 option java_package = "io.spoud.sdm.logistics.selection.v1";
 option go_package = "selection.v1";
+import "global/selection/v1/reference.proto";
 
 // TransportMatchingProperties are used to define an internal business key, which
 // can be used for referencing a resource across different components.
 message TransportMatchingProperties {
-  BaseRef transport = 5;
+  io.spoud.sdm.global.selection.v1.BaseRef transport = 5;
   map<string, string> properties = 1;
 }
 
@@ -16,7 +17,7 @@ message TransportMatchingProperties {
 message DataOfferRef {
   oneof ref {
     // ref by id or path
-    IdPathRef id_path = 5;
+    io.spoud.sdm.global.selection.v1.IdPathRef id_path = 5;
 
     // provide matching properties explicitly
     // MatchingProperties properties = 3
@@ -38,7 +39,7 @@ message DataPortRef {
   oneof ref {
 
     // ref by id or path
-    IdPathRef id_path = 4;
+    io.spoud.sdm.global.selection.v1.IdPathRef id_path = 4;
 
     // provide matching properties explicitly
     TransportMatchingProperties transport_matching_properties = 3;
@@ -53,7 +54,7 @@ message DataPortRef {
 message DataItemRef {
   oneof ref {
     // ref by id or path
-    IdPathRef id_path = 1;
+    io.spoud.sdm.global.selection.v1.IdPathRef id_path = 1;
 
     // provide matching properties explicitly
     TransportMatchingProperties transport_matching_properties = 2;
@@ -68,7 +69,7 @@ message DataSubscriptionStateRef {
   oneof ref {
 
     // ref by id or path
-    IdPathRef id_path = 4;
+    io.spoud.sdm.global.selection.v1.IdPathRef id_path = 4;
 
     // provide matching properties explicitly
     TransportMatchingProperties transport_matching_properties = 3;
@@ -82,35 +83,18 @@ message DataSubscriptionStateRef {
 // Transport reference.
 message TransportRef {
   oneof ref {
-    IdPathRef id_path = 4;
+    io.spoud.sdm.global.selection.v1.IdPathRef id_path = 4;
   }
 }
 
 message TransportTypeRef {
   oneof ref {
     // ref by id or path
-    IdPathRef id_path = 4;
+    io.spoud.sdm.global.selection.v1.IdPathRef id_path = 4;
   }
 }
 
-message IdPathRef {
-  oneof ref {
-    // ref by id
-    string id = 1;
-    // ref by name
-    string name = 2 [deprecated = true];
-    // ref by path;
-    string path = 3;
-  }
-}
-
-// Base ref type.
-// Used for any resource ref without a specific ref message.
-// Support ref evolution by moving from this basic ref type to a dedicated ref messages.
-message BaseRef {
-  IdPathRef id_path = 1;
-}
 
 message ResourceGroupRef {
-  IdPathRef id_path = 2;
+  io.spoud.sdm.global.selection.v1.IdPathRef id_path = 2;
 }

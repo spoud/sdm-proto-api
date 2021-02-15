@@ -6,6 +6,7 @@ option java_package = "io.spoud.sdm.logistics.service.v1";
 option go_package = "logistics.service.v1";
 
 import "global/selection/v1/pagination.proto";
+import "global/selection/v1/reference.proto";
 import "logistics/selection/v1/filter.proto";
 import "logistics/domain/v1/domain.proto";
 import "logistics/mutation/v1/mutation.proto";
@@ -64,7 +65,7 @@ message ListDataSubscriptionStatesRequest {
 
   io.spoud.sdm.logistics.selection.v1.DataPortRef data_port_ref = 7;
 
-  io.spoud.sdm.logistics.selection.v1.BaseRef transport_ref = 8;
+  io.spoud.sdm.global.selection.v1.BaseRef transport_ref = 8;
 }
 
 message ListDataSubscriptionStatesResponse {

@@ -6,6 +6,7 @@ option java_package = "io.spoud.sdm.logistics.service.v1";
 option go_package = "logistics.service.v1";
 
 import "global/selection/v1/pagination.proto";
+import "global/selection/v1/reference.proto";
 import "logistics/domain/v1/domain.proto";
 import "logistics/selection/v1/filter.proto";
 import "logistics/selection/v1/reference.proto";
@@ -30,7 +31,7 @@ message CreateAgentResponse {
 }
 
 message DeleteAgentRequest {
-  io.spoud.sdm.logistics.selection.v1.BaseRef self = 2;
+  io.spoud.sdm.global.selection.v1.BaseRef self = 2;
 }
 
 

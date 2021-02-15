@@ -6,6 +6,7 @@ option java_package = "io.spoud.sdm.logistics.service.v1";
 option go_package = "logistics.service.v1";
 
 import "global/selection/v1/pagination.proto";
+import "global/selection/v1/reference.proto";
 import "logistics/selection/v1/filter.proto";
 import "logistics/domain/v1/domain.proto";
 import "logistics/mutation/v1/mutation.proto";
@@ -58,7 +59,7 @@ message ListDataPortsRequest {
 
   io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 4;
 
-  io.spoud.sdm.logistics.selection.v1.BaseRef transport_ref = 5;
+  io.spoud.sdm.global.selection.v1.BaseRef transport_ref = 5;
 }
 
 message ListDataPortsResponse {
@@ -89,7 +90,7 @@ message DataPortChange {
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8;
 
   // Transport Reference
-  io.spoud.sdm.logistics.selection.v1.BaseRef transport = 9;
+  io.spoud.sdm.global.selection.v1.BaseRef transport = 9;
 
   // Lifecycle State
   io.spoud.sdm.logistics.mutation.v1.StateChange state = 10;
