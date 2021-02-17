@@ -22,6 +22,7 @@ message Schema {
   google.protobuf.Timestamp last_seen = 8;
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 9;
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 10;
+  string path = 11;
 }
 
 message SchemaSource {
