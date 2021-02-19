@@ -13,34 +13,38 @@ import "global/domain/v1/domain.proto";
 message Activity {
     // reference the correlating activities
     string correlation_id = 1;
-    string entity_uuid = 2;
-    google.protobuf.Timestamp timestamp = 3;
-    ActivityType.Type type = 4;
-    // subject who causes the activity
-    SubjectReference subject_causing = 5;
+    google.protobuf.Timestamp timestamp = 2;
+    ActivityType.Type type = 3;
 
-    // reference the target the activity applies to
-    Reference target = 6;
+    // subject who causes the activity
+    ResourceReference subject_causing = 4;
+
+    // reference the source resource the activity comes from
+    ResourceReference source_resource = 5;
 
     // additional named references to subjects or resources
-    map<string, Reference> references = 7;
+    map<string, ResourceReference> references = 6;
 
-}
+    // additional named values
+    map<string, Value> values = 7;
 
-message Reference {
-    oneof reference {
-        ResourceReference resource_ref = 1;
-        SubjectReference subject_ref = 2;
-    }
 }
 
 message ResourceReference {
     string id = 1;
-    io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 2;
+    ReferenceType.Type reference_type = 2;
+    io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 3;
 }
 
-message SubjectReference {
-    string id = 1;
+
+message Value {
+    oneof value {
+        string string_value = 10;
+        int32 int_value = 11;
+        int32 long_value = 12;
+        int32 double_value = 13;
+        google.protobuf.Timestamp time_value = 14;
+    }
 }
 
 message ActivityType {
@@ -57,3 +61,11 @@ message ActivityType {
 }
 
 
+message ReferenceType {
+    enum Type {
+        UNKNOWN = 0;
+        ID = 1; // id of sdm entity including collaboration service subject id
+        JWT_SUBJECT_ID = 2;
+        NAME = 3;
+    }
+}
