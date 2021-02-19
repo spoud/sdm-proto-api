@@ -9,8 +9,8 @@ import "hooks/domain/v1/filter.proto";
 import "hooks/domain/v1/domain.proto";
 
 service StateChanger {
-    // subscribe to any changes
-    rpc SubscribeChange (SubscribeChangeRequest) returns (stream SubscribeChangeResponse);
+  // subscribe to any changes
+  rpc SubscribeChange (SubscribeChangeRequest) returns (stream SubscribeChangeResponse);
 }
 
 // ---------------------
@@ -28,8 +28,8 @@ service StateChanger {
 // to avoid always streaming from the beginning.
 // ---------------------
 message SubscribeChangeRequest {
-    io.spoud.sdm.hooks.domain.v1.StateChangeStartPosition start_position = 1;
-    repeated io.spoud.sdm.hooks.domain.v1.StateChangeFilter filters = 2;
+  io.spoud.sdm.hooks.domain.v1.StateChangeStartPosition start_position = 1;
+  repeated io.spoud.sdm.hooks.domain.v1.StateChangeFilter filters = 2;
 }
 
 // ---------------------
@@ -41,9 +41,9 @@ message SubscribeChangeRequest {
 // 2) by acyclic dependencies (for initial state loading), same as 1) after initial loading.
 // ---------------------
 message SubscribeChangeResponse {
-    oneof response {
-      io.spoud.sdm.hooks.domain.v1.LogRecord log_record = 1;
-      io.spoud.sdm.hooks.domain.v1.StreamInfo stream_info = 2;
-    }
+  oneof response {
+    io.spoud.sdm.hooks.domain.v1.LogRecord log_record = 1;
+    io.spoud.sdm.hooks.domain.v1.StreamInfo stream_info = 2;
+  }
 }
 

@@ -1,0 +1,56 @@
+syntax = "proto3";
+package io.spoud.sdm.collaboration.v1alpha;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.collaboration.v1alpha";
+option go_package = "collaboration.v1alpha";
+
+import "collaboration/domain/v1alpha/domain.proto";
+import "global/selection/v1/reference.proto";
+import "global/selection/v1/pagination.proto";
+import "global/domain/v1/domain.proto";
+import "google/protobuf/empty.proto";
+
+
+
+service FollowEntityService {
+  rpc FollowEntity (FollowEntityRequest) returns (google.protobuf.Empty);
+  rpc UnFollowEntity (UnFollowEntityRequest) returns (google.protobuf.Empty);
+  rpc ListFollowedEntitiesByUser (ListFollowedEntitiesRequest) returns (ListFollowedEntitiesResponse);
+  rpc IsUserFollowingEntity (IsUserFollowingEntityRequest) returns (IsUserFollowingEntityResponse);
+  rpc CountUsersByEntityRef (CountUsersByEntityRefRequest) returns (CountUsersByEntityRefResponse);
+}
+
+message FollowEntityRequest {
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 1;
+}
+
+message UnFollowEntityRequest {
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 1;
+}
+
+message ListFollowedEntitiesRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+  repeated io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 2;
+}
+
+message ListFollowedEntitiesResponse {
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 1;
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.Follow follows = 2;
+}
+
+message IsUserFollowingEntityRequest {
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 1;
+}
+
+message IsUserFollowingEntityResponse {
+  bool is_following = 1;
+}
+
+message CountUsersByEntityRefRequest {
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 1;
+}
+
+message CountUsersByEntityRefResponse {
+  int32 user_count= 1;
+}

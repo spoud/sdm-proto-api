@@ -19,21 +19,6 @@ message IdPathReference {
   string path = 11;
 }
 
-message IdNamePathReference {
-  string id = 1;
-  string name = 2;
-
-  string path = 11;
-}
-
-message IdNameReference {
-  string id = 1;
-  string name = 2;
-
-  // range reserved due to possible replacement in the future by other types.
-  reserved 11;
-}
-
 message ActionInfo {
   string username = 1;
   google.protobuf.Timestamp timestamp = 2;
@@ -48,8 +33,7 @@ message ResourceEntity {
   enum Type {
     UNKNOWN = 0;
     DATA_OFFER = 1;
-    DATA_OFFER_STATE = 2;
-    DATA_SUBSCRIPTION = 3;
+    DATA_PORT = 2;
     DATA_SUBSCRIPTION_STATE = 4;
     TRANSPORT = 5;
     RESOURCE_GROUP = 6;
@@ -58,15 +42,17 @@ message ResourceEntity {
     USER_GROUP = 9;
     DATA_PROFILE = 10;
     SCHEMA = 11;
-    DATA_PROFILING_JOB = 12;
+    // @Deprecate since 17.12.2020 we don't use jobs anymore
+    DATA_PROFILING_JOB = 12[deprecated=true];
     ORGANIZATION = 13;
     DATA_SAMPLE = 14;
     // user (account) managed completely in collaboration for integration and automation purposes (agents).
     // same authorization is applied as for regular users.
     TECHNICAL_USER = 15;
     AGENT = 16;
+    DATA_ITEM = 17;
     // can be user or group
-    SUBJECT = 17;
+    SUBJECT = 18;
 
     // Used only for hooks
     CHECKPOINT = 999;

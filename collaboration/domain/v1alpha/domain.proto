@@ -8,76 +8,84 @@ option go_package = "collaboration.domain.v1alpha";
 import "google/protobuf/wrappers.proto";
 import "permission/domain/v1/domain.proto";
 import "global/domain/v1/domain.proto";
+import "global/selection/v1/reference.proto";
+
 
 message User {
-    string id = 1;
-    string email = 2;
-    google.protobuf.StringValue first_name = 3;
-    google.protobuf.StringValue last_name = 4;
-    repeated string organizations = 5;
-    map<string, string> properties = 6;
+  string id = 1;
+  string email = 2;
+  google.protobuf.StringValue first_name = 3;
+  google.protobuf.StringValue last_name = 4;
+  repeated string organizations = 5;
+  map<string, string> properties = 6;
 }
 
 message TechnicalUser {
-    string id = 1;
-    string label = 2;
-    string username = 3;
-    string organization = 4;
-    io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 5;
+  string id = 1;
+  string label = 2;
+  string username = 3;
+  string organization = 4;
+  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 5;
 }
 
 message TechnicalUserCredentials {
-    string secret = 1;
+  string secret = 1;
 }
 
 message UserGroup {
-    string id = 1;
-    string name = 2;
-    string organization = 3;
-    map<string, string> properties = 4;
-    io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 5;
+  string id = 1;
+  string name = 2;
+  string organization = 3;
+  map<string, string> properties = 4;
+  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 5;
 }
 
 message Subject {
-    oneof subject {
-        User user = 2;
-        UserGroup userGroup = 3;
-    }
+  oneof subject {
+    User user = 2;
+    UserGroup userGroup = 3;
+  }
 }
 
 message SubjectType {
-    enum Type {
-        UNKNOWN = 0;
-        USER = 1;
-        USER_GROUP = 2;
-    }
+  enum Type {
+    UNKNOWN = 0;
+    USER = 1;
+    USER_GROUP = 2;
+  }
 }
 
 message Organization {
-    string id = 1;
-    string name = 2;
-    map<string, string> properties = 4;
-    io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 5;
+  string id = 1;
+  string name = 2;
+  map<string, string> properties = 4;
+  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 5;
 }
 
 
-message ResourceEntityConfiguration{
-    repeated ResourcePropertyValueDefinition resource_property_value_definition = 1;
+message ResourceEntityConfiguration {
+  repeated ResourcePropertyValueDefinition resource_property_value_definition = 1;
 }
 
-message ResourcePropertyValueDefinition{
-    io.spoud.sdm.global.domain.v1.ResourceEntity.Type resource_entity = 1;
-    string key = 2;
-    Type property_data_type = 3;
-    string label = 4;
-    string description = 5;
-    bool editable = 6;
-    string icon_url = 7;
+message ResourcePropertyValueDefinition {
+  io.spoud.sdm.global.domain.v1.ResourceEntity.Type resource_entity = 1;
+  string key = 2;
+  Type property_data_type = 3;
+  string label = 4;
+  string description = 5;
+  bool editable = 6;
+  string icon_url = 7;
 
-    enum Type {
-        UNKNOWN = 0;
-        TEXT = 1;
-        LINK = 2;
-        UNIX_TIMESTAMP = 3;
-    }
+  enum Type {
+    UNKNOWN = 0;
+    TEXT = 1;
+    LINK = 2;
+    UNIX_TIMESTAMP = 3;
+  }
+}
+
+message Follow {
+  string id = 1;
+  string user_id = 2;
+  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 3;
 }

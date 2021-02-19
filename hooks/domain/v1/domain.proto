@@ -3,46 +3,51 @@ package io.spoud.sdm.hooks.domain.v1;
 
 option java_multiple_files = true;
 option java_package = "io.spoud.sdm.hooks.domain.v1";
-option go_package = "logger.v1";
+option go_package = "hooks.v1";
 
 import "google/protobuf/timestamp.proto";
 import "logistics/domain/v1/domain.proto";
+import "schema/domain/v1alpha/domain.proto";
 import "global/domain/v1/domain.proto";
 
 
 message LogRecord {
-    string entity_uuid = 1;
-    google.protobuf.Timestamp timestamp = 2;
-    StateChangeAction.Type action = 3;
+  string entity_uuid = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  StateChangeAction.Type action = 3;
 
-    io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 4;
+  io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 4;
 
-    string path = 5;
+  string path = 5;
 
-    // in a DELETED case, the entity might be null
-    oneof entity {
-        io.spoud.sdm.logistics.domain.v1.DataOffer data_offer = 10;
-        io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_state = 12;
-        io.spoud.sdm.logistics.domain.v1.DataSubscription data_subscription = 13;
-        io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_state = 14;
-        io.spoud.sdm.logistics.domain.v1.ResourceGroup resource_group = 15;
-        io.spoud.sdm.logistics.domain.v1.Transport transport = 16;
-    }
+  // Cursor of the current message, you can then use this cursor to go back to this exact position when you reconnect
+  string cursor = 6;
+
+  // in a DELETED case, the entity might be null
+  oneof entity {
+    io.spoud.sdm.logistics.domain.v1.DataOffer data_offer = 10;
+    io.spoud.sdm.logistics.domain.v1.DataPort data_port = 12;
+    io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_state = 14;
+    io.spoud.sdm.logistics.domain.v1.ResourceGroup resource_group = 15;
+    io.spoud.sdm.logistics.domain.v1.Transport transport = 16;
+    io.spoud.sdm.logistics.domain.v1.DataItem data_item = 17;
+    io.spoud.sdm.schema.domain.v1alpha.Schema schema = 18;
+  }
 }
 
 // Context specific information about the current stream.
 // Also used for keep alives and other gossip.
 message StreamInfo {
-    google.protobuf.Timestamp timestamp = 2;
+  google.protobuf.Timestamp timestamp = 2;
 }
 
 // WARNING ! DIFFERENT FROM  logitics/v1alpha/hook.proto
 message StateChangeAction {
-    enum Type {
-        UNKNOWN = 0;
-        UPDATED = 1;
-        DELETED = 2;
-    }
+  enum Type {
+    UNKNOWN = 0;
+    UPDATED = 1;
+    DELETED = 2;
+  }
 }
 
 

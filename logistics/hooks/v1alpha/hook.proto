@@ -9,10 +9,10 @@ import "google/protobuf/timestamp.proto";
 import "logistics/domain/v1/domain.proto";
 
 // deprecated since 15.09.2020 moved to /hooks/service/v1
-service StateChanger  {
+service StateChanger {
   option deprecated = true;
   // subscribe to any changes
-  rpc SubscribeChange (SubscribeChangeRequest) returns (stream SubscribeChangeResponse) ;
+  rpc SubscribeChange (SubscribeChangeRequest) returns (stream SubscribeChangeResponse);
 }
 
 // ---------------------
@@ -55,14 +55,12 @@ message SubscribeChangeResponse {
   // in a DELETED case, the entity might be null
   oneof entity {
     io.spoud.sdm.logistics.domain.v1.DataOffer data_offer = 10;
-    io.spoud.sdm.logistics.domain.v1.DataOfferState data_offer_state = 12;
-    io.spoud.sdm.logistics.domain.v1.DataSubscription data_subscription = 13;
+    io.spoud.sdm.logistics.domain.v1.DataPort data_port = 12;
     io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_state = 14;
     io.spoud.sdm.logistics.domain.v1.ResourceGroup resource_group = 15;
     io.spoud.sdm.logistics.domain.v1.Transport transport = 16;
   }
 }
-
 
 // ---------------------
 // specific entity based filters.
@@ -90,19 +88,11 @@ message DataOfferFilter {
   repeated PropertiesFilter properties_filters = 2;
 }
 
-// Entity DataOfferState
-message DataOfferStateFilter {
+// Entity DataPort
+message DataPortFilter {
   option deprecated = true;
   string id = 1;
   repeated PropertiesFilter properties_filters = 3;
-}
-
-// Entity DataSubscription
-message DataSubscriptionFilter {
-  option deprecated = true;
-  string id = 1;
-  repeated PropertiesFilter properties_filters = 2;
-  string data_offer_id = 3;
 }
 
 // Entity DataSubscriptionState
@@ -124,8 +114,7 @@ message StateChangeFilter {
   option deprecated = true;
   oneof filter {
     DataOfferFilter data_offer_filter = 1;
-    DataOfferStateFilter data_offer_state_filter = 2;
-    DataSubscriptionFilter data_subscription_filter = 3;
+    DataPortFilter data_port_filter = 2;
     DataSubscriptionStateFilter data_subscription_state_filter = 4;
     ResourceGroupFilter resource_group_filter = 5;
     TransportFilter transport_filter = 6;
@@ -157,9 +146,9 @@ enum EntityType {
   option deprecated = true;
   UNKNOWN = 0;
   DATA_OFFER = 1;
-  DATA_OFFER_STATE = 2;
-  DATA_SUBSCRIPTION = 3;
+  DATA_PORT = 2;
   DATA_SUBSCRIPTION_STATE = 4;
   TRANSPORT = 5;
   RESOURCE_GROUP = 6;
+  DATA_ITEM = 7;
 }

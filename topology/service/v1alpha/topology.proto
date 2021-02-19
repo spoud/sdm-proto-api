@@ -37,7 +37,7 @@ message GetContainerNodeResponse {
 
 message GetDataSourceNodeRequest {
   oneof reference {
-    string data_offer_state_id = 1;
+    string data_port_id = 1;
     string data_source_node_id = 2;
   }
 }
@@ -91,7 +91,7 @@ message SaveDataSourceNodeRequest {
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue label = 2;
   google.protobuf.StringValue container_node_id = 3;
-  google.protobuf.StringValue data_offer_state_id = 4;
+  google.protobuf.StringValue data_port_id = 4;
 }
 
 message SaveDataSourceNodeResponse {

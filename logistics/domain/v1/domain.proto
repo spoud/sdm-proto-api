@@ -26,39 +26,18 @@ message ResourceGroup {
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 10;
 }
 
-// data subscription
-message DataSubscription {
-  string id = 1;
-  string name = 2;
-  map<string, string> properties = 3;
-  io.spoud.sdm.global.domain.v1.IdReference data_offer = 6;
-
-  // additional entity/doc information
-  io.spoud.sdm.global.domain.v1.DocInfo info = 9;
-  io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 10;
-  io.spoud.sdm.global.domain.v1.IdReference data_subscription_state = 12;
-
-  string label = 13;
-
-  // tag list.
-  repeated SimpleTag tags = 14;
-
-  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 15;
-}
-
 // DataSubscriptionState
 message DataSubscriptionState {
   string id = 1;
   string name = 2;
   map<string, string> properties = 3;
   string transport_url = 4;
-  io.spoud.sdm.global.domain.v1.IdReference data_offer_state = 5;
+  io.spoud.sdm.global.domain.v1.IdReference data_port = 5;
   bool deleted = 6;
 
   // additional entity/doc information
   io.spoud.sdm.global.domain.v1.DocInfo info = 7;
   io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 8;
-  io.spoud.sdm.global.domain.v1.IdReference data_subscription = 9;
   io.spoud.sdm.global.domain.v1.IdReference transport = 10;
 
   string label = 11;
@@ -79,7 +58,7 @@ message DataOffer {
   io.spoud.sdm.global.domain.v1.DocInfo info = 9;
 
   io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 10;
-  io.spoud.sdm.global.domain.v1.IdReference data_offer_state = 11;
+  io.spoud.sdm.global.domain.v1.IdReference data_port = 11;
 
   string label = 12;
 
@@ -89,12 +68,12 @@ message DataOffer {
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 14;
 }
 
-// DataOfferState
-message DataOfferState {
+// DataPort
+message DataPort {
   string id = 1;
   string name = 2;
   map<string, string> properties = 4;
-  string transport_url = 5;
+  string endpoint_url = 5;
   io.spoud.sdm.global.domain.v1.IdReference transport = 6;
   bool deleted = 7;
   io.spoud.sdm.global.domain.v1.IdReference data_offer = 8;
@@ -111,6 +90,44 @@ message DataOfferState {
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 13;
 }
 
+// DataItem
+message DataItem {
+  string id = 1;
+  string name = 2;
+  string label = 3;
+  map<string, string> properties = 4;
+  string transport_url = 5;
+  io.spoud.sdm.global.domain.v1.IdReference transport = 6;
+  bool deleted = 7;
+  io.spoud.sdm.global.domain.v1.IdReference data_port = 8;
+
+  // additional entity/doc information
+  io.spoud.sdm.global.domain.v1.DocInfo info = 9;
+
+  // tag list.
+  repeated SimpleTag tags = 11;
+}
+
+message TransportDataType {
+  enum Type {
+    UNKNOWN = 0;
+    DATA_SET = 1;
+    STREAM = 2;
+  }
+}
+
+message TransportType {
+  string id = 1;
+  string name = 2;
+  map<string, string> initial_properties = 4;
+  io.spoud.sdm.global.domain.v1.DocInfo info = 5;
+  string label = 6;
+  TransportDataType.Type data_type = 7;
+
+  // Config template for agent startup
+  string config_template_docker_compose = 8;
+}
+
 // Transports
 message Transport {
   string id = 1;
@@ -125,6 +142,8 @@ message Transport {
   string label = 7;
 
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 8;
+
+  TransportType type = 9;
 }
 
 // Agents
@@ -141,8 +160,6 @@ message Agent {
 }
 
 // History
-
-
 message HistoryEntity {
   string id = 1;
   ResourceEntityType.Type type = 2;
@@ -170,9 +187,9 @@ message ResourceEntityType {
   enum Type {
     UNKNOWN = 0;
     DATA_OFFER = 1;
-    DATA_OFFER_STATE = 2;
-    DATA_SUBSCRIPTION = 3;
+    DATA_PORT = 2;
     DATA_SUBSCRIPTION_STATE = 4;
+    DATA_ITEM = 5;
   }
 }
 

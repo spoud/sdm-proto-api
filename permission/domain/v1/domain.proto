@@ -40,7 +40,7 @@ message Permission {
   PrivilegeInformation privilegeInformation = 7;
 }
 
-message SubjectRef{
+message SubjectRef {
   string name = 1;
 }
 
@@ -50,14 +50,14 @@ message PrivilegeInformation {
 }
 
 message ResourceGroupings {
-  enum Type{
+  enum Type {
     UNKNOWN = 0;
     ALL = 1;
   }
 }
 
 message ResourceFilter {
-  oneof type{
+  oneof type {
     io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity = 1;
     ResourceGroupings.Type grouping = 2;
   }

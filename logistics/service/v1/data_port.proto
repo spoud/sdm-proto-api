@@ -15,41 +15,40 @@ import "permission/selection/v1/filter.proto";
 
 import "google/protobuf/wrappers.proto";
 
-service DataSubscriptionStateService {
-  rpc GetDataSubscriptionState (GetDataSubscriptionStateRequest) returns (GetDataSubscriptionStateResponse);
-  rpc DeleteDataSubscriptionState (DeleteDataSubscriptionStateRequest) returns (DeleteDataSubscriptionStateResponse);
-  rpc ListDataSubscriptionStates (ListDataSubscriptionStatesRequest) returns (ListDataSubscriptionStatesResponse);
+service DataPortService {
+  rpc GetDataPort (GetDataPortRequest) returns (GetDataPortResponse);
+  rpc DeleteDataPort (DeleteDataPortRequest) returns (DeleteDataPortResponse);
+  rpc ListDataPorts (ListDataPortsRequest) returns (ListDataPortsResponse);
 
-  // Saves a DataSubscriptionState.
+  // Saves a DataPort.
   //
   // The entity is identified through the `self` attribute. Different mechanisms for referencing are supported,
-  // like the usual name or id refs. A more advanced approach is to use matching properties as a reference (basically a tech key).
+  // like id refs. A more advanced approach is to use matching properties as a reference (basically a tech key).
   // If the self entity to update does not yet exist and is referenced through matching properties, it gets created automatically.
   //
   // Limitations:
   //   - properties cannot be removed yet
   //   - no support of specific field updates (without updating everything), aka field masks
-  rpc Save (SaveDataSubscriptionStateRequest) returns (SaveDataSubscriptionStateResponse);
+  rpc Save (SaveDataPortRequest) returns (SaveDataPortResponse);
 }
 
-
-message GetDataSubscriptionStateRequest {
-  io.spoud.sdm.logistics.selection.v1.DataSubscriptionStateRef self = 2;
+message GetDataPortRequest {
+  io.spoud.sdm.logistics.selection.v1.DataPortRef self = 3;
 }
 
-message GetDataSubscriptionStateResponse {
-  io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_state = 1;
+message GetDataPortResponse {
+  io.spoud.sdm.logistics.domain.v1.DataPort data_port = 1;
 }
 
-message DeleteDataSubscriptionStateResponse {
+message DeleteDataPortResponse {
 
 }
 
-message DeleteDataSubscriptionStateRequest {
-  io.spoud.sdm.logistics.selection.v1.DataSubscriptionStateRef self = 2;
+message DeleteDataPortRequest {
+  io.spoud.sdm.logistics.selection.v1.DataPortRef self = 2;
 }
 
-message ListDataSubscriptionStatesRequest {
+message ListDataPortsRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
 
   // Simple predicate filter by key and value.
@@ -58,46 +57,40 @@ message ListDataSubscriptionStatesRequest {
   // There is no support for an "OR" right now.
   repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 3;
 
-  // add a filter for returning only data subscription states with a data offer state with a data offer.
-  bool with_data_offer_only = 5;
+  io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 4;
 
-  io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 6;
-
-  io.spoud.sdm.logistics.selection.v1.DataPortRef data_port_ref = 7;
-
-  io.spoud.sdm.global.selection.v1.BaseRef transport_ref = 8;
+  io.spoud.sdm.global.selection.v1.BaseRef transport_ref = 5;
 }
 
-message ListDataSubscriptionStatesResponse {
-  repeated io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_states = 1;
+message ListDataPortsResponse {
+  repeated io.spoud.sdm.logistics.domain.v1.DataPort data_port = 1;
   io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
 }
 
-message SaveDataSubscriptionStateRequest {
-  DataSubscriptionStateChange input = 10;
+message SaveDataPortRequest {
+  DataPortChange input = 10;
 }
 
-message DataSubscriptionStateChange {
+message DataPortChange {
   // field mask support for updating specific fields only can be added later on
 
   // Selector for the entity to change.
   // If the entity does not exist, it gets created under these conditions:
   //   - properties are copied over to the properties map when using matching properties
   //   - an error is thrown if the selector is an id and not a name or matching properties
-  io.spoud.sdm.logistics.selection.v1.DataSubscriptionStateRef self = 1;
+  io.spoud.sdm.logistics.selection.v1.DataPortRef self = 1;
 
   // Entity name (can be used as id).
   // Globally unique per entity type.
   google.protobuf.StringValue name = 2;
 
-  // Label
   google.protobuf.StringValue label = 4;
 
   // ResourceGroup Reference
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8;
 
-  // DataPort Reference
-  io.spoud.sdm.logistics.selection.v1.DataPortRef data_port = 9;
+  // Transport Reference
+  io.spoud.sdm.global.selection.v1.BaseRef transport = 9;
 
   // Lifecycle State
   io.spoud.sdm.logistics.mutation.v1.StateChange state = 10;
@@ -112,6 +105,6 @@ message DataSubscriptionStateChange {
   io.spoud.sdm.logistics.mutation.v1.PropertyMap properties = 13;
 }
 
-message SaveDataSubscriptionStateResponse {
-  io.spoud.sdm.logistics.domain.v1.DataSubscriptionState data_subscription_state = 1;
+message SaveDataPortResponse {
+  io.spoud.sdm.logistics.domain.v1.DataPort data_port = 1;
 }
