@@ -1,0 +1,48 @@
+syntax = "proto3";
+package io.spoud.sdm.activities.domain.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.activities.domain.v1";
+option go_package = "activities.domain.v1";
+
+import "google/protobuf/timestamp.proto";
+import "global/domain/v1/domain.proto";
+import "global/selection/v1/reference.proto";
+
+
+message Activity {
+    string id = 1;
+
+    // activity type
+    ActivityType.Type activity_type = 2;
+
+    // who causes the activity
+    io.spoud.sdm.global.selection.v1.EntityRef triggered_by = 4;
+
+    // who was affect by the change
+    io.spoud.sdm.global.selection.v1.EntityRef affected_entity = 5;
+
+  // pre build msg
+    string message = 6;
+
+    // old value
+    string old_value = 7;
+
+    // new value
+    string new_value = 8;
+
+    google.protobuf.Timestamp createdAt = 9;
+}
+
+message ActivityType {
+    enum Type {
+        UNKNOWN = 0;
+        // 100..199 related to ownership change
+        OWNER_CHANGE = 100;
+        OWNERSHIP_SELF_ASSIGNED = 110;
+        OWNERSHIP_ASSIGNED = 120;
+        OWNERSHIP_UNASSIGNED = 130;
+        // 200..299 related to ...
+
+    }
+}
