@@ -6,7 +6,6 @@ option java_package = "io.spoud.sdm.activities.domain.v1";
 option go_package = "activities.domain.v1";
 
 import "google/protobuf/timestamp.proto";
-import "global/domain/v1/domain.proto";
 import "global/selection/v1/reference.proto";
 
 
@@ -34,7 +33,7 @@ message Activity {
   // extra entity ref
   map<string, io.spoud.sdm.global.selection.v1.EntityRef> references = 9;
 
-  google.protobuf.Timestamp createdAt = 10;
+  google.protobuf.Timestamp date_time = 10;
 }
 
 message ActivityType {
