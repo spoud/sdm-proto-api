@@ -6,6 +6,7 @@ option java_package = "io.spoud.sdm.activities.domain.v1";
 option go_package = "activities.domain.v1";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 import "global/selection/v1/reference.proto";
 
 
@@ -25,10 +26,10 @@ message Activity {
   string message = 6;
 
   // old value
-  string old_value = 7;
+  google.protobuf.StringValue old_value = 7;
 
   // new value
-  string new_value = 8;
+  google.protobuf.StringValue new_value = 8;
 
   // extra entity ref
   map<string, io.spoud.sdm.global.selection.v1.EntityRef> references = 9;
