@@ -8,6 +8,7 @@ option go_package = "activities.domain.v1";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "global/selection/v1/reference.proto";
+import "global/domain/v1/domain.proto";
 
 
 message Activity {
@@ -17,7 +18,7 @@ message Activity {
   ActivityType.Type activity_type = 2;
 
   // who causes the activity
-  io.spoud.sdm.global.selection.v1.EntityRef triggered_by = 4;
+  SubjectRef triggered_by = 4;
 
   // who was affect by the change
   io.spoud.sdm.global.selection.v1.EntityRef affected_entity = 5;
@@ -44,5 +45,18 @@ message ActivityType {
     OWNERSHIP_UNASSIGNED = 130;
     // 200..299 related to ...
 
+  }
+}
+
+message SubjectRef {
+  string id = 1;
+  SubjectType subject_type = 2;
+}
+
+message SubjectType {
+  enum Type {
+    USER = 0;
+    USER_GROUP = 1;
+    TECHNICAL_USER = 2;
   }
 }
