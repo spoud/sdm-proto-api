@@ -8,8 +8,6 @@ option go_package = "activities.domain.v1";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "global/selection/v1/reference.proto";
-import "global/domain/v1/domain.proto";
-
 
 message Activity {
   string id = 1;
