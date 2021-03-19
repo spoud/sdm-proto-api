@@ -31,9 +31,6 @@ message Activity {
   // new value
   google.protobuf.StringValue new_value = 8;
 
-  // extra entity ref
-  map<string, io.spoud.sdm.global.selection.v1.EntityRef> references = 9;
-
   google.protobuf.Timestamp date_time = 10;
 }
 
