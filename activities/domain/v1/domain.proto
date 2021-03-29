@@ -48,7 +48,7 @@ message ActivityType {
 
 message SubjectRef {
   string id = 1;
-  SubjectType subject_type = 2;
+  SubjectType.Type subject_type = 2;
 }
 
 message SubjectType {
