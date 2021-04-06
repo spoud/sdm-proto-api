@@ -41,8 +41,8 @@ message ActivityType {
     OWNERSHIP_SELF_ASSIGNED = 110;
     OWNERSHIP_ASSIGNED = 120;
     OWNERSHIP_UNASSIGNED = 130;
-    // 200..299 related to ...
-
+    RESOURCE_GROUP_CHANGE = 200;
+    GENERIC_TEXT_FIELD_CHANGE = 300;
   }
 }
 
