@@ -59,6 +59,8 @@ message DataSample {
     UNKNOWN = 0;
     JSON = 1;
     AVRO = 2;
+    XML = 3;
+    PROTOBUF = 4;
   }
 
   Encoding encoding = 1;
