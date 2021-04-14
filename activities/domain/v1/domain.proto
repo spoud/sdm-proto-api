@@ -22,23 +22,22 @@ message Activity {
   // who was affect by the change
   io.spoud.sdm.global.selection.v1.EntityRef affected_entity = 5;
 
-  // pre build msg
+  // pre builded msg
   string message = 6;
 
   // old value
-  io.spoud.sdm.hooks.domain.v1.LogRecord old_value = 7;
+  io.spoud.sdm.hooks.domain.v1.LogRecord previousLogRecord = 7;
 
-  // new value
-  io.spoud.sdm.hooks.domain.v1.LogRecord new_value = 8;
+  // actual value
+  io.spoud.sdm.hooks.domain.v1.LogRecord logRecord = 8;
 
   google.protobuf.Timestamp date_time = 10;
-  
 }
 
 message ActivityType {
   enum Type {
     UNKNOWN = 0;
-    FIRST_APPEARANCE=1;
+    FIRST_APPEARANCE = 1;
     // 100..199 related to ownership change
     OWNER_CHANGE = 100;
     OWNERSHIP_SELF_ASSIGNED = 110;
