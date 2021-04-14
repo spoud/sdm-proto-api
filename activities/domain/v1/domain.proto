@@ -8,6 +8,7 @@ option go_package = "activities.domain.v1";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "global/selection/v1/reference.proto";
+import "hooks/domain/v1/domain.proto";
 
 message Activity {
   string id = 1;
@@ -25,12 +26,20 @@ message Activity {
   string message = 6;
 
   // old value
-  google.protobuf.StringValue old_value = 7;
+  io.spoud.sdm.hooks.domain.v1.LogRecord old_value = 7;
 
   // new value
-  google.protobuf.StringValue new_value = 8;
+  io.spoud.sdm.hooks.domain.v1.LogRecord new_value = 8;
 
   google.protobuf.Timestamp date_time = 10;
+
+ // oneof entity {
+
+    // OwnerChange
+    // ResourceGroupChange
+    // genricTextChnage
+
+  //}
 }
 
 message ActivityType {
