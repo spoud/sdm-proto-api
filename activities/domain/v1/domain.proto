@@ -6,7 +6,6 @@ option java_package = "io.spoud.sdm.activities.domain.v1";
 option go_package = "activities.domain.v1";
 
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/wrappers.proto";
 import "global/selection/v1/reference.proto";
 import "hooks/domain/v1/domain.proto";
 
@@ -25,10 +24,10 @@ message Activity {
   // pre builded msg
   string message = 6;
 
-  // old value
+  // previous logRecord
   io.spoud.sdm.hooks.domain.v1.LogRecord previousLogRecord = 7;
 
-  // actual value
+  // actual logRecord
   io.spoud.sdm.hooks.domain.v1.LogRecord logRecord = 8;
 
   google.protobuf.Timestamp date_time = 10;
