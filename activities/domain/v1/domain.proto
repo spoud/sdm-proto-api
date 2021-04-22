@@ -31,12 +31,7 @@ message Activity {
   io.spoud.sdm.hooks.domain.v1.LogRecord logRecord = 8;
 
   google.protobuf.Timestamp date_time = 10;
-
-  // oneof entity {
-  // OwnerChange
-  // ResourceGroupChange
-  // genericTextChange
-  //}
+  
 }
 
 message ActivityType {
