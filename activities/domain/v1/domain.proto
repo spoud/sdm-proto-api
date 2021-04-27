@@ -7,7 +7,6 @@ option go_package = "activities.domain.v1";
 
 import "google/protobuf/timestamp.proto";
 import "global/selection/v1/reference.proto";
-import "hooks/domain/v1/domain.proto";
 
 message Activity {
   string id = 1;
@@ -21,17 +20,36 @@ message Activity {
   // who was affect by the change
   io.spoud.sdm.global.selection.v1.EntityRef affected_entity = 5;
 
-  // pre builded msg
+  // pre built msg
   string message = 6;
 
-  // previous logRecord
-  io.spoud.sdm.hooks.domain.v1.LogRecord previousLogRecord = 7;
-
-  // actual logRecord
-  io.spoud.sdm.hooks.domain.v1.LogRecord logRecord = 8;
-
   google.protobuf.Timestamp date_time = 10;
-  
+
+  ChangeInfo metaInfo = 11;
+
+}
+
+message ChangeInfo{
+  oneof entity {
+    OwnerChangeInfo ownerChangeInfo = 1;
+    ResourceGroupChangeInfo resourceGroupInfo = 2;
+    GenericTextChangeInfo genericTextChangeInfo = 3;
+  }
+}
+message OwnerChangeInfo {
+  string previousOwnerId = 1;
+  string newOwnerId = 2;
+}
+
+message ResourceGroupChangeInfo {
+  string previousResourceGroupId = 1;
+  string newResourceGroupId = 2;
+}
+
+message GenericTextChangeInfo {
+  string fieldName = 1;
+  string previousValue = 2;
+  string newValue = 3;
 }
 
 message ActivityType {
