@@ -25,31 +25,31 @@ message Activity {
 
   google.protobuf.Timestamp date_time = 10;
 
-  ChangeInfo metaInfo = 11;
+  ChangeInfo change_info = 11;
 
 }
 
 message ChangeInfo{
   oneof entity {
-    OwnerChangeInfo ownerChangeInfo = 1;
-    ResourceGroupChangeInfo resourceGroupInfo = 2;
-    GenericTextChangeInfo genericTextChangeInfo = 3;
+    OwnerChangeInfo owner_change_info = 1;
+    ResourceGroupChangeInfo resource_group_info = 2;
+    GenericTextChangeInfo generic_text_change_info = 3;
   }
 }
 message OwnerChangeInfo {
-  string previousOwnerId = 1;
-  string newOwnerId = 2;
+  string previous_owner_id = 1;
+  string new_owner_id = 2;
 }
 
 message ResourceGroupChangeInfo {
-  string previousResourceGroupId = 1;
-  string newResourceGroupId = 2;
+  string previous_resource_group_id = 1;
+  string new_resource_group_id = 2;
 }
 
 message GenericTextChangeInfo {
-  string fieldName = 1;
-  string previousValue = 2;
-  string newValue = 3;
+  string field_name = 1;
+  string previous_value = 2;
+  string new_value = 3;
 }
 
 message ActivityType {
