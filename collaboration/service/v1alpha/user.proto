@@ -21,7 +21,7 @@ service UserService {
   rpc ListUserGroupsOfUser (ListUserGroupsOfUserRequest) returns (ListUserGroupsOfUserResponse);
   rpc SaveUserGroupsOfUser (SaveUserGroupsOfUserRequest) returns (SaveUserGroupsOfUserResponse);
 
-  // Invite a user to an organization
+  // Organization Management
   rpc InviteToOrganization (InviteToOrganizationRequest) returns (InviteToOrganizationResponse);
   rpc RemoveFromOrganization (RemoveFromOrganizationRequest) returns (google.protobuf.Empty);
 }
