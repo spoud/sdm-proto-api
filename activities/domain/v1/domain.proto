@@ -1,0 +1,83 @@
+syntax = "proto3";
+package io.spoud.sdm.activities.domain.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.activities.domain.v1";
+option go_package = "activities.domain.v1";
+
+import "google/protobuf/timestamp.proto";
+import "global/selection/v1/reference.proto";
+
+message Activity {
+  string id = 1;
+
+  // activity type
+  ActivityType.Type activity_type = 2;
+
+  // who causes the activity
+  SubjectRef triggered_by = 4;
+
+  // who was affect by the change
+  io.spoud.sdm.global.selection.v1.EntityRef affected_entity = 5;
+
+  // pre built msg
+  string message = 6;
+
+  google.protobuf.Timestamp date_time = 10;
+
+  ChangeInfo change_info = 11;
+
+}
+
+message ChangeInfo{
+  oneof entity {
+    OwnerChangeInfo owner_change_info = 1;
+    ResourceGroupChangeInfo resource_group_info = 2;
+    GenericTextChangeInfo generic_text_change_info = 3;
+  }
+}
+message OwnerChangeInfo {
+  string previous_owner_id = 1;
+  string new_owner_id = 2;
+}
+
+message ResourceGroupChangeInfo {
+  string previous_resource_group_id = 1;
+  string new_resource_group_id = 2;
+}
+
+message GenericTextChangeInfo {
+  string field_name = 1;
+  string previous_value = 2;
+  string new_value = 3;
+}
+
+message ActivityType {
+  enum Type {
+    UNKNOWN = 0;
+    FIRST_APPEARANCE = 1;
+    // 100..199 related to ownership change
+    OWNER_CHANGE = 100;
+    OWNERSHIP_SELF_ASSIGNED = 110;
+    OWNERSHIP_ASSIGNED = 120;
+    OWNERSHIP_UNASSIGNED = 130;
+    RESOURCE_GROUP_CHANGE = 200;
+    GENERIC_TEXT_FIELD_CHANGE = 300;
+    TAGS_CHANGE = 400;
+    PROPERTIES_CHANGE = 500;
+    DELETED = 600;
+  }
+}
+
+message SubjectRef {
+  string username = 1;
+  SubjectType.Type subject_type = 2;
+}
+
+message SubjectType {
+  enum Type {
+    USER = 0;
+    USER_GROUP = 1;
+    TECHNICAL_USER = 2;
+  }
+}

@@ -1,0 +1,26 @@
+syntax = "proto3";
+package io.spoud.sdm.activities.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.activities.v1";
+option go_package = "activities.v1";
+
+import "activities/domain/v1/domain.proto";
+import "global/selection/v1/reference.proto";
+import "global/selection/v1/pagination.proto";
+
+service ActivitiesService {
+  rpc ListActivities (ListActivitiesRequest) returns (ListActivitiesResponse);
+}
+
+message ListActivitiesRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+  repeated io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 2;
+}
+
+
+message ListActivitiesResponse {
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 1;
+  repeated io.spoud.sdm.activities.domain.v1.Activity activities = 2;
+}
+

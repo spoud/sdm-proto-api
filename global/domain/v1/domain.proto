@@ -43,8 +43,9 @@ message ResourceEntity {
     DATA_PROFILE = 10;
     SCHEMA = 11;
     // @Deprecate since 17.12.2020 we don't use jobs anymore
-    DATA_PROFILING_JOB = 12[deprecated=true];
+    DATA_PROFILING_JOB = 12[deprecated = true];
     ORGANIZATION = 13;
+    // @Deprecate since 12.04.2021 we don't use jobs anymore
     DATA_SAMPLE = 14;
     // user (account) managed completely in collaboration for integration and automation purposes (agents).
     // same authorization is applied as for regular users.
