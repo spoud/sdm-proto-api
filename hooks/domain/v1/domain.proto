@@ -8,6 +8,7 @@ option go_package = "hooks.v1";
 import "google/protobuf/timestamp.proto";
 import "logistics/domain/v1/domain.proto";
 import "schema/domain/v1alpha/domain.proto";
+import "collaboration/domain/v1alpha/domain.proto";
 import "global/domain/v1/domain.proto";
 
 
@@ -32,6 +33,10 @@ message LogRecord {
     io.spoud.sdm.logistics.domain.v1.Transport transport = 16;
     io.spoud.sdm.logistics.domain.v1.DataItem data_item = 17;
     io.spoud.sdm.schema.domain.v1alpha.Schema schema = 18;
+    io.spoud.sdm.collaboration.domain.v1alpha.Organization organization = 19;
+    io.spoud.sdm.collaboration.domain.v1alpha.User user = 20;
+    io.spoud.sdm.collaboration.domain.v1alpha.TechnicalUser technical_user = 21;
+    io.spoud.sdm.collaboration.domain.v1alpha.UserGroup user_group = 22;
   }
 }
 
