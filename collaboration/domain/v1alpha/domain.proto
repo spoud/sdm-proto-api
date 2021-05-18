@@ -14,6 +14,7 @@ import "global/selection/v1/reference.proto";
 message User {
   string id = 1;
   string email = 2;
+  google.protobuf.StringValue user_name = 7;
   google.protobuf.StringValue first_name = 3;
   google.protobuf.StringValue last_name = 4;
   repeated string organizations = 5;
