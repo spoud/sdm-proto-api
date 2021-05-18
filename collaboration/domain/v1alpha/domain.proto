@@ -19,6 +19,7 @@ message User {
   google.protobuf.StringValue last_name = 4;
   repeated string organizations = 5;
   map<string, string> properties = 6;
+  repeated string group_paths = 8;
 }
 
 message TechnicalUser {
