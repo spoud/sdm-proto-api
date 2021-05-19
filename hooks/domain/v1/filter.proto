@@ -59,6 +59,33 @@ message SchemaFilter {
   io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 3;
 }
 
+// Entity Organization
+message OrganizationFilter {
+  string id = 1;
+  string name = 2;
+}
+
+// Entity User
+message UserFilter {
+  string id = 1;
+  string user_name = 2;
+  string email = 3;
+}
+
+// Entity Technical User
+message TechnicalUserFilter {
+  string id = 1;
+  string user_name = 2;
+  string organization = 3;
+}
+
+// Entity User Group
+message UserGroupFilter {
+  string id = 1;
+  string name = 2;
+  string organization = 3;
+}
+
 // General predicate for one meta attribute (exact match)
 message PropertiesFilter {
   string key = 1; // e.g. sdm.transport.kafka.topic
@@ -75,6 +102,10 @@ message StateChangeFilter {
     TransportFilter transport_filter = 6;
     DataItemFilter data_item_filter = 7;
     SchemaFilter schema_filter = 8;
+    OrganizationFilter organization_filter = 9;
+    UserFilter user_filter = 10;
+    TechnicalUserFilter technical_user_filter = 11;
+    UserGroupFilter user_group_filter = 12;
   }
 }
 
