@@ -1,0 +1,45 @@
+syntax = "proto3";
+package io.spoud.sdm.agent.domain.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.agent.domain.v1";
+option go_package = "agent.v1";
+
+
+message AgentRef {
+  string agent_username = 1;
+  string transport_path = 2;
+}
+
+message AgentEventType {
+  enum Type{
+    // The agent started (can be useful to see if the agent restarts
+    AGENT_STARTED = 0;
+
+    // Can be useful to see if the agent is still alive
+    AGENT_PING = 1;
+  }
+
+}
+
+message AgentMetricType {
+  enum Type{
+    // time since the agent started
+    AGENT_UPTIME_MS = 0;
+
+    // If the agent is loop based, how long was the loop
+    LOOP_TIME_MS = 1;
+
+    // If the agent is loop based, (time of the loop)/(loop interval)*100
+    // This can be used to see if the agent cannot catch up and has too much to doo. If the loop takes more than the
+    // interval, it means that the agent is overwhelmed.
+    LOOP_PERCENT = 2;
+
+    // Memory usage of the agent
+    MEMORY_USAGE_BYTES = 3;
+
+    // CPU usage of the agent
+    CPU_USAGE_PERCENT = 4;
+  }
+
+}

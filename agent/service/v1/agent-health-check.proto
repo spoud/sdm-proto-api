@@ -1,0 +1,44 @@
+syntax = "proto3";
+package io.spoud.sdm.agent.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.agent.v1";
+option go_package = "agent.v1";
+
+import "agent/domain/v1/domain.proto";
+import "global/selection/v1/pagination.proto";
+import "google/protobuf/wrappers.proto";
+import "global/domain/v1/domain.proto";
+import "google/protobuf/empty.proto";
+
+
+service AgentHealthCheckService {
+  rpc reportEvent (ReportEventRequest) returns (google.protobuf.Empty);
+  rpc reportMetric (ReportMetricRequest) returns (google.protobuf.Empty);
+  rpc reportError (ReportErrorRequest) returns (google.protobuf.Empty);
+}
+
+message ReportEventRequest {
+  io.spoud.sdm.agent.domain.v1.AgentRef agent_ref = 1;
+  io.spoud.sdm.agent.domain.v1.AgentEventType event_type = 2;
+  map<string, string> properties = 3;
+}
+
+message ReportMetricRequest {
+  io.spoud.sdm.agent.domain.v1.AgentRef agent_ref = 1;
+
+  io.spoud.sdm.agent.domain.v1.AgentMetricType metric_type = 2;
+  double metric_value = 3;
+
+  map<string, string> properties = 4;
+}
+
+message ReportErrorRequest {
+  io.spoud.sdm.agent.domain.v1.AgentRef agent_ref = 1;
+
+  string error_message = 2;
+  string stacktrace = 3;
+
+  map<string, string> properties = 4;
+}
+
