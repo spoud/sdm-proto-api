@@ -5,12 +5,13 @@ option java_multiple_files = true;
 option java_package = "io.spoud.sdm.looker.v1alpha1";
 option go_package = "looker.v1alpha1";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
 
 service MetricsService {
   rpc updateMetric (UpdateMetricRequest) returns (UpdateMetricResponse);
   rpc updateOperationalMetric (UpdateOperationalMetricRequest) returns (UpdateMetricResponse);
 
-  rpc listMetric(ListMetricsRequest) returns (ListMetricsResponse);
+  rpc listMetric (ListMetricsRequest) returns (ListMetricsResponse);
 }
 
 message ResourceMetric {
@@ -162,17 +163,32 @@ message UpdateOperationalMetricRequest {
 message ListMetricsRequest {
   google.protobuf.Timestamp from = 1;
   google.protobuf.Timestamp to = 2;
-  string resource_id = 3;
-  ResourceMetric.MetricType type = 4;
+  google.protobuf.Duration interval = 3;
+  GroupingType grouping = 4;
+  string resource_id = 5;
+  repeated ResourceMetric.MetricType type = 6;
 }
 
 message ListMetricsResponse {
   string resource_id = 1;
+  repeated TimeSerie time_series = 2;
+}
+
+message TimeSerie {
+  ResourceMetric.MetricType type = 5;
   repeated Metric metrics = 2;
 }
 
 message Metric {
   google.protobuf.Timestamp report_timestamp = 1;
-  ResourceMetric.MetricType type = 5;
   double double_value = 3;
+}
+
+message GroupingType {
+  enum Type {
+    UNKNOWN = 0;
+    SUM = 1;
+    AVG = 2;
+    RATE = 3;
+  }
 }
