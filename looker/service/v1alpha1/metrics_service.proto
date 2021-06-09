@@ -175,10 +175,10 @@ message ListMetricsResponse {
 
 message TimeSerie {
   ResourceMetric.MetricType type = 5;
-  repeated Metric metrics = 2;
+  repeated MetricValue metrics = 2;
 }
 
-message Metric {
+message MetricValue {
   google.protobuf.Timestamp report_timestamp = 1;
   double double_value = 3;
 }
