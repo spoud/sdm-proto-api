@@ -163,7 +163,6 @@ message UpdateOperationalMetricRequest {
 message ListMetricsRequest {
   google.protobuf.Timestamp from = 1;
   google.protobuf.Timestamp to = 2;
-  google.protobuf.Duration interval = 3;
   GroupingType grouping = 4;
   string resource_id = 5;
   repeated ResourceMetric.MetricType type = 6;
