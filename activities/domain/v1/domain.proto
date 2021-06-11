@@ -68,7 +68,7 @@ message ActivityType {
     DELETED = 600;
     CONSUMER_GROUP_CHANGE = 700;
     SCHEMA_CHANGE = 710;
-    DATA_ITEM = 720;
+    DATA_ITEM_CHANGE = 720;
   }
 }
 
