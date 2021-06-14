@@ -70,7 +70,8 @@ message ResourceMetric {
 
   // Additional tags as key/value pairs for indexing purposes.
   // Tag keys are predefined per metric type. Unknown tag keys will be ignored!
-  map<string, string> tags = 5;
+  // @Deprecate since 14.06.2021 we don't use tags anymore, please sum the values on the agent side
+  map<string, string> tags = 5 [deprecated = true];
 }
 
 message UpdateMetricRequest {
