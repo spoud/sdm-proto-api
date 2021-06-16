@@ -20,14 +20,16 @@ message UpdateNotificationChannelConfiguration{
   }
 }
 message WebhookConfiguration{
-  string webhook_url = 1;
-  map<string, string> webhook_headers = 2;
-  repeated io.spoud.sdm.activities.domain.v1.ActivityType.Type notify_only_on_activity_type = 3;
+  string id = 1;
+  string webhook_url = 2;
+  map<string, string> webhook_headers = 3;
+  repeated io.spoud.sdm.activities.domain.v1.ActivityType.Type notify_only_on_activity_type = 4;
 }
 
 message EmailConfiguaration{
-  string email = 1;
-  repeated io.spoud.sdm.activities.domain.v1.ActivityType.Type notify_only_on_activity_type = 2;
+  string id = 1;
+  string email = 2;
+  repeated io.spoud.sdm.activities.domain.v1.ActivityType.Type notify_only_on_activity_type = 3;
 }
 
 message NotificationChannelsConfigurationResponse{
