@@ -9,15 +9,39 @@ import "google/protobuf/empty.proto";
 import "activities/domain/v1/domain.proto";
 
 service notificationsService {
-  rpc updateNotificationChannelsConfiguration (NotificationChannelConfiguration) returns (google.protobuf.Empty);
-  rpc getNotificationChannelsConfiguration (google.protobuf.Empty) returns (NotificationChannelConfiguration);
+  rpc updateNotificationChannelsConfiguration (UpdateNotificationChannelConfiguration) returns (google.protobuf.Empty);
+  rpc getNotificationChannelsConfiguration (google.protobuf.Empty) returns (NotificationChannelsConfigurationResponse);
 }
 
-message NotificationChannelConfiguration{
-  bool notify_by_email = 1;
-  string webhook_url = 2;
-  map<string, string> webhook_headers = 3;
-  repeated io.spoud.sdm.activities.domain.v1.ActivityType.Type notify_only_on_activity_type = 4;
+message UpdateNotificationChannelConfiguration{
+  oneof notificationConfiguration {
+    WebhookConfiguration webhookConfiguration = 1;
+    EmailConfiguaration emailConfiguaration = 2;
+  }
+}
+message WebhookConfiguration{
+  string webhook_url = 1;
+  map<string, string> webhook_headers = 2;
+  repeated io.spoud.sdm.activities.domain.v1.ActivityType.Type notify_only_on_activity_type = 3;
 }
 
+message EmailConfiguaration{
+  string email = 1;
+  repeated io.spoud.sdm.activities.domain.v1.ActivityType.Type notify_only_on_activity_type = 2;
+}
 
+message NotificationChannelsConfigurationResponse{
+  repeated NotificationConfiguration configurations = 1;
+}
+
+message NotificationConfiguration{
+  oneof configuration {
+    WebhookConfiguration webhookConfiguration = 1;
+    EmailConfiguaration emailConfiguaration = 2;
+  }
+}
+
+enum NotificationType {
+  EMAIL = 0;
+  WEBHOOK = 1;
+} 
