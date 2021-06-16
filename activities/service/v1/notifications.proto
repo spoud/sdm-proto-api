@@ -14,7 +14,7 @@ service notificationsService {
 }
 
 message UpdateNotificationChannelConfiguration{
-  NotificationConfiguration notificationConfiguraion = 1;
+  NotificationConfiguration configuration = 1;
 }
 message WebhookConfiguration{
   string webhook_url = 1;
