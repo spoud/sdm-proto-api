@@ -14,13 +14,7 @@ service notificationsService {
 }
 
 message UpdateNotificationChannelConfiguration{
-  string id = 1;
-  string label = 2;
-  repeated io.spoud.sdm.activities.domain.v1.ActivityType.Type notify_only_on_activity_type = 3;
-  oneof notificationConfiguration {
-    WebhookConfiguration webhookConfiguration = 4;
-    EmailConfiguaration emailConfiguaration = 5;
-  }
+  NotificationConfiguration notificationConfiguraion = 1;
 }
 message WebhookConfiguration{
   string webhook_url = 1;
@@ -36,9 +30,12 @@ message NotificationChannelsConfigurationResponse{
 }
 
 message NotificationConfiguration{
-  oneof configuration {
-    WebhookConfiguration webhookConfiguration = 1;
-    EmailConfiguaration emailConfiguaration = 2;
+  string id = 1;
+  string label = 2;
+  repeated io.spoud.sdm.activities.domain.v1.ActivityType.Type notify_only_on_activity_type = 3;
+  oneof notificationConfiguration {
+    WebhookConfiguration webhookConfiguration = 4;
+    EmailConfiguaration emailConfiguaration = 5;
   }
 }
 
