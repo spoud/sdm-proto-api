@@ -43,7 +43,9 @@ message NotificationConfiguration{
   }
 }
 
-enum NotificationType {
-  EMAIL = 0;
-  WEBHOOK = 1;
-} 
+message Notification{
+  enum Type {
+    EMAIL = 0;
+    WEBHOOK = 1;
+  } 
+}
