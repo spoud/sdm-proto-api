@@ -9,11 +9,11 @@ import "google/protobuf/empty.proto";
 import "activities/domain/v1/domain.proto";
 
 service notificationsService {
-  rpc updateNotificationChannelsConfiguration (notificationChannelConfiguration) returns (google.protobuf.Empty);
-  rpc getNotificationChannelsConfiguration (google.protobuf.Empty) returns (notificationChannelConfiguration);
+  rpc updateNotificationChannelsConfiguration (NotificationChannelConfiguration) returns (google.protobuf.Empty);
+  rpc getNotificationChannelsConfiguration (google.protobuf.Empty) returns (NotificationChannelConfiguration);
 }
 
-message notificationChannelConfiguration{
+message NotificationChannelConfiguration{
   bool notify_by_email = 1;
   string webhook_url = 2;
   map<string, string> webhook_headers = 3;
