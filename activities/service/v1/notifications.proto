@@ -7,6 +7,8 @@ option go_package = "activities.v1";
 
 import "google/protobuf/empty.proto";
 import "activities/domain/v1/domain.proto";
+import "google/protobuf/wrappers.proto";
+import "global/domain/v1/domain.proto";
 
 service notificationsService {
   rpc updateNotificationChannelsConfiguration (UpdateNotificationChannelConfiguration) returns (google.protobuf.Empty);
@@ -33,9 +35,11 @@ message NotificationConfiguration{
   string id = 1;
   string label = 2;
   repeated io.spoud.sdm.activities.domain.v1.ActivityType.Type notify_only_on_activity_type = 3;
+  repeated google.protobuf.StringValue filter_by_path = 4;
+  repeated io.spoud.sdm.global.domain.v1.ResourceEntity.Type filter_by_entity_type = 5;
   oneof notificationConfiguration {
-    WebhookConfiguration webhookConfiguration = 4;
-    EmailConfiguaration emailConfiguaration = 5;
+    WebhookConfiguration webhookConfiguration = 6;
+    EmailConfiguaration emailConfiguaration = 7;
   }
 }
 
