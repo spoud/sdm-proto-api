@@ -34,9 +34,7 @@ message NotificationChannelsConfigurationResponse{
 message NotificationConfiguration{
   string id = 1;
   string label = 2;
-  repeated io.spoud.sdm.activities.domain.v1.ActivityType.Type notify_only_on_activity_type = 3;
-  repeated google.protobuf.StringValue filter_by_path = 4;
-  repeated io.spoud.sdm.global.domain.v1.ResourceEntity.Type filter_by_entity_type = 5;
+  repeated ActivityFilter activity_filters = 3;
   oneof notificationConfiguration {
     WebhookConfiguration webhookConfiguration = 6;
     EmailConfiguaration emailConfiguaration = 7;
@@ -48,4 +46,10 @@ message Notification{
     EMAIL = 0;
     WEBHOOK = 1;
   } 
+}
+
+message ActivityFilter{
+  io.spoud.sdm.activities.domain.v1.ActivityType.Type  activity_type = 1;
+  google.protobuf.StringValue path = 2;
+  io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 3;
 }
