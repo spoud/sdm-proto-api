@@ -1,0 +1,23 @@
+syntax = "proto3";
+package io.spoud.sdm.activities.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.activities.v1";
+option go_package = "activities.v1";
+
+import "google/protobuf/empty.proto";
+import "activities/domain/v1/notifications.proto";
+
+service notificationsService {
+  rpc updateNotificationChannelsConfiguration (UpdateNotificationChannelConfiguration) returns (google.protobuf.Empty);
+  rpc getNotificationChannelsConfiguration (google.protobuf.Empty) returns (NotificationChannelsConfigurationResponse);
+}
+
+message UpdateNotificationChannelConfiguration{
+  io.spoud.sdm.activities.domain.v1.NotificationConfiguration configuration = 1;
+}
+
+message NotificationChannelsConfigurationResponse{
+  repeated io.spoud.sdm.activities.domain.v1.NotificationConfiguration configurations = 1;
+}
+
