@@ -5,7 +5,6 @@ option java_multiple_files = true;
 option java_package = "io.spoud.sdm.looker.v1alpha1";
 option go_package = "looker.v1alpha1";
 
-import "google/protobuf/timestamp.proto";
 import "looker/domain/v1alpha1/metrics.proto";
 import "google/protobuf/empty.proto";
 
