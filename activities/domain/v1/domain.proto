@@ -66,6 +66,9 @@ message ActivityType {
     TAGS_CHANGE = 400;
     PROPERTIES_CHANGE = 500;
     DELETED = 600;
+    CONSUMER_GROUP_CHANGE = 700;
+    SCHEMA_CHANGE = 710;
+    DATA_ITEM_CHANGE = 720;
   }
 }
 
