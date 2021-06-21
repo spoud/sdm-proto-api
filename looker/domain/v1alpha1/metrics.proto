@@ -61,19 +61,8 @@ message ResourceMetric {
   double value = 3;
   MetricType type = 4;
 
-  // Additional tags as key/value pairs for indexing purposes.
-  // Tag keys are predefined per metric type. Unknown tag keys will be ignored!
-  map<string, string> tags = 5;
-}
-
-// operational metric
-message HealthState {
-  enum State {
-    UNDEFINED = 0;
-    UP = 1;
-    DOWN = 2;
-    OUT_OF_SERVICE = 3;
-  }
+  // Not used anymore
+  map<string, string> tags = 5 [deprecated = true];
 }
 
 message OperationalMetricType {
@@ -111,10 +100,8 @@ message OperationalMetricType {
 
 message OperationalMetric {
   google.protobuf.Timestamp report_timestamp = 1;
-
+  OperationalMetricType.Type type = 2;
   double double_value = 3;
-
-  OperationalMetricType.Type type = 5;
 }
 
 message AgentRef {
