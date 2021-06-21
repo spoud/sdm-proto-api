@@ -30,7 +30,7 @@ message ListMetricsRequest {
   google.protobuf.Timestamp to = 2;
   GroupingType.Type grouping = 4;
   string resource_id = 5;
-  repeated io.spoud.sdm.looker.domain.v1alpha1.ResourceMetric.MetricType type = 6;
+  repeated io.spoud.sdm.looker.domain.v1alpha1.ResourceMetricType.Type type = 6;
 }
 
 message ListMetricsResponse {
@@ -39,7 +39,7 @@ message ListMetricsResponse {
 }
 
 message TimeSerie {
-  io.spoud.sdm.looker.domain.v1alpha1.ResourceMetric.MetricType type = 5;
+  io.spoud.sdm.looker.domain.v1alpha1.ResourceMetricType.Type type = 5;
   repeated MetricValue metrics = 2;
 }
 

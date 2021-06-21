@@ -7,11 +7,8 @@ option go_package = "looker.v1alpha1";
 
 import "google/protobuf/timestamp.proto";
 
-message ResourceMetric {
-  google.protobuf.Timestamp report_timestamp = 1;
-  string resource_id = 2;
-
-  enum MetricType {
+message ResourceMetricType{
+  enum Type {
     UNDEFINED = 0;
 
     // Message COUNTER on the producing side.
@@ -56,51 +53,53 @@ message ResourceMetric {
 
     // Number of mutations that occur on the dataset
     DATA_PORT_MUTATIONS = 11;
+
+
+
+    // time since the agent started
+    AGENT_UPTIME_MS = 101;
+
+    // If the agent is loop based, how long was the loop
+    LOOP_TIME_MS = 102;
+
+    // If the agent is loop based, (time of the loop)/(loop interval)*100
+    // This can be used to see if the agent cannot catch up and has too much to doo. If the loop takes more than the
+    // interval, it means that the agent is overwhelmed.
+    LOOP_PERCENT = 103;
+
+    // Memory usage of the agent
+    MEMORY_USAGE_BYTES = 104;
+
+    // CPU usage of the agent
+    CPU_USAGE_PERCENT = 105;
+
+    // Condensed indicator of health of a foreign system where 1.0 is healthy. (Gauge)
+    // The name of the foreign system should be stated in the tag "foreign_system"
+    FOREIGN_SYSTEM_HEALTH = 106;
+
+    // Number of errors. (Counter)
+    ERRORS = 107;
+
+    // loop count (Counter)
+    LOOPS_COUNTER = 108;
+
   }
+}
+
+message ResourceMetric {
+  google.protobuf.Timestamp report_timestamp = 1;
+  string resource_id = 2;
 
   double value = 3;
-  MetricType type = 4;
+  ResourceMetricType.Type type = 4;
 
   // Not used anymore
   map<string, string> tags = 5 [deprecated = true];
 }
 
-message OperationalMetricType {
-  enum Type {
-    UNDEFINED = 0;
-
-    // time since the agent started
-    AGENT_UPTIME_MS = 1;
-
-    // If the agent is loop based, how long was the loop
-    LOOP_TIME_MS = 2;
-
-    // If the agent is loop based, (time of the loop)/(loop interval)*100
-    // This can be used to see if the agent cannot catch up and has too much to doo. If the loop takes more than the
-    // interval, it means that the agent is overwhelmed.
-    LOOP_PERCENT = 3;
-
-    // Memory usage of the agent
-    MEMORY_USAGE_BYTES = 4;
-
-    // CPU usage of the agent
-    CPU_USAGE_PERCENT = 5;
-
-    // Condensed indicator of health of a foreign system where 1.0 is healthy. (Gauge)
-    // The name of the foreign system should be stated in the tag "foreign_system"
-    FOREIGN_SYSTEM_HEALTH = 6;
-
-    // Number of errors. (Counter)
-    ERRORS = 7;
-
-    // loop count (Counter)
-    LOOPS_COUNTER = 8;
-  }
-}
-
 message OperationalMetric {
   google.protobuf.Timestamp report_timestamp = 1;
-  OperationalMetricType.Type type = 2;
+  ResourceMetricType.Type type = 2;
   double double_value = 3;
 }
 
