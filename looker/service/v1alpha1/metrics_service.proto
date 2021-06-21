@@ -4,155 +4,21 @@ package io.spoud.sdm.looker.v1alpha1;
 option java_multiple_files = true;
 option java_package = "io.spoud.sdm.looker.v1alpha1";
 option go_package = "looker.v1alpha1";
+
 import "google/protobuf/timestamp.proto";
+import "looker/domain/v1alpha1/metrics.proto";
+import "google/protobuf/empty.proto";
 
 service MetricsService {
-  rpc updateMetric (UpdateMetricRequest) returns (UpdateMetricResponse);
-  rpc updateOperationalMetric (UpdateOperationalMetricRequest) returns (UpdateMetricResponse);
-}
-
-message ResourceMetric {
-  google.protobuf.Timestamp report_timestamp = 1;
-  string resource_id = 2;
-
-  enum MetricType {
-    UNDEFINED = 0;
-
-    // Message COUNTER on the producing side.
-    // Tag keys:
-    // - partition (default: 0)
-    DATA_PORT_MESSAGES = 1;
-
-    // Bytes COUNTER on the producing side.
-    // Tag keys:
-    // - partition (default: 0)
-    DATA_PORT_BYTES = 2;
-
-    // Message COUNTER on the consuming side.
-    // Tag keys:
-    // - partition (default: 0)
-    DATA_SUBSCRIPTION_STATE_MESSAGES = 3;
-
-    // Bytes COUNTER on the consuming side.
-    // Tag keys:
-    // - partition (default: 0)
-    DATA_SUBSCRIPTION_STATE_BYTES = 4;
-
-    // message lag on the consuming side
-    // Tag keys:
-    // - partition (default: 0)
-    DATA_SUBSCRIPTION_STATE_MESSAGES_LAG = 5;
-
-    // how well the data matches the schema
-    DATA_PORT_ATTRIBUTE_QUALITY_INDEX = 6;
-
-    // how detailed the schema is defined
-    DATA_PORT_ATTRIBUTE_SPECIFICATION_INDEX = 7;
-
-    // a combination of attribute quality and specification index
-    DATA_PORT_ATTRIBUTE_INTEGRITY = 8;
-
-    // How many item is there in this dataset
-    DATA_PORT_DATASET_COUNT = 9;
-
-    // The size in bytes of the dataset
-    DATA_PORT_DATASET_SIZE_BYTES = 10;
-
-    // Number of mutations that occur on the dataset
-    DATA_PORT_MUTATIONS = 11;
-  }
-
-  double value = 3;
-  MetricType type = 4;
-
-  // Additional tags as key/value pairs for indexing purposes.
-  // Tag keys are predefined per metric type. Unknown tag keys will be ignored!
-  map<string, string> tags = 5;
+  rpc updateMetric (UpdateMetricRequest) returns (google.protobuf.Empty);
+  rpc updateOperationalMetric (UpdateOperationalMetricRequest) returns (google.protobuf.Empty);
 }
 
 message UpdateMetricRequest {
-  ResourceMetric metric = 1;
-}
-
-message UpdateMetricResponse {
-}
-
-// operational metric
-message HealthState {
-  enum State {
-    UNDEFINED = 0;
-    UP = 1;
-    DOWN = 2;
-    OUT_OF_SERVICE = 3;
-  }
-}
-
-message OperationalMetricType {
-  enum Type {
-    UNDEFINED = 0;
-
-    // Condensed indicator of agent health where 1.0 is healthy. (Gauge)
-    AGENT_HEALTH = 1;
-
-    // Condensed indicator of health of a foreign system where 1.0 is healthy. (Gauge)
-    // The name of the foreign system should be stated in the tag "foreign_system"
-    FOREIGN_SYSTEM_HEALTH = 2;
-
-    // Agents cpu usage (Gauge)
-    CPU_USAGE = 3;
-
-    // Agents system load (Gauge)
-    SYSTEM_LOAD = 4;
-
-    // Agents memory usage in percent 0.0..100.0  (Gauge)
-    // Use tags for different memory pools.
-    MEMORY_USAGE = 5;
-
-    // Number of bytes (Gauge)
-    MEMORY_SIZE_BYTES = 6;
-
-    // Number of threads (Gauge)
-    LIVE_THREADS = 7;
-
-    // Uptime (Counter)
-    UPTIME_SECONDS = 8;
-
-    // Number of errors. (Counter)
-    // In order to count specific errors to use in graphing.
-    // Different errors can be tagged with the `error.name`
-    ERRORS = 9;
-
-    // Duration of a cron loop (Gauge)
-    LOOP_DURATION_SECONDS_GAUGE = 10;
-
-    // Total duration of a cron loop (Counter)
-    LOOP_DURATION_COUNT_SECONDS = 11;
-
-    // loop count (Counter)
-    LOOPS = 12;
-
-    // Number of bytes (Gauge)
-    FILE_SIZE_BYTES = 13;
-  }
-}
-
-message OperationalMetric {
-  google.protobuf.Timestamp report_timestamp = 1;
-
-  // this sdm.auth.client-id
-  string agent_id = 2;
-
-  // metric value
-  oneof value {
-    double double_value = 3;
-    HealthState.State health = 4;
-  }
-
-  OperationalMetricType.Type type = 5;
-  // Additional tags as key/value pairs for indexing purposes.
-  map<string, string> tags = 6;
+  io.spoud.sdm.looker.domain.v1alpha1.ResourceMetric metric = 1;
 }
 
 message UpdateOperationalMetricRequest {
-  repeated OperationalMetric metric = 1;
+  io.spoud.sdm.looker.domain.v1alpha1.AgentRef agent_ref = 2;
+  repeated io.spoud.sdm.looker.domain.v1alpha1.OperationalMetric metric = 1;
 }

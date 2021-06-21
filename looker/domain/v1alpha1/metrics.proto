@@ -9,69 +9,6 @@ import "google/protobuf/timestamp.proto";
 import "permission/domain/v1/domain.proto";
 import "global/selection/v1/reference.proto";
 
-message DataProfilingError {
-  string message = 1;
-
-  enum Type {
-    UNKNOWN = 0;
-    PROFILER_UNREACHABLE = 1;
-    UNKNOWN_ENCODING = 2;
-    ACCESS_DENIED = 3;
-    NO_DATA = 4;
-    TRANSPORT_UNAVAILABLE = 5;
-    NO_PARTITION = 6;
-  }
-
-  Type type = 2;
-}
-
-// DataProfile
-message DataProfile {
-  string id = 1;
-  // references the job which triggered this profiling
-  string data_profiling_job_id = 2;
-
-  int32 data_samples_count = 4;
-  // Report creation timestamp, does not have to
-  // be related to the timestamp of the profiled messages.
-  google.protobuf.Timestamp report_timestamp = 5;
-
-  // reference to the data port
-  // deprecated since 17.12.2010, please use entity_ref
-  string data_port_id = 8 [deprecated=true];
-
-  google.protobuf.Timestamp data_samples_from = 9;
-  google.protobuf.Timestamp data_samples_to = 10;
-
-  // if there's an error set, the profiling returns without a report.
-  DataProfilingError error = 12;
-
-  // this contains a UUID for the profile which is stored in the blob service
-  string html_blob_id = 13;
-
-  io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 14;
-
-  io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 15;
-}
-
-message DataSample {
-  enum Encoding {
-    UNKNOWN = 0;
-    JSON = 1;
-    AVRO = 2;
-    XML = 3;
-    PROTOBUF = 4;
-  }
-
-  Encoding encoding = 1;
-  bytes data_sample = 2;
-}
-
-enum NotExistsResolution {
-  THROW_ERROR = 0;
-  RETURN_EMPTY = 1;
-}
-
 
 message ResourceMetric {
   google.protobuf.Timestamp report_timestamp = 1;
@@ -130,4 +67,60 @@ message ResourceMetric {
   // Additional tags as key/value pairs for indexing purposes.
   // Tag keys are predefined per metric type. Unknown tag keys will be ignored!
   map<string, string> tags = 5;
+}
+
+// operational metric
+message HealthState {
+  enum State {
+    UNDEFINED = 0;
+    UP = 1;
+    DOWN = 2;
+    OUT_OF_SERVICE = 3;
+  }
+}
+
+message OperationalMetricType {
+  enum Type {
+    UNDEFINED = 0;
+
+    // time since the agent started
+    AGENT_UPTIME_MS = 1;
+
+    // If the agent is loop based, how long was the loop
+    LOOP_TIME_MS = 2;
+
+    // If the agent is loop based, (time of the loop)/(loop interval)*100
+    // This can be used to see if the agent cannot catch up and has too much to doo. If the loop takes more than the
+    // interval, it means that the agent is overwhelmed.
+    LOOP_PERCENT = 3;
+
+    // Memory usage of the agent
+    MEMORY_USAGE_BYTES = 4;
+
+    // CPU usage of the agent
+    CPU_USAGE_PERCENT = 5;
+
+    // Condensed indicator of health of a foreign system where 1.0 is healthy. (Gauge)
+    // The name of the foreign system should be stated in the tag "foreign_system"
+    FOREIGN_SYSTEM_HEALTH = 6;
+
+    // Number of errors. (Counter)
+    ERRORS = 7;
+
+    // loop count (Counter)
+    LOOPS_COUNTER = 8;
+  }
+}
+
+message OperationalMetric {
+  google.protobuf.Timestamp report_timestamp = 1;
+
+  double double_value = 3;
+
+  OperationalMetricType.Type type = 5;
+}
+
+message AgentRef {
+  string agent_username = 1;
+  string transport_path = 2;
 }
