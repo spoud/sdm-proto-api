@@ -15,7 +15,7 @@ message WebhookConfiguration{
   map<string, string> webhook_headers = 2;
 }
 
-message EmailConfiguaration{
+message EmailConfiguration{
   string email = 1;
 }
 
@@ -25,7 +25,7 @@ message NotificationConfiguration{
   repeated ActivityFilter activity_filters = 3;
   oneof notificationConfiguration {
     WebhookConfiguration webhookConfiguration = 6;
-    EmailConfiguaration emailConfiguaration = 7;
+    EmailConfiguration emailConfiguration = 7;
   }
 }
 
