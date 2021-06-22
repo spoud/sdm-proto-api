@@ -8,7 +8,7 @@ option go_package = "activities.v1";
 import "google/protobuf/empty.proto";
 import "activities/domain/v1/notifications.proto";
 
-service notificationsService {
+service NotificationsService {
   rpc updateNotificationChannelsConfiguration (UpdateNotificationChannelConfiguration) returns (google.protobuf.Empty);
   rpc getNotificationChannelsConfiguration (google.protobuf.Empty) returns (NotificationChannelsConfigurationResponse);
 }
