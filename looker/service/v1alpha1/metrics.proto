@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package io.spoud.sdm.looker.v1alpha1;
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.looker.v1alpha1";
+option go_package = "looker.v1alpha1";
+
+import "looker/domain/v1alpha1/metrics.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+service MetricsService {
+  rpc updateMetric (UpdateMetricRequest) returns (google.protobuf.Empty);
+  rpc updateOperationalMetric (UpdateOperationalMetricRequest) returns (google.protobuf.Empty);
+
+  rpc listMetric (ListMetricsRequest) returns (ListMetricsResponse);
+}
+
+message UpdateMetricRequest {
+  io.spoud.sdm.looker.domain.v1alpha1.ResourceMetric metric = 1;
+}
+
+message UpdateOperationalMetricRequest {
+  io.spoud.sdm.looker.domain.v1alpha1.AgentRef agent_ref = 2;
+  repeated io.spoud.sdm.looker.domain.v1alpha1.OperationalMetric metric = 1;
+}
+
+message ListMetricsRequest {
+  google.protobuf.Timestamp from = 1;
+  google.protobuf.Timestamp to = 2;
+  GroupingType.Type grouping = 4;
+  string resource_id = 5;
+  repeated io.spoud.sdm.looker.domain.v1alpha1.ResourceMetricType.Type type = 6;
+}
+
+message ListMetricsResponse {
+  string resource_id = 1;
+  repeated TimeSerie time_series = 2;
+}
+
+message TimeSerie {
+  io.spoud.sdm.looker.domain.v1alpha1.ResourceMetricType.Type type = 5;
+  repeated MetricValue metrics = 2;
+}
+
+message MetricValue {
+  google.protobuf.Timestamp report_timestamp = 1;
+  double double_value = 3;
+}
+
+message GroupingType {
+  enum Type {
+    UNKNOWN = 0;
+    SUM = 1;
+    AVG = 2;
+    MAX_MINUS_MIN = 3;
+  }
+}

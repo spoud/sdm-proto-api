@@ -32,6 +32,7 @@ message LogRecord {
     io.spoud.sdm.logistics.domain.v1.ResourceGroup resource_group = 15;
     io.spoud.sdm.logistics.domain.v1.Transport transport = 16;
     io.spoud.sdm.logistics.domain.v1.DataItem data_item = 17;
+    io.spoud.sdm.logistics.domain.v1.Agent agent = 23;
     io.spoud.sdm.schema.domain.v1alpha.Schema schema = 18;
     io.spoud.sdm.collaboration.domain.v1alpha.Organization organization = 19;
     io.spoud.sdm.collaboration.domain.v1alpha.User user = 20;
