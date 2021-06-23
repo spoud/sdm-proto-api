@@ -100,7 +100,7 @@ message ResourceMetric {
 message OperationalMetric {
   google.protobuf.Timestamp report_timestamp = 1;
   ResourceMetricType.Type type = 2;
-  double double_value = 3;
+  double value = 3;
 }
 
 message AgentRef {
