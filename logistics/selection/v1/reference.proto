@@ -98,3 +98,15 @@ message TransportTypeRef {
 message ResourceGroupRef {
   io.spoud.sdm.global.selection.v1.IdPathRef id_path = 2;
 }
+
+
+// Agent reference.
+message AgentRef {
+  oneof ref {
+    // ref by id or path
+    io.spoud.sdm.global.selection.v1.IdPathRef id_path = 1;
+
+    // username reference
+    string  username = 2;
+  }
+}
