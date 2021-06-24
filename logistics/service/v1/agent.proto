@@ -52,7 +52,7 @@ message ListAgentsResponse {
 }
 
 message GetAgentRequest {
-  io.spoud.sdm.logistics.selection.v1.AgentRef self = 3;
+  io.spoud.sdm.logistics.selection.v1.AgentRef self = 1;
 }
 
 message GetAgentResponse {
