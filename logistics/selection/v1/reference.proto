@@ -5,6 +5,7 @@ option java_multiple_files = true;
 option java_package = "io.spoud.sdm.logistics.selection.v1";
 option go_package = "selection.v1";
 import "global/selection/v1/reference.proto";
+import "google/protobuf/wrappers.proto";
 
 // TransportMatchingProperties are used to define an internal business key, which
 // can be used for referencing a resource across different components.
@@ -107,6 +108,6 @@ message AgentRef {
     io.spoud.sdm.global.selection.v1.IdPathRef id_path = 1;
 
     // username reference
-    string  username = 2;
+    google.protobuf.StringValue username = 2;
   }
 }
