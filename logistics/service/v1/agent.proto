@@ -16,6 +16,7 @@ service AgentService {
   rpc CreateAgent (CreateAgentRequest) returns (CreateAgentResponse);
   rpc DeleteAgent (DeleteAgentRequest) returns (DeleteAgentResponse);
   rpc ListAgents (ListAgentsRequest) returns (ListAgentsResponse);
+  rpc GetAgent (GetAgentRequest) returns (GetAgentResponse);
 }
 
 message CreateAgentRequest {
@@ -48,4 +49,12 @@ message ListAgentsRequest {
 message ListAgentsResponse {
   repeated io.spoud.sdm.logistics.domain.v1.Agent agents = 1;
   io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
+}
+
+message GetAgentRequest {
+  io.spoud.sdm.logistics.selection.v1.AgentRef self = 1;
+}
+
+message GetAgentResponse {
+  io.spoud.sdm.logistics.domain.v1.Agent agent = 1;
 }
