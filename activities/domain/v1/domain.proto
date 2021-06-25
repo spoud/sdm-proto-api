@@ -7,6 +7,8 @@ option go_package = "activities.domain.v1";
 
 import "google/protobuf/timestamp.proto";
 import "global/selection/v1/reference.proto";
+import "google/protobuf/wrappers.proto";
+
 
 message Activity {
   string id = 1;
@@ -47,9 +49,9 @@ message ResourceGroupChangeInfo {
 }
 
 message GenericTextChangeInfo {
-  string field_name = 1;
-  string previous_value = 2;
-  string new_value = 3;
+  google.protobuf.StringValue field_name = 1;
+  google.protobuf.StringValue previous_value = 2;
+  google.protobuf.StringValue new_value = 3;
 }
 
 message ActivityType {
