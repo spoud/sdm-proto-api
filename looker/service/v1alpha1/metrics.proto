@@ -45,7 +45,7 @@ message LastMetricRequest {
 }
 
 message LastMetricResponse {
-  google.protobuf.Timestamp last_metric_timestamp = 2;
+  google.protobuf.Timestamp last_metric_timestamp = 1;
 }
 
 message TimeSerie {
