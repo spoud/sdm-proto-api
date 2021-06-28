@@ -14,6 +14,7 @@ service MetricsService {
   rpc updateOperationalMetric (UpdateOperationalMetricRequest) returns (google.protobuf.Empty);
 
   rpc listMetric (ListMetricsRequest) returns (ListMetricsResponse);
+  rpc lastMetric (LastMetricRequest) returns (LastMetricResponse);
 }
 
 message UpdateMetricRequest {
@@ -36,6 +37,15 @@ message ListMetricsRequest {
 message ListMetricsResponse {
   string resource_id = 1;
   repeated TimeSerie time_series = 2;
+}
+
+message LastMetricRequest {
+  string resource_id = 1;
+  io.spoud.sdm.looker.domain.v1alpha1.ResourceMetricType.Type metric_type = 2;
+}
+
+message LastMetricResponse {
+  google.protobuf.Timestamp last_metric_timestamp = 1;
 }
 
 message TimeSerie {
