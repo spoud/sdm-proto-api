@@ -40,7 +40,7 @@ message ListMetricsResponse {
 }
 
 message LastMetricRequest {
-  string resource_id = 5;
+  string resource_id = 1;
   io.spoud.sdm.looker.domain.v1alpha1.ResourceMetricType.Type metric_type = 2;
 }
 
