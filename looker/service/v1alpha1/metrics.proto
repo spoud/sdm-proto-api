@@ -63,6 +63,11 @@ message GroupingType {
     UNKNOWN = 0;
     SUM = 1;
     AVG = 2;
-    MAX_MINUS_MIN = 3;
+
+    // Delta to previous period
+    DELTA = 3;
+
+    // Delta but no value under 0 (value below are set to zero)
+    DELTA_POSITIVE = 4;
   }
 }
