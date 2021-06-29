@@ -64,7 +64,7 @@ message GroupingType {
     SUM = 1;
     AVG = 2;
 
-    // Delta to previous previous period
+    // Delta to previous period
     DELTA = 3;
 
     // Delta but no value under 0 (value below are set to zero)
