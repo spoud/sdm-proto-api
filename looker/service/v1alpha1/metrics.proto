@@ -66,5 +66,8 @@ message GroupingType {
 
     // Delta to previous previous period
     DELTA = 3;
+
+    // Delta but no value under 0 (value below are set to zero)
+    DELTA_POSITIVE = 4;
   }
 }
