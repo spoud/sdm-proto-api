@@ -20,7 +20,7 @@ service AgentService {
 }
 
 message CreateAgentRequest {
-  string label = 1;
+  string name = 1;
   string technical_user_uuid = 3;
   string username = 4;
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 5;
