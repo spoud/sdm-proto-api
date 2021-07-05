@@ -87,7 +87,8 @@ message DataPortChange {
   google.protobuf.StringValue label = 4;
 
   // ResourceGroup Reference
-  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8;
+  // @deprecated 05.07.2021 use path instead
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8 [deprecated=true];
 
   // Transport Reference
   io.spoud.sdm.global.selection.v1.BaseRef transport = 9;
@@ -103,6 +104,9 @@ message DataPortChange {
 
   // Map of properties
   io.spoud.sdm.logistics.mutation.v1.PropertyMap properties = 13;
+
+  // Path
+  google.protobuf.StringValue path = 14;
 }
 
 message SaveDataPortResponse {

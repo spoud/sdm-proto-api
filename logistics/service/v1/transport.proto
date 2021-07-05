@@ -33,8 +33,11 @@ message CreateTransportRequest {
   string name = 1;
   map<string, string> properties = 2;
   string label = 4;
-  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 5;
+  // @deprecated 05.07.2021 use path instead
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 5 [deprecated=true];
   io.spoud.sdm.logistics.selection.v1.TransportTypeRef transport_type_ref = 6;
+
+  string path = 7;
 }
 
 message CreateTransportResponse {
