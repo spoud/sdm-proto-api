@@ -32,7 +32,8 @@ message CreateResourceGroupRequest {
   string id = 1;
   string name = 2;
   map<string, string> properties = 4;
-  string label = 6;
+  //@deprecated use name instead
+  string label = 6 [deprecated=true];
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef parent = 7;
 
 }
@@ -48,7 +49,8 @@ message UpdateResourceGroupRequest {
 
   // deprecated since 2020-08-10 use parent reference with parent (field 7) instead.
   io.spoud.sdm.logistics.mutation.v1.AttributeChange parent_name_or_id = 4 [deprecated = true];
-  io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 5;
+  //@deprecated use name instead
+  io.spoud.sdm.logistics.mutation.v1.AttributeChange label = 5 [deprecated=true];
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef self = 6;
   io.spoud.sdm.logistics.selection.v1.ResourceGroupRef parent = 7;
 
