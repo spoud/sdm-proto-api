@@ -87,7 +87,8 @@ message DataOfferChange {
   google.protobuf.StringValue label = 4;
 
   // Resource Group Reference
-  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8;
+  // @deprecated 05.07.2021 use path instead
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef resource_group = 8[deprecated=true];
 
   // Selector for data port entity.
   // When using matching properties as a selector, the data port gets created automatically.
@@ -98,6 +99,9 @@ message DataOfferChange {
 
   // Map of properties
   io.spoud.sdm.logistics.mutation.v1.PropertyMap properties = 11;
+
+  // Path
+  google.protobuf.StringValue  path = 13;
 }
 
 message SaveDataOfferResponse {

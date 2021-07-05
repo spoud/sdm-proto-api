@@ -36,9 +36,12 @@ message DataSubscriptionState {
   io.spoud.sdm.global.domain.v1.IdReference data_port = 5;
   bool deleted = 6;
 
+  string path = 14;
+
   // additional entity/doc information
   io.spoud.sdm.global.domain.v1.DocInfo info = 7;
-  io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 8;
+  // @deprecated 05.07.2021 use path instead
+  io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 8 [deprecated=true];
   io.spoud.sdm.global.domain.v1.IdReference transport = 10;
 
   string label = 11;
@@ -47,6 +50,7 @@ message DataSubscriptionState {
   repeated SimpleTag tags = 12;
 
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 13;
+
 }
 
 // Data Offer
@@ -58,7 +62,10 @@ message DataOffer {
   // additional entity/doc information
   io.spoud.sdm.global.domain.v1.DocInfo info = 9;
 
-  io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 10;
+  string path = 15;
+
+  // @deprecated 05.07.2021 use path instead
+  io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 10 [deprecated=true];
   io.spoud.sdm.global.domain.v1.IdReference data_port = 11;
 
   string label = 12;
@@ -67,6 +74,7 @@ message DataOffer {
   repeated SimpleTag tags = 13;
 
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 14;
+
 }
 
 // DataPort
@@ -79,9 +87,12 @@ message DataPort {
   bool deleted = 7;
   io.spoud.sdm.global.domain.v1.IdReference data_offer = 8;
 
+  string path = 14;
+
   // additional entity/doc information
   io.spoud.sdm.global.domain.v1.DocInfo info = 9;
-  io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 10;
+  // @deprecated 05.07.2021 use path instead
+  io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 10 [deprecated=true];
 
   string label = 11;
 
@@ -138,7 +149,10 @@ message Transport {
   // additional entity/doc information
   io.spoud.sdm.global.domain.v1.DocInfo info = 5;
 
-  io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 6;
+  string path = 10;
+
+  // @deprecated 05.07.2021 use path instead
+  io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 6 [deprecated=true];
 
   // @deprecated use name instead
   string label = 7 [deprecated=true];
@@ -152,7 +166,11 @@ message Transport {
 message Agent {
   string id = 1;
   string name = 2;
-  io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 3;
+
+  string path = 8;
+
+  // @deprecated 05.07.2021 use path instead
+  io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 3 [deprecated=true];
   io.spoud.sdm.global.domain.v1.IdReference technical_user_id = 4;
   string username = 5;
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 6;
