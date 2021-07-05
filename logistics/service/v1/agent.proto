@@ -20,7 +20,7 @@ service AgentService {
 }
 
 message CreateAgentRequest {
-  string label = 1;
+  string name = 1;
   string technical_user_uuid = 3;
   string username = 4;
   // @deprecated 05.07.2021 use path instead

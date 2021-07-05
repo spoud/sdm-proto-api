@@ -22,7 +22,8 @@ message ResourceGroup {
   io.spoud.sdm.global.domain.v1.DocInfo info = 6;
   io.spoud.sdm.global.domain.v1.IdReference parent = 7;
   string path = 8;
-  string label = 9;
+  // @deprecated use name instead
+  string label = 9 [deprecated=true];
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 10;
 }
 
@@ -153,7 +154,8 @@ message Transport {
   // @deprecated 05.07.2021 use path instead
   io.spoud.sdm.global.domain.v1.IdPathReference resource_group = 6 [deprecated=true];
 
-  string label = 7;
+  // @deprecated use name instead
+  string label = 7 [deprecated=true];
 
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 8;
 
@@ -163,7 +165,7 @@ message Transport {
 // Agents
 message Agent {
   string id = 1;
-  string label = 2;
+  string name = 2;
 
   string path = 8;
 
