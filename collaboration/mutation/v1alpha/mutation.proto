@@ -16,27 +16,3 @@ message OrganizationsList {
   // MergeOption merge_option = 1;
   repeated string organizations = 2;
 }
-
-// Wrapper for a list of groups
-// Useful to detect if a value was set explicitly.
-message UserGroupsList {
-  enum MergeOption {
-    REPLACE_ALL = 0;
-    // TODO: APPEND = 1;
-    // currently, only replacing all properties mode is supported (default)
-  }
-  // MergeOption merge_option = 1;
-  repeated string user_group_ids = 2;
-}
-
-// Wrapper for a list of users
-// Useful to detect if a value was set explicitly.
-message UsersList {
-  enum MergeOption {
-    REPLACE_ALL = 0;
-    // TODO: APPEND = 1;
-    // currently, only replacing all properties mode is supported (default)
-  }
-  // MergeOption merge_option = 1;
-  repeated string user_ids = 2;
-}

@@ -53,7 +53,6 @@ message SaveUserRequest {
   google.protobuf.StringValue last_name = 4;
   io.spoud.sdm.collaboration.mutation.v1alpha.OrganizationsList organizations = 5;
   io.spoud.sdm.global.mutation.v1.PropertyMap properties = 6;
-  io.spoud.sdm.collaboration.mutation.v1alpha.UserGroupsList user_groups= 7;
 }
 
 message SaveUserResponse {
@@ -65,7 +64,7 @@ message ListUserGroupsOfUserRequest {
 }
 
 message ListUserGroupsOfUserResponse {
-  repeated io.spoud.sdm.collaboration.domain.v1alpha.UserGroup userGroups = 1;
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.UserGroup user_groups = 1;
 }
 
 message SaveUserGroupsOfUserRequest {

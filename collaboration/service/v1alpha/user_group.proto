@@ -11,11 +11,15 @@ import "google/protobuf/empty.proto";
 import "global/selection/v1/pagination.proto";
 import "global/mutation/v1/mutation.proto";
 import "collaboration/mutation/v1alpha/mutation.proto";
+import "global/domain/v1/domain.proto";
 
 service UserGroupService {
   rpc ListUserGroups (ListUserGroupsRequest) returns (ListUserGroupsResponse);
   rpc SaveUserGroup (SaveUserGroupRequest) returns (SaveUserGroupResponse);
   rpc DeleteUserGroup (DeleteUserGroupRequest) returns (google.protobuf.Empty);
+
+  rpc ListUsersOfUserGroup (ListUsersOfUserGroupRequest) returns (ListUsersOfUserGroupResponse);
+  rpc SaveUsersOfUserGroup (SaveUsersOfUserGroupRequest) returns (SaveUsersOfUserGroupResponse);
 }
 
 message ListUserGroupsRequest {
@@ -38,13 +42,28 @@ message SaveUserGroupRequest {
   google.protobuf.StringValue name = 2;
   google.protobuf.StringValue organization = 3;
   io.spoud.sdm.global.mutation.v1.PropertyMap properties = 4;
-  io.spoud.sdm.collaboration.mutation.v1alpha.UsersList users= 5;
 }
 
 message SaveUserGroupResponse {
   io.spoud.sdm.collaboration.domain.v1alpha.UserGroup user_group = 1;
 }
 
+message ListUsersOfUserGroupRequest {
+  string user_group_id = 1;
+}
+
+message ListUsersOfUserGroupResponse {
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.User users = 1;
+}
+
+message SaveUsersOfUserGroupRequest {
+  string user_group_id = 1;
+  repeated io.spoud.sdm.global.domain.v1.IdReference user_ids = 2;
+}
+
+message SaveUsersOfUserGroupResponse {
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.User users = 1;
+}
 
 
 
