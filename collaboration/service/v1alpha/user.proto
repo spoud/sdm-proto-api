@@ -29,7 +29,6 @@ service UserService {
 message ListUsersRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
   string organization = 2;
-  google.protobuf.StringValue user_group_id = 3;
 }
 
 message ListUsersResponse {
