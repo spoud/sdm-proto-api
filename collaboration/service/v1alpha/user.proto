@@ -12,6 +12,7 @@ import "collaboration/domain/v1alpha/domain.proto";
 import "global/selection/v1/pagination.proto";
 import "global/domain/v1/domain.proto";
 import "global/mutation/v1/mutation.proto";
+import "collaboration/mutation/v1alpha/mutation.proto";
 
 service UserService {
   rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);
@@ -29,6 +30,7 @@ service UserService {
 message ListUsersRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
   string organization = 2;
+  google.protobuf.StringValue user_group_id = 3;
 }
 
 message ListUsersResponse {
@@ -51,6 +53,7 @@ message SaveUserRequest {
   google.protobuf.StringValue last_name = 4;
   io.spoud.sdm.collaboration.mutation.v1alpha.OrganizationsList organizations = 5;
   io.spoud.sdm.global.mutation.v1.PropertyMap properties = 6;
+  io.spoud.sdm.collaboration.mutation.v1alpha.UserGroupsList user_groups= 7;
 }
 
 message SaveUserResponse {
