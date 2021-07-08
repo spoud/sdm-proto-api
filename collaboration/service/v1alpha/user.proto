@@ -12,7 +12,6 @@ import "collaboration/domain/v1alpha/domain.proto";
 import "global/selection/v1/pagination.proto";
 import "global/domain/v1/domain.proto";
 import "global/mutation/v1/mutation.proto";
-import "collaboration/mutation/v1alpha/mutation.proto";
 
 service UserService {
   rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);

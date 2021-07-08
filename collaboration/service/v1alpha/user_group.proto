@@ -10,7 +10,6 @@ import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
 import "global/selection/v1/pagination.proto";
 import "global/mutation/v1/mutation.proto";
-import "collaboration/mutation/v1alpha/mutation.proto";
 import "global/domain/v1/domain.proto";
 
 service UserGroupService {
