@@ -62,7 +62,7 @@ message ListUserGroupsOfUserRequest {
 }
 
 message ListUserGroupsOfUserResponse {
-  repeated io.spoud.sdm.collaboration.domain.v1alpha.UserGroup userGroups = 1;
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.UserGroup user_groups = 1;
 }
 
 message SaveUserGroupsOfUserRequest {
