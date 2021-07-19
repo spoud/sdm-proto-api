@@ -9,12 +9,24 @@ import "google/protobuf/empty.proto";
 import "activities/domain/v1/notifications.proto";
 
 service NotificationsService {
-  rpc updateNotificationChannelsConfiguration (UpdateNotificationChannelConfiguration) returns (google.protobuf.Empty);
-  rpc getNotificationChannelsConfiguration (google.protobuf.Empty) returns (NotificationChannelsConfigurationResponse);
+  rpc UpdateNotificationChannelsConfiguration (UpdateNotificationChannelConfigurationRequest) returns (UpdateNotificationChannelsConfigurationResponse);
+  rpc DeleteNotificationChannelsConfiguration (DeleteNotificationChannelsConfigurationRequest) returns (DeleteNotificationChannelsConfigurationResponse);
+  rpc GetNotificationChannelsConfiguration (google.protobuf.Empty) returns (NotificationChannelsConfigurationResponse);
 }
 
-message UpdateNotificationChannelConfiguration{
+message UpdateNotificationChannelConfigurationRequest{
   io.spoud.sdm.activities.domain.v1.NotificationConfiguration configuration = 1;
+}
+
+message UpdateNotificationChannelsConfigurationResponse{
+  io.spoud.sdm.activities.domain.v1.NotificationConfiguration configuration = 1;
+}
+
+message DeleteNotificationChannelsConfigurationRequest{
+  string id = 1;
+}
+
+message DeleteNotificationChannelsConfigurationResponse{
 }
 
 message NotificationChannelsConfigurationResponse{
