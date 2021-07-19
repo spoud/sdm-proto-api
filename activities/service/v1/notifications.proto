@@ -10,7 +10,7 @@ import "activities/domain/v1/notifications.proto";
 
 service NotificationsService {
   rpc UpdateNotificationChannelsConfiguration (UpdateNotificationChannelConfigurationRequest) returns (UpdateNotificationChannelsConfigurationResponse);
-  rpc DeleteNotificationChannelsConfiguration (RemoveNotificationChannelsConfigurationRequest) returns (RemoveNotificationChannelsConfigurationResponse);
+  rpc DeleteNotificationChannelsConfiguration (DeleteNotificationChannelsConfigurationRequest) returns (DeleteNotificationChannelsConfigurationResponse);
   rpc GetNotificationChannelsConfiguration (google.protobuf.Empty) returns (NotificationChannelsConfigurationResponse);
 }
 
@@ -22,11 +22,11 @@ message UpdateNotificationChannelsConfigurationResponse{
   io.spoud.sdm.activities.domain.v1.NotificationConfiguration configuration = 1;
 }
 
-message RemoveNotificationChannelsConfigurationRequest{
+message DeleteNotificationChannelsConfigurationRequest{
   string id = 1;
 }
 
-message RemoveNotificationChannelsConfigurationResponse{
+message DeleteNotificationChannelsConfigurationResponse{
 }
 
 message NotificationChannelsConfigurationResponse{
