@@ -14,6 +14,7 @@ import "global/domain/v1/domain.proto";
 
 service UserGroupService {
   rpc ListUserGroups (ListUserGroupsRequest) returns (ListUserGroupsResponse);
+  rpc GetUserGroup (GetUserGroupRequest) returns (GetUserGroupResponse);
   rpc SaveUserGroup (SaveUserGroupRequest) returns (SaveUserGroupResponse);
   rpc DeleteUserGroup (DeleteUserGroupRequest) returns (google.protobuf.Empty);
 
@@ -29,6 +30,14 @@ message ListUserGroupsRequest {
 message ListUserGroupsResponse {
   io.spoud.sdm.global.selection.v1.PageResult page_result = 1;
   repeated io.spoud.sdm.collaboration.domain.v1alpha.UserGroup user_groups = 2;
+}
+
+message GetUserGroupRequest {
+  string user_group_id = 1;
+}
+
+message GetUserGroupResponse {
+  io.spoud.sdm.collaboration.domain.v1alpha.UserGroup user_groups = 1;
 }
 
 message DeleteUserGroupRequest {
