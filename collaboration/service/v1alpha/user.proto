@@ -15,6 +15,7 @@ import "global/mutation/v1/mutation.proto";
 
 service UserService {
   rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);
+  rpc GetUser (GetUserRequest) returns (GetUserResponse);
   rpc FindUser (FindUserRequest) returns (FindUserResponse);
   rpc SaveUser (SaveUserRequest) returns (SaveUserResponse);
 
@@ -34,6 +35,14 @@ message ListUsersRequest {
 message ListUsersResponse {
   io.spoud.sdm.global.selection.v1.PageResult page_result = 1;
   repeated io.spoud.sdm.collaboration.domain.v1alpha.User users = 2;
+}
+
+message GetUserRequest {
+  string user_id = 1;
+}
+
+message GetUserResponse {
+  io.spoud.sdm.collaboration.domain.v1alpha.User user = 1;
 }
 
 message FindUserRequest {
