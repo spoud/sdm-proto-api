@@ -25,6 +25,8 @@ message ResourceGroup {
   // @deprecated use name instead
   string label = 9 [deprecated=true];
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 10;
+  
+  int32 dataOffersCount = 14
 }
 
 // DataSubscriptionState
