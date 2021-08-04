@@ -18,6 +18,7 @@ service DataOfferService {
   rpc GetDataOffer (GetDataOfferRequest) returns (GetDataOfferResponse);
   rpc DeleteDataOffer (DeleteDataOfferRequest) returns (DeleteDataOfferResponse);
   rpc ListDataOffers (ListDataOffersRequest) returns (ListDataOffersResponse);
+  rpc CountDataOffers (CountDataOffersRequest) returns (CountDataOffersResponse);
 
   // Saves a DataOffer.
   // The entity is identified through the `self` attribute. Different mechanisms for referencing are supported,
@@ -62,6 +63,16 @@ message ListDataOffersRequest {
 message ListDataOffersResponse {
   repeated io.spoud.sdm.logistics.domain.v1.DataOffer data_offers = 1;
   io.spoud.sdm.global.selection.v1.PageResult page_result = 3;
+}
+
+message CountDataOffersRequest {
+  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 1;
+
+  io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 2;
+}
+
+message CountDataOffersResponse {
+  uint32 data_offers_count = 1;
 }
 
 // the write model is different from the read model.
