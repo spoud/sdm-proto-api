@@ -18,6 +18,7 @@ service ResourceGroupService {
   rpc CreateResourceGroup (CreateResourceGroupRequest) returns (CreateResourceGroupResponse);
   rpc DeleteResourceGroup (DeleteResourceGroupRequest) returns (DeleteResourceGroupResponse);
   rpc ListResourceGroups (ListResourceGroupsRequest) returns (ListResourceGroupsResponse);
+  rpc CountResourceGroups (CountResourceGroupsRequest) returns (CountResourceGroupsResponse);
 }
 
 message GetResourceGroupRequest {
@@ -79,4 +80,14 @@ message ListResourceGroupsRequest {
 message ListResourceGroupsResponse {
   repeated io.spoud.sdm.logistics.domain.v1.ResourceGroup resource_groups = 1;
   io.spoud.sdm.global.selection.v1.PageResult page_result = 2;
+}
+
+message CountResourceGroupsRequest {
+  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 1;
+  io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 2;
+  io.spoud.sdm.permission.selection.v1.ResourceEntityPredicate resource_entity = 3;
+}
+
+message CountResourceGroupsResponse {
+  uint32 resource_groups_count = 1;
 }
