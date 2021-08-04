@@ -83,9 +83,9 @@ message ListResourceGroupsResponse {
 }
 
 message CountResourceGroupsRequest {
-  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 2;
-  io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 3;
-  io.spoud.sdm.permission.selection.v1.ResourceEntityPredicate resource_entity = 4;
+  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 1;
+  io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 2;
+  io.spoud.sdm.permission.selection.v1.ResourceEntityPredicate resource_entity = 3;
 }
 
 message CountResourceGroupsResponse {
