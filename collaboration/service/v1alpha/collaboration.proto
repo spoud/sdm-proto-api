@@ -19,7 +19,7 @@ message ListSubjectRequest {
   google.protobuf.StringValue organization_name = 2;
   // This global text filter will search in group name and user email/username/firstName/lastName
   google.protobuf.StringValue text_filter = 3;
-  io.spoud.sdm.collaboration.domain.v1alpha.SubjectType subject_type = 4;
+  io.spoud.sdm.collaboration.domain.v1alpha.SubjectType.Type subject_type = 4;
 }
 
 message ListSubjectResponse {
