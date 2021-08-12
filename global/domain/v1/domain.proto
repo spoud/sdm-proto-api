@@ -58,6 +58,6 @@ message ResourceEntity {
   }
 }
 
-message ResourceEntityWrapper{
+message ResourceEntityTypeWrapper{
   ResourceEntity.Type value = 1;
 }
