@@ -33,11 +33,11 @@ message Notification{
   enum Type {
     EMAIL = 0;
     WEBHOOK = 1;
-  } 
+  }
 }
 
 message ActivityFilter{
-  io.spoud.sdm.activities.domain.v1.ActivityType.Type  activity_type = 1;
   google.protobuf.StringValue path = 2;
-  io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 3;
+  io.spoud.sdm.activities.domain.v1.ActivityTypeWrapper  activity_type = 4;
+  io.spoud.sdm.global.domain.v1.ResourceEntityTypeWrapper entity_type = 5;
 }
