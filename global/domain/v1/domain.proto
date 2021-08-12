@@ -57,3 +57,7 @@ message ResourceEntity {
     CHECKPOINT = 999;
   }
 }
+
+message ResourceEntityWrapper{
+  ResourceEntity.Type value = 1;
+}

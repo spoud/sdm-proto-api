@@ -74,6 +74,10 @@ message ActivityType {
   }
 }
 
+message ActivityTypeWrapper{
+  ActivityType.Type value = 1;
+}
+
 message SubjectRef {
   string username = 1;
   SubjectType.Type subject_type = 2;
