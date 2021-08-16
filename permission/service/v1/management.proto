@@ -8,6 +8,7 @@ option go_package = "permission.service.v1";
 import "global/selection/v1/pagination.proto";
 import "permission/domain/v1/domain.proto";
 import "permission/selection/v1/filter.proto";
+import "google/protobuf/wrappers.proto";
 
 service PermissionManagementService {
   // Unset the Permissions
@@ -25,6 +26,9 @@ service PermissionManagementService {
   // through any combination of user permissions and group permissions, the highest one will be in effect.
   rpc SavePermissions (SavePermissionsRequest) returns (SavePermissionsResponse);
   rpc ListPermissions (ListPermissionsRequest) returns (ListPermissionsResponse);
+
+  // List the permission for a given user reference. This will include all the implicit permission from groups
+  rpc ListPermissionsSummaryForUser (ListPermissionsSummaryForUserRequest) returns (ListPermissionsSummaryForUserResponse);
 }
 
 message UnsetPermissionsRequest {
@@ -58,6 +62,17 @@ message ListPermissionsRequest {
 }
 
 message ListPermissionsResponse {
+  repeated io.spoud.sdm.permission.domain.v1.Permission permissions = 1;
+  io.spoud.sdm.global.selection.v1.PageResult page_result = 3;
+}
+
+message ListPermissionsSummaryForUserRequest {
+  io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
+  google.protobuf.StringValue username = 2;
+  google.protobuf.StringValue email = 3;
+}
+
+message ListPermissionsSummaryForUserResponse {
   repeated io.spoud.sdm.permission.domain.v1.Permission permissions = 1;
   io.spoud.sdm.global.selection.v1.PageResult page_result = 3;
 }
