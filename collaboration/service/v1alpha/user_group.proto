@@ -49,6 +49,8 @@ message SaveUserGroupRequest {
   google.protobuf.StringValue name = 2;
   google.protobuf.StringValue organization = 3;
   io.spoud.sdm.global.mutation.v1.PropertyMap properties = 4;
+  google.protobuf.StringValue label = 5;
+  google.protobuf.StringValue email = 6;
 }
 
 message SaveUserGroupResponse {
