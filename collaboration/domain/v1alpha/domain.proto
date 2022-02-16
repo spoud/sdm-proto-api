@@ -40,6 +40,8 @@ message UserGroup {
   string organization = 3;
   map<string, string> properties = 4;
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 5;
+  google.protobuf.StringValue label = 6;
+  google.protobuf.StringValue email = 7;
 }
 
 message Subject {
