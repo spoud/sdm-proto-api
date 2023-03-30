@@ -29,6 +29,8 @@ message SaveSchemaRequest {
   string content = 6;
   string path = 7;
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 10;
+  io.spoud.sdm.schema.domain.v1alpha.SchemaEncoding.Type key_encoding = 11;
+  string key_content = 12;
 }
 
 message SaveSchemaResponse {
