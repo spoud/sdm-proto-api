@@ -44,6 +44,7 @@ message SchemaEncoding {
     JSON_ASYNCAPI = 3;
     SQL = 4;
     STRING = 5;
+    PROTOBUF = 6;
   }
 }
 
