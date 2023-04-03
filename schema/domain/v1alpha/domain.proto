@@ -23,6 +23,8 @@ message Schema {
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 9;
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 10;
   string path = 11;
+  SchemaEncoding.Type key_encoding = 12;
+  string key_content = 13;
 }
 
 message SchemaSource {
@@ -41,6 +43,8 @@ message SchemaEncoding {
     AVRO = 2;
     JSON_ASYNCAPI = 3;
     SQL = 4;
+    STRING = 5;
+    PROTOBUF = 6;
   }
 }
 
