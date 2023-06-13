@@ -93,3 +93,9 @@ message Follow {
   string user_id = 2;
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 3;
 }
+
+message UserVsGroupDuplicate {
+  string userId = 1;
+  string groupId = 2;
+  string email = 3;
+}

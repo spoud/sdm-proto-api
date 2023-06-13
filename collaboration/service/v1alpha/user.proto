@@ -25,6 +25,7 @@ service UserService {
   // Organization Management
   rpc InviteToOrganization (InviteToOrganizationRequest) returns (InviteToOrganizationResponse);
   rpc RemoveFromOrganization (RemoveFromOrganizationRequest) returns (google.protobuf.Empty);
+  rpc getUserVsGroupDuplicates (GetUserVsGroupDuplicatesRequest) returns (google.protobuf.Empty);
 }
 
 message ListUsersRequest {
@@ -98,3 +99,10 @@ message RemoveFromOrganizationRequest {
   string user_email = 2;
 }
 
+message GetUserVsGroupDuplicatesRequest {
+  string organization = 1;
+}
+
+message GetUserVsGroupDuplicatesResponse {
+  repeated io.spoud.sdm.collaboration.domain.v1alpha.UserVsGroupDuplicate duplicates = 1;
+}
