@@ -30,6 +30,7 @@ service UserService {
 message ListUsersRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
   string organization = 2;
+  repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 3;
 }
 
 message ListUsersResponse {
