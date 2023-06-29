@@ -12,6 +12,7 @@ import "collaboration/domain/v1alpha/domain.proto";
 import "global/selection/v1/pagination.proto";
 import "global/domain/v1/domain.proto";
 import "global/mutation/v1/mutation.proto";
+import "collaboration/selection/v1/filter.proto";
 
 service UserService {
   rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);
@@ -30,6 +31,7 @@ service UserService {
 message ListUsersRequest {
   io.spoud.sdm.global.selection.v1.PageRequest page_request = 1;
   string organization = 2;
+  repeated io.spoud.sdm.collaboration.selection.v1.FilterPredicate predicates = 3;
 }
 
 message ListUsersResponse {
