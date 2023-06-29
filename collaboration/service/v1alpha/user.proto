@@ -19,6 +19,7 @@ service UserService {
   rpc GetUser (GetUserRequest) returns (GetUserResponse);
   rpc FindUser (FindUserRequest) returns (FindUserResponse);
   rpc SaveUser (SaveUserRequest) returns (SaveUserResponse);
+  rpc DeleteUsers (DeleteUsersRequest) returns (google.protobuf.Empty);
 
   rpc ListUserGroupsOfUser (ListUserGroupsOfUserRequest) returns (ListUserGroupsOfUserResponse);
   rpc SaveUserGroupsOfUser (SaveUserGroupsOfUserRequest) returns (SaveUserGroupsOfUserResponse);
@@ -66,6 +67,10 @@ message SaveUserRequest {
 
 message SaveUserResponse {
   io.spoud.sdm.collaboration.domain.v1alpha.User user = 1;
+}
+
+message DeleteUsersRequest {
+  repeated google.protobuf.StringValue user_ids = 1;
 }
 
 message ListUserGroupsOfUserRequest {
