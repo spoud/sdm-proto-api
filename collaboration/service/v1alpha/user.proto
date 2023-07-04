@@ -50,6 +50,7 @@ message GetUserResponse {
 
 message FindUserRequest {
   string email = 1;
+  repeated io.spoud.sdm.collaboration.selection.v1.FilterPredicate predicates = 2;
 }
 
 message FindUserResponse {
