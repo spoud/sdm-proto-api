@@ -60,9 +60,13 @@ message AddDataProfileRequest {
   string profiler_version = 8;
 
   // this contains a UUID for the profile which is stored in the blob service
+  // deprecated — use profile_json instead
   string profile_html_blob_id = 9;
 
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 10;
+
+  // structured JSON profile data (replaces profile_html_blob_id)
+  string profile_json = 11;
 }
 
 message AddDataProfileResponse {

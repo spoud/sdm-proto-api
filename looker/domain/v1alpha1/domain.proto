@@ -47,11 +47,15 @@ message DataProfile {
   DataProfilingError error = 12;
 
   // this contains a UUID for the profile which is stored in the blob service
+  // deprecated — use profile_json instead
   string html_blob_id = 13;
 
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 14;
 
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 15;
+
+  // structured JSON profile data (replaces html_blob_id)
+  string profile_json = 16;
 }
 
 message DataSample {
