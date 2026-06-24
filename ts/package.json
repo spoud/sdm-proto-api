@@ -5,15 +5,16 @@
   "type": "module",
   "exports": {
     "./*": "./dist/*",
-    "./ts-proto/*": "./dist/ts-proto/*"
+    "./ts-proto/*": "./ts-proto/*"
   },
   "files": [
-    "dist/"
+    "dist/",
+    "ts-proto/"
   ],
   "scripts": {
     "generate": "cd .. && buf generate",
     "build": "npm run generate && tsc && tsc -p tsconfig.ts-proto.json",
-    "clean": "rm -rf dist/ src/gen/ src/gen-ts-proto/"
+    "clean": "rm -rf dist/ ts-proto/ src/gen/ src/gen-ts-proto/"
   },
   "peerDependencies": {
     "@bufbuild/protobuf": "^2.0.0",

@@ -10,5 +10,6 @@ target/
 # Node
 ts/node_modules/
 ts/dist/
+ts/ts-proto/
 ts/src/gen/
 ts/src/gen-ts-proto/

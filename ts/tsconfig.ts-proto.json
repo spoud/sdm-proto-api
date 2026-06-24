@@ -6,7 +6,7 @@
     "ignoreDeprecations": "6.0",
     "declaration": true,
     "sourceMap": true,
-    "outDir": "dist/ts-proto",
+    "outDir": "ts-proto",
     "rootDir": "src/gen-ts-proto",
     "strict": false,
     "esModuleInterop": true,
