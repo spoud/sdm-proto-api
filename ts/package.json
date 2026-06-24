@@ -2,7 +2,6 @@
   "name": "@spoud/sdm-proto-api",
   "version": "0.0.0",
   "description": "SDM Proto API - Protobuf-ES and ts-proto TypeScript types",
-  "type": "module",
   "typesVersions": {
     "*": {
       "ts-proto/*": ["ts-proto/*"],
