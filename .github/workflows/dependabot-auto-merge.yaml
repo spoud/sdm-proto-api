@@ -5,6 +5,7 @@ permissions:
   contents: write
   pull-requests: write
   packages: read
+  workflows: write
 
 jobs:
   dependabot:
@@ -19,7 +20,7 @@ jobs:
           skip-commit-verification: true
 
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v6
 
       - name: Approve a PR if not already approved
         run: |
