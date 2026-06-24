@@ -1,18 +1,19 @@
 {
   "name": "@spoud/sdm-proto-api",
   "version": "0.0.0",
-  "description": "SDM Proto API - Protobuf-ES TypeScript types and Connect-RPC service descriptors",
+  "description": "SDM Proto API - Protobuf-ES and ts-proto TypeScript types",
   "type": "module",
   "exports": {
-    "./*": "./dist/*"
+    "./*": "./dist/*",
+    "./ts-proto/*": "./dist/ts-proto/*"
   },
   "files": [
     "dist/"
   ],
   "scripts": {
     "generate": "cd .. && buf generate",
-    "build": "npm run generate && tsc",
-    "clean": "rm -rf dist/ src/gen/"
+    "build": "npm run generate && tsc && tsc -p tsconfig.ts-proto.json",
+    "clean": "rm -rf dist/ src/gen/ src/gen-ts-proto/"
   },
   "peerDependencies": {
     "@bufbuild/protobuf": "^2.0.0",
@@ -23,6 +24,9 @@
     "@bufbuild/protobuf": "^2.6.0",
     "@bufbuild/protoc-gen-es": "^2.6.0",
     "@connectrpc/connect": "^2.0.0",
+    "@grpc/grpc-js": "^1.14.4",
+    "@types/node": "^26.0.0",
+    "ts-proto": "^2.11.8",
     "typescript": "^6.0.3"
   },
   "publishConfig": {

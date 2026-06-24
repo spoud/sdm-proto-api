@@ -3,3 +3,9 @@ plugins:
   - local: protoc-gen-es
     out: ts/src/gen
     opt: target=ts
+  - local: protoc-gen-ts_proto
+    out: ts/src/gen-ts-proto
+    opt:
+      - outputServices=grpc-js
+      - useOptionals=messages
+      - esModuleInterop=true

@@ -11,3 +11,4 @@ target/
 ts/node_modules/
 ts/dist/
 ts/src/gen/
+ts/src/gen-ts-proto/
