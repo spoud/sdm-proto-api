@@ -74,7 +74,7 @@ jobs:
       - name: Publish Maven package
         run: |
           mvn versions:set -DnewVersion=${{ steps.version.outputs.replaced }}
-          mvn -B deploy
+          mvn -B clean deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
