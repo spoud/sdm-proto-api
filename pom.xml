@@ -80,6 +80,11 @@
           <sourceDirectories>
             <sourceDirectory>${project.basedir}</sourceDirectory>
           </sourceDirectories>
+          <excludes>
+            <exclude>ts/**</exclude>
+            <exclude>target/**</exclude>
+            <exclude>out/**</exclude>
+          </excludes>
           <plugins>
             <plugin kind="binary-maven">
               <groupId>io.grpc</groupId>
