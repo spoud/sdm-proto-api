@@ -1,0 +1,87 @@
+name: Release
+on:
+  push:
+    branches:
+      - master
+      - main
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  secrets-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Scan for secrets with Gitleaks
+        run: |
+          curl -sSfL https://github.com/gitleaks/gitleaks/releases/download/v8.27.2/gitleaks_8.27.2_linux_x64.tar.gz | tar xz gitleaks
+          ./gitleaks detect --source . --no-git --verbose --redact --exit-code 1
+
+  release:
+    needs: secrets-scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: '21'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: https://npm.pkg.github.com
+
+      - uses: bufbuild/buf-action@v1
+        with:
+          setup_only: true
+
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven-
+
+      - name: Build Java package
+        run: mvn -B clean package
+
+      - name: Build TypeScript package
+        working-directory: ts
+        run: npm ci && npm run build
+
+      - name: Bump version and push tag
+        id: tag
+        uses: anothrNick/github-tag-action@1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+
+      - uses: frabert/replace-string-action@v2.5
+        id: version
+        with:
+          pattern: 'v(.+)'
+          string: ${{ steps.tag.outputs.new_tag }}
+          replace-with: '$1'
+
+      - name: Publish Maven package
+        run: |
+          mvn versions:set -DnewVersion=${{ steps.version.outputs.replaced }}
+          mvn -B deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish npm package
+        working-directory: ts
+        run: |
+          npm version ${{ steps.version.outputs.replaced }} --no-git-tag-version
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

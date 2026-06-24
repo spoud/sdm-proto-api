@@ -1,0 +1,17 @@
+version: v2
+modules:
+  - path: .
+    excludes:
+      - target
+      - out
+      - ts
+lint:
+  use:
+    - MINIMAL
+  except:
+    # Package names use io.spoud.sdm.* prefix but directories omit that prefix
+    - PACKAGE_DIRECTORY_MATCH
+    - PACKAGE_SAME_DIRECTORY
+breaking:
+  use:
+    - FILE

@@ -1,0 +1,68 @@
+name: Build
+on:
+  push:
+    branches-ignore:
+      - master
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: bufbuild/buf-action@v1
+        with:
+          setup_only: true
+
+      - name: Lint proto files
+        run: buf lint
+
+      - name: Check for breaking changes
+        run: buf breaking --against '.git#branch=main'
+
+  build-java:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: '21'
+
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven-
+
+      - name: Build Java package
+        run: mvn -B package
+
+  build-ts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - uses: bufbuild/buf-action@v1
+        with:
+          setup_only: true
+
+      - name: Install dependencies
+        working-directory: ts
+        run: npm ci
+
+      - name: Build TypeScript package
+        working-directory: ts
+        run: npm run build

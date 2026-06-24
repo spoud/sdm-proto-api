@@ -3,3 +3,11 @@
 out/
 .DS_Store
 
+# Maven
+target/
+*.class
+
+# Node
+ts/node_modules/
+ts/dist/
+ts/src/gen/
