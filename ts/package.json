@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "description": "SDM Proto API - Protobuf-ES and ts-proto TypeScript types",
   "type": "module",
-  "exports": {
-    "./*": "./dist/*",
-    "./ts-proto/*": "./ts-proto/*"
+  "typesVersions": {
+    "*": {
+      "ts-proto/*": ["ts-proto/*"],
+      "*": ["dist/*"]
+    }
   },
   "files": [
     "dist/",
