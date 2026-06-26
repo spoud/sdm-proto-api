@@ -59,9 +59,7 @@ message AddDataProfileRequest {
   string profiler_service_version = 7;
   string profiler_version = 8;
 
-  // this contains a UUID for the profile which is stored in the blob service
-  // deprecated — use profile_json instead
-  string profile_html_blob_id = 9;
+  reserved 9; // was profile_html_blob_id (blob service removed)
 
   io.spoud.sdm.global.selection.v1.EntityRef entity_ref = 10;
 

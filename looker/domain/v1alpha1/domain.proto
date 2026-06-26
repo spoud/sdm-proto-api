@@ -46,9 +46,7 @@ message DataProfile {
   // if there's an error set, the profiling returns without a report.
   DataProfilingError error = 12;
 
-  // this contains a UUID for the profile which is stored in the blob service
-  // deprecated — use profile_json instead
-  string html_blob_id = 13;
+  reserved 13; // was html_blob_id (blob service removed)
 
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 14;
 
