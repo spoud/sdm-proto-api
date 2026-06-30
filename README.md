@@ -59,7 +59,7 @@ cd ts && npm ci && npm run build
 ### Proto structure
 
 ```
-activities/    blob/          collaboration/  global/
+activities/    collaboration/  global/
 hooks/         logistics/     looker/         permission/
 profiler/      schema/        search/         topology/
 ```
