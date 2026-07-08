@@ -27,7 +27,7 @@
     "@bufbuild/protoc-gen-es": "^2.6.0",
     "@connectrpc/connect": "^2.0.0",
     "@grpc/grpc-js": "^1.14.4",
-    "@types/node": "^26.1.0",
+    "@types/node": "^26.1.1",
     "ts-proto": "^2.11.10",
     "typescript": "^6.0.3"
   },
