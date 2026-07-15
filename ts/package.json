@@ -29,7 +29,7 @@
     "@grpc/grpc-js": "^1.14.4",
     "@types/node": "^26.1.1",
     "ts-proto": "^2.12.0",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
