@@ -13,7 +13,7 @@ jobs:
   secrets-scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
           fetch-depth: 0
       - name: Scan for secrets with Gitleaks
@@ -25,27 +25,27 @@ jobs:
     needs: secrets-scan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@0f481fcb613427c0f801b606911222b5b6f3083a # v5
         with:
           distribution: zulu
           java-version: '21'
           server-id: github
 
-      - uses: actions/setup-node@v7
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version: '22'
           registry-url: https://npm.pkg.github.com
 
-      - uses: bufbuild/buf-action@v1
+      - uses: bufbuild/buf-action@fd21066df7214747548607aaa45548ba2b9bc1ff # v1
         with:
           setup_only: true
 
       - name: Cache Maven packages
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
@@ -60,12 +60,12 @@ jobs:
 
       - name: Bump version and push tag
         id: tag
-        uses: anothrNick/github-tag-action@1
+        uses: anothrNick/github-tag-action@4ed44965e0db8dab2b466a16da04aec3cc312fd8 # 1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
 
-      - uses: frabert/replace-string-action@v2.5
+      - uses: frabert/replace-string-action@b6828c5a4cb6371753ff873b0d1c4c4fbd9a63cb # v2.5
         id: version
         with:
           pattern: 'v(.+)'
