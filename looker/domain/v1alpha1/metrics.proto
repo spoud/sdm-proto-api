@@ -106,4 +106,7 @@ message OperationalMetric {
 message AgentRef {
   string agent_username = 1;
   string transport_path = 2;
+
+  // Self-reported build version of the running agent. Empty if unknown.
+  string agent_version = 3;
 }
