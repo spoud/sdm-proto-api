@@ -15,6 +15,8 @@ service MetricsService {
 
   rpc listMetric (ListMetricsRequest) returns (ListMetricsResponse);
   rpc lastMetric (LastMetricRequest) returns (LastMetricResponse);
+
+  rpc getAgentVersion (GetAgentVersionRequest) returns (GetAgentVersionResponse);
 }
 
 message UpdateMetricRequest {
@@ -46,6 +48,16 @@ message LastMetricRequest {
 
 message LastMetricResponse {
   google.protobuf.Timestamp last_metric_timestamp = 1;
+}
+
+message GetAgentVersionRequest {
+  // Agent UUID (same id as the canonical Agent.id from logistics)
+  string resource_id = 1;
+}
+
+message GetAgentVersionResponse {
+  // Empty if the agent has never reported a version.
+  string version = 1;
 }
 
 message TimeSerie {
