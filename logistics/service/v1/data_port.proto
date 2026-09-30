@@ -55,6 +55,10 @@ message ListDataPortsRequest {
   // All predicates are formed as an AND, except predicates with the same key.
   // For predicates with the same key, the latest entry in the list is taken.
   // There is no support for an "OR" right now.
+  // Lifecycle related keys:
+  //  - "lifecycleStatus": CREATED (not deleted) or DELETED
+  //  - "lastSeenBefore": ISO-8601 instant, only entities not reported by an agent since then
+  //    (including never reported ones)
   repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 3;
 
   io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 4;
