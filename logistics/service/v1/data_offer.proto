@@ -55,6 +55,9 @@ message ListDataOffersRequest {
   // All predicates are formed as an AND, except predicates with the same key.
   // For predicates with the same key, the latest entry in the list is taken.
   // There is no support for an "OR" right now.
+  // Lifecycle related keys:
+  //  - "sourceUnavailableSince": ISO-8601 instant, only data offers whose data port is retired
+  //    or was last reported by an agent before then
   repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 2;
 
   io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 3;
@@ -66,6 +69,9 @@ message ListDataOffersResponse {
 }
 
 message CountDataOffersRequest {
+  // Lifecycle related keys:
+  //  - "sourceUnavailableSince": ISO-8601 instant, only data offers whose data port is retired
+  //    or was last reported by an agent before then
   repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 1;
 
   io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 2;
