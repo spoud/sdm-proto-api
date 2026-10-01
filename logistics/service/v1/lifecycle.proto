@@ -22,6 +22,12 @@ service LifecycleService {
   // With delete_transport, the transport itself is also deleted, which requires that no data
   // offer is still linked to one of its data ports.
   rpc RetireTransport (RetireTransportRequest) returns (RetireTransportResponse);
+
+  // Permanently deletes a TRANSPORT or DATA_PORT together with everything that blocks a normal
+  // delete: data offers linked to its data ports (also the ones owned by others), data
+  // subscription states and data items. Use it when the agent was removed and nothing should be
+  // kept. Requires write permission on every deleted entity, otherwise nothing is deleted.
+  rpc ForceDelete (ForceDeleteRequest) returns (ForceDeleteResponse);
 }
 
 message GetDeletionImpactRequest {
@@ -70,4 +76,14 @@ message RetireTransportResponse {
   // data offers kept because they are not flagged for auto-deletion
   repeated ImpactedEntity kept_data_offers = 4;
   bool transport_deleted = 5;
+}
+
+message ForceDeleteRequest {
+  io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 1;
+  string id = 2;
+}
+
+message ForceDeleteResponse {
+  // everything that was deleted, the entity itself first
+  repeated ImpactedEntity deleted = 1;
 }
