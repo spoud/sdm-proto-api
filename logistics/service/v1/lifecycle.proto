@@ -11,7 +11,8 @@ import "global/selection/v1/reference.proto";
 // Lifecycle operations spanning several entities, e.g. cleaning up what an agent left behind.
 service LifecycleService {
   // Read only. Lists what deleting (or retiring) an entity would affect, and whether something
-  // blocks it. Supported entity types: TRANSPORT, DATA_PORT and AGENT.
+  // blocks it. Supported entity types: TRANSPORT, DATA_PORT, AGENT and RESOURCE_GROUP (a path
+  // can only be deleted once nothing lives in it anymore).
   rpc GetDeletionImpact (GetDeletionImpactRequest) returns (GetDeletionImpactResponse);
 
   // Soft deletes every data port and data subscription state of a transport. Data offers linked
