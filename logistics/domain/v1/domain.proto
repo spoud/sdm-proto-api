@@ -51,6 +51,8 @@ message DataSubscriptionState {
 
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 13;
 
+  // Last time an agent reported this data subscription state as present (read only, set by logistics).
+  google.protobuf.Timestamp last_seen_at = 15;
 }
 
 // Data Offer
@@ -100,6 +102,10 @@ message DataPort {
   repeated SimpleTag tags = 12;
 
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 13;
+
+  // Last time an agent reported this data port as present (read only, set by logistics).
+  // Not changed by edits, only by agents saving the data port.
+  google.protobuf.Timestamp last_seen_at = 15;
 }
 
 // DataItem
@@ -160,6 +166,12 @@ message Transport {
   io.spoud.sdm.permission.domain.v1.PrivilegeInformation privilege = 8;
 
   TransportType type = 9;
+
+  // Last time an agent reported a data port or data subscription state of this transport
+  // (read only, set by logistics). Unset if no agent ever reported anything.
+  google.protobuf.Timestamp last_seen_at = 11;
+  // Username of the (technical) user that reported last, usually the agent managing this transport.
+  string last_seen_by = 12;
 }
 
 // Agents
