@@ -61,6 +61,7 @@ message ListDataPortsRequest {
   //    (including never reported ones)
   //  - "lastSeenSince": ISO-8601 instant, only entities reported by an agent since then
   //  - "neverSeen": true for entities never reported by an agent, false for the others
+  //  - "liveness": ACTIVE, STALE or NEVER_SEEN, see Liveness
   repeated io.spoud.sdm.logistics.selection.v1.FilterPredicate predicates = 3;
 
   io.spoud.sdm.permission.selection.v1.PrivilegePredicate privilege = 4;

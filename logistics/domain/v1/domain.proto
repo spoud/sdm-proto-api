@@ -53,6 +53,8 @@ message DataSubscriptionState {
 
   // Last time an agent reported this data subscription state as present (read only, set by logistics).
   google.protobuf.Timestamp last_seen_at = 15;
+  // Whether agents still report it (read only, decided by logistics).
+  Liveness.Type liveness = 16;
 }
 
 // Data Offer
@@ -106,6 +108,8 @@ message DataPort {
   // Last time an agent reported this data port as present (read only, set by logistics).
   // Not changed by edits, only by agents saving the data port.
   google.protobuf.Timestamp last_seen_at = 15;
+  // Whether agents still report it (read only, decided by logistics).
+  Liveness.Type liveness = 16;
 }
 
 // DataItem
@@ -172,6 +176,8 @@ message Transport {
   google.protobuf.Timestamp last_seen_at = 11;
   // Username of the (technical) user that reported last, usually the agent managing this transport.
   string last_seen_by = 12;
+  // Whether an agent still reports anything of this transport (read only, decided by logistics).
+  Liveness.Type liveness = 13;
 }
 
 // Agents
@@ -222,6 +228,21 @@ message ResourceEntityType {
     DATA_PORT = 2;
     DATA_SUBSCRIPTION_STATE = 4;
     DATA_ITEM = 5;
+  }
+}
+
+// Whether agents still report an entity. Decided by logistics from the last time an agent reported
+// it and its stale threshold (sdm.lifecycle.stale-after), so all clients show the same status.
+// Independent of deleted: a retired entity keeps its last liveness.
+message Liveness {
+  enum Type {
+    UNKNOWN = 0;
+    // reported by an agent within the stale threshold
+    ACTIVE = 1;
+    // reported before, but not within the stale threshold: probably gone, or its agent is down
+    STALE = 2;
+    // never reported by an agent, e.g. created by hand
+    NEVER_SEEN = 3;
   }
 }
 
