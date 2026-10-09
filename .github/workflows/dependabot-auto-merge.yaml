@@ -1,8 +1,10 @@
-name: Dependabot auto-merge
+# Approves Dependabot PRs but leaves the merge to a person: merges done with the GITHUB_TOKEN
+# don't trigger other workflows, so an auto-merged bump would never be released.
+name: Dependabot auto-approve
 on: pull_request
 
 permissions:
-  contents: write
+  contents: read
   pull-requests: write
   packages: read
 
@@ -33,9 +35,3 @@ jobs:
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-      - name: Enable auto-merge for Dependabot PRs
-        run: gh pr merge --auto --squash "$PR_URL"
-        env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
