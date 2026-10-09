@@ -1,0 +1,89 @@
+syntax = "proto3";
+package io.spoud.sdm.logistics.service.v1;
+
+option java_multiple_files = true;
+option java_package = "io.spoud.sdm.logistics.service.v1";
+option go_package = "logistics.service.v1";
+
+import "global/domain/v1/domain.proto";
+import "global/selection/v1/reference.proto";
+
+// Lifecycle operations spanning several entities, e.g. cleaning up what an agent left behind.
+service LifecycleService {
+  // Read only. Lists what deleting (or retiring) an entity would affect, and whether something
+  // blocks it. Supported entity types: TRANSPORT, DATA_PORT, AGENT and RESOURCE_GROUP (a path
+  // can only be deleted once nothing lives in it anymore).
+  rpc GetDeletionImpact (GetDeletionImpactRequest) returns (GetDeletionImpactResponse);
+
+  // Soft deletes every data port and data subscription state of a transport. Data offers linked
+  // to those data ports are deleted only if they are flagged for auto-deletion, otherwise they
+  // are kept so their owners can decide. Retired entities come back automatically if an agent
+  // reports them again.
+  // With delete_transport, the transport itself is also deleted, which requires that no data
+  // offer is still linked to one of its data ports.
+  rpc RetireTransport (RetireTransportRequest) returns (RetireTransportResponse);
+
+  // Permanently deletes a TRANSPORT or DATA_PORT together with everything that blocks a normal
+  // delete: data offers linked to its data ports (also the ones owned by others), data
+  // subscription states and data items. Use it when the agent was removed and nothing should be
+  // kept. Requires write permission on every deleted entity, otherwise nothing is deleted.
+  rpc ForceDelete (ForceDeleteRequest) returns (ForceDeleteResponse);
+}
+
+message GetDeletionImpactRequest {
+  io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 1;
+  string id = 2;
+}
+
+message ImpactedEntity {
+  enum Action {
+    UNKNOWN = 0;
+    // hard deleted
+    DELETE = 1;
+    // marked as deleted, can come back
+    SOFT_DELETE = 2;
+    // not touched, but loses (part of) its source
+    KEEP = 3;
+    // prevents the operation
+    BLOCKS = 4;
+  }
+
+  io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 1;
+  string id = 2;
+  string label = 3;
+  string path = 4;
+  Action action = 5;
+  // human readable explanation of the action
+  string reason = 6;
+}
+
+message GetDeletionImpactResponse {
+  // the entity itself comes first
+  repeated ImpactedEntity impacted = 1;
+  // true if at least one impacted entity has the action BLOCKS
+  bool blocked = 2;
+}
+
+message RetireTransportRequest {
+  io.spoud.sdm.global.selection.v1.BaseRef transport = 1;
+  bool delete_transport = 2;
+}
+
+message RetireTransportResponse {
+  int32 retired_data_ports = 1;
+  int32 retired_data_subscription_states = 2;
+  int32 deleted_data_offers = 3;
+  // data offers kept because they are not flagged for auto-deletion
+  repeated ImpactedEntity kept_data_offers = 4;
+  bool transport_deleted = 5;
+}
+
+message ForceDeleteRequest {
+  io.spoud.sdm.global.domain.v1.ResourceEntity.Type entity_type = 1;
+  string id = 2;
+}
+
+message ForceDeleteResponse {
+  // everything that was deleted, the entity itself first
+  repeated ImpactedEntity deleted = 1;
+}
