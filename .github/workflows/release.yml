@@ -58,12 +58,24 @@ jobs:
         working-directory: ts
         run: npm ci && npm run build
 
+      # Plain git instead of a tag action: the action built a Docker image on every run and failed
+      # whenever Docker Hub rate limited the runner. Bumps the minor version, like before, and reuses
+      # the tag if this commit already has one (re-run after a failed publish).
       - name: Bump version and push tag
         id: tag
-        uses: anothrNick/github-tag-action@4ed44965e0db8dab2b466a16da04aec3cc312fd8 # 1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
+        run: |
+          existing=$(git tag --points-at "$GITHUB_SHA" --list 'v*' --sort=-v:refname | head -n1)
+          if [ -n "$existing" ]; then
+            echo "Commit already tagged $existing"
+            echo "new_tag=$existing" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          latest=$(git tag --list 'v*' --sort=-v:refname | head -n1)
+          IFS=. read -r major minor _ <<< "${latest:-v0.0.0}"
+          new_tag="${major}.$((minor + 1)).0"
+          git tag "$new_tag" "$GITHUB_SHA"
+          git push origin "$new_tag"
+          echo "new_tag=$new_tag" >> "$GITHUB_OUTPUT"
 
       - uses: frabert/replace-string-action@b6828c5a4cb6371753ff873b0d1c4c4fbd9a63cb # v2.5
         id: version
