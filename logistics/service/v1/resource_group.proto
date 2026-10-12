@@ -19,6 +19,8 @@ service ResourceGroupService {
   rpc DeleteResourceGroup (DeleteResourceGroupRequest) returns (DeleteResourceGroupResponse);
   rpc ListResourceGroups (ListResourceGroupsRequest) returns (ListResourceGroupsResponse);
   rpc CountResourceGroups (CountResourceGroupsRequest) returns (CountResourceGroupsResponse);
+  // Read only. Counts what lives in a path: the same things that block deleting it.
+  rpc GetResourceGroupContents (GetResourceGroupContentsRequest) returns (GetResourceGroupContentsResponse);
 }
 
 message GetResourceGroupRequest {
@@ -90,4 +92,21 @@ message CountResourceGroupsRequest {
 
 message CountResourceGroupsResponse {
   uint32 resource_groups_count = 1;
+}
+
+message GetResourceGroupContentsRequest {
+  io.spoud.sdm.logistics.selection.v1.ResourceGroupRef self = 1;
+}
+
+// Everything living directly in the path, retired (soft deleted) entities included. A path can
+// only be deleted when all counts are 0.
+message GetResourceGroupContentsResponse {
+  // direct child paths (deeper ones are counted by those)
+  uint32 child_paths = 1;
+  uint32 transports = 2;
+  uint32 agents = 3;
+  uint32 data_ports = 4;
+  uint32 data_offers = 5;
+  uint32 data_subscription_states = 6;
+  uint32 data_items = 7;
 }
