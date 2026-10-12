@@ -12,7 +12,8 @@ import "global/selection/v1/reference.proto";
 service LifecycleService {
   // Read only. Lists what deleting (or retiring) an entity would affect, and whether something
   // blocks it. Supported entity types: TRANSPORT, DATA_PORT, AGENT and RESOURCE_GROUP (a path
-  // can only be deleted once nothing lives in it anymore).
+  // can only be deleted once nothing lives in it anymore; for a path everything at any depth below
+  // it is listed, which is what a force delete removes).
   rpc GetDeletionImpact (GetDeletionImpactRequest) returns (GetDeletionImpactResponse);
 
   // Soft deletes every data port and data subscription state of a transport. Data offers linked
@@ -27,6 +28,9 @@ service LifecycleService {
   // delete: data offers linked to its data ports (also the ones owned by others), data
   // subscription states and data items. Use it when the agent was removed and nothing should be
   // kept. Requires write permission on every deleted entity, otherwise nothing is deleted.
+  // A RESOURCE_GROUP (path) is deleted with its sub-paths and everything living in them, the way
+  // above for transports and data ports. Agents block it: they also have a technical user, delete
+  // them first (the agent API removes both).
   rpc ForceDelete (ForceDeleteRequest) returns (ForceDeleteResponse);
 }
 
