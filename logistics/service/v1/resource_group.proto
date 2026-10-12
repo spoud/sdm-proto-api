@@ -101,7 +101,7 @@ message GetResourceGroupContentsRequest {
 // Everything living directly in the path, retired (soft deleted) entities included. A path can
 // only be deleted when all counts are 0.
 message GetResourceGroupContentsResponse {
-  // direct child paths (deeper ones are counted by those)
+  // all paths below this one, at any depth
   uint32 child_paths = 1;
   uint32 transports = 2;
   uint32 agents = 3;
