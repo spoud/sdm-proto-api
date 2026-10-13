@@ -14,6 +14,14 @@ service OrganizationService {
   rpc ListOrganizations (ListOrganizationsRequest) returns (ListOrganizationsResponse);
   rpc GetOrganization (GetOrganizationsRequest) returns (GetOrganizationsResponse);
   rpc SaveOrganization (SaveOrganizationRequest) returns (SaveOrganizationResponse);
+  // Deletes an organization with everything that only exists for it: its technical users and user
+  // groups (also in Keycloak), its memberships, every permission rule on its root path /<name>/
+  // and below, and the root path with its sub-paths in logistics.
+  // Refused (FAILED_PRECONDITION) while anything still lives in those paths (retired entities
+  // included), see logistics LifecycleService.GetDeletionImpact, and for the default
+  // organizations, which are created again at startup. Requires ADMIN on the root path.
+  // Running it again after a partial failure finishes the deletion.
+  rpc DeleteOrganization (DeleteOrganizationRequest) returns (DeleteOrganizationResponse);
 }
 
 message ListOrganizationsRequest {
@@ -46,7 +54,19 @@ message SaveOrganizationResponse {
   io.spoud.sdm.collaboration.domain.v1alpha.Organization organization = 1;
 }
 
+message DeleteOrganizationRequest {
+  oneof identifier {
+    string id = 1;
+    string name = 2;
+  }
+}
 
-
-
-
+message DeleteOrganizationResponse {
+  uint32 deleted_technical_users = 1;
+  uint32 deleted_user_groups = 2;
+  // members removed from the organization (the users themselves are kept)
+  uint32 removed_members = 3;
+  uint32 deleted_permissions = 4;
+  // the root path and its sub-paths
+  uint32 deleted_paths = 5;
+}
