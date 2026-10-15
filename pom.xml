@@ -5,145 +5,29 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.spoud.sdm</groupId>
-  <artifactId>sdm-proto-api</artifactId>
+  <artifactId>sdm-proto-api-parent</artifactId>
   <version>999-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-  <name>sdm-proto-api</name>
-  <description>SDM Proto API - gRPC service definitions and generated Java stubs</description>
+  <name>sdm-proto-api-parent</name>
+  <description>Parent of sdm-proto-api: single source of truth for the protobuf/gRPC versions</description>
+
+  <modules>
+    <module>bom</module>
+    <module>api</module>
+  </modules>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
 
+    <!-- The generated stubs require a protobuf-java runtime >= this version. Consumers get it by
+         importing sdm-proto-api-bom, so they never have to track it themselves. -->
     <protobuf.version>4.36.2</protobuf.version>
     <grpc.version>1.82.0</grpc.version>
     <quarkus.version>3.35.2</quarkus.version>
   </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-bom</artifactId>
-        <version>${quarkus.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-  <dependencies>
-    <dependency>
-      <groupId>com.google.protobuf</groupId>
-      <artifactId>protobuf-java</artifactId>
-      <version>${protobuf.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.grpc</groupId>
-      <artifactId>grpc-api</artifactId>
-      <version>${grpc.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.grpc</groupId>
-      <artifactId>grpc-stub</artifactId>
-      <version>${grpc.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.grpc</groupId>
-      <artifactId>grpc-protobuf</artifactId>
-      <version>${grpc.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.annotation</groupId>
-      <artifactId>jakarta.annotation-api</artifactId>
-      <version>3.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-grpc</artifactId>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>io.github.ascopes</groupId>
-        <artifactId>protobuf-maven-plugin</artifactId>
-        <version>5.1.11</version>
-        <configuration>
-          <protoc>${protobuf.version}</protoc>
-          <sourceDirectories>
-            <sourceDirectory>${project.basedir}</sourceDirectory>
-          </sourceDirectories>
-          <excludes>
-            <exclude>ts/**</exclude>
-            <exclude>target/**</exclude>
-            <exclude>out/**</exclude>
-          </excludes>
-          <plugins>
-            <plugin kind="binary-maven">
-              <groupId>io.grpc</groupId>
-              <artifactId>protoc-gen-grpc-java</artifactId>
-              <version>${grpc.version}</version>
-            </plugin>
-            <plugin kind="jvm-maven">
-              <groupId>io.quarkus</groupId>
-              <artifactId>quarkus-grpc-protoc-plugin</artifactId>
-              <version>${quarkus.version}</version>
-              <mainClass>io.quarkus.grpc.protoc.plugin.MutinyGrpcGenerator</mainClass>
-            </plugin>
-          </plugins>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.5.1</version>
-      </plugin>
-
-      <plugin>
-        <groupId>io.smallrye</groupId>
-        <artifactId>jandex-maven-plugin</artifactId>
-        <version>3.6.0</version>
-        <executions>
-          <execution>
-            <id>make-index</id>
-            <goals>
-              <goal>jandex</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.16.0</version>
-      </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>versions-maven-plugin</artifactId>
-        <version>2.23.0</version>
-        <configuration>
-          <generateBackupPoms>false</generateBackupPoms>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 
   <distributionManagement>
     <repository>

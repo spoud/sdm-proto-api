@@ -10,7 +10,10 @@ updates:
         update-types: ["minor", "patch"]
 
   - package-ecosystem: maven
-    directory: /
+    directories:
+      - /
+      - /api
+      - /bom
     schedule:
       interval: weekly
     groups:
