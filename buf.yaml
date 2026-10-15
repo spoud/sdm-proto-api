@@ -3,6 +3,8 @@ modules:
   - path: .
     excludes:
       - target
+      - api
+      - bom
       - out
       - ts
 lint:
