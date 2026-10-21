@@ -22,13 +22,13 @@
     "@connectrpc/connect": "^2.2.0"
   },
   "devDependencies": {
-    "@bufbuild/buf": "^1.73.0",
+    "@bufbuild/buf": "^1.74.0",
     "@bufbuild/protobuf": "^2.14.0",
     "@bufbuild/protoc-gen-es": "^2.16.0",
     "@connectrpc/connect": "^2.2.0",
     "@grpc/grpc-js": "^1.14.6",
     "@types/node": "^26.6.5",
-    "ts-proto": "^2.13.3",
+    "ts-proto": "^2.17.0",
     "typescript": "^7.0.2"
   },
   "publishConfig": {
