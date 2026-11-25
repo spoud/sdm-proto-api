@@ -28,7 +28,7 @@
     "@connectrpc/connect": "^2.3.0",
     "@grpc/grpc-js": "^1.14.7",
     "@types/node": "^26.6.6",
-    "ts-proto": "^2.22.0",
+    "ts-proto": "^2.23.5",
     "typescript": "^7.0.2"
   },
   "publishConfig": {
